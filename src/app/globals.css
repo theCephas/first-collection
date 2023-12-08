@@ -1,3 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Judson&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "gilroy";
+  src: url(../../public/fonts/gilroy.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+.gilroy {
+  font-family: "gilroy";
+}
