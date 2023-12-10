@@ -2,12 +2,18 @@
 import React, { useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
-import { BackIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
+import {
+  BackIcon,
+  CheckIcon,
+  HideIcon,
+  ShowIcon,
+} from "../(components)/AuthIcons";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
   const [hasAcc, setHasAcc] = useState(true);
   const [passwordFocus, setPasswordFocus] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   return (
     <AuthWrapper
@@ -119,10 +125,16 @@ const Login = () => {
                 </aside>
               </div>
             </label>
-            {/* Check */}
-            <p className="text-neutral-700 text-sm font-normal gilroy leading-tight">
-              Keep me logged In.
-            </p>
+            {/* CheckBox */}
+            <div className="text-neutral-700 text-sm font-normal gilroy leading-tight flex items-center gap-1">
+              <div
+                onClick={() => setChecked((prev) => !prev)}
+                className={`bg-transparent rounded border border-black w-4 h-4 cursor-pointer flex items-center justify-center`}
+              >
+                {checked && <CheckIcon />}
+              </div>
+              <span>Keep me logged In.</span>
+            </div>
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  ">
