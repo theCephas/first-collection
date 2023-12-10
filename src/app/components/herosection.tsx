@@ -1,9 +1,19 @@
 import React from "react";
+import VectorLeft1 from "../../../public/vectorleft1.svg";
+import VectorLeft2 from "../../../public/vectorleft2.svg";
+import VectorRight1 from "../../../public/vectorright1.svg";
+import VectorRight2 from "../../../public/vectorright2.svg";
+import Slide1 from "../../../public/slide1.svg";
+import Slide2 from "../../../public/slide2.svg";
+import Slide3 from "../../../public/slide3.svg";
+import Slide4 from "../../../public/slide4.svg";
+import Slide from "../../../public/slide.png";
+import Image from "next/image";
 
 const Herosection = () => {
   return (
-    <div className="px-8 lg:px-10">
-      <div className="m-auto flex flex-col items-center justify-center text-center gap-6">
+    <div className="mb-20 bg-[#fffafa] h-[800px] relative">
+      <div className="px-8 lg:px-10 pb-[150px] m-auto flex flex-col items-center justify-center text-center gap-6">
         <p className="text-[40px] sm:text-[56px] w-full sm:w-[679px] gilroy font-[700] leading-[56px] text-[#060606] text-center ">
           Shop quality and affordable fashion accessories{" "}
         </p>
@@ -11,14 +21,60 @@ const Herosection = () => {
           Get trendy shoes, bags, purses, and headties, and transform your
           everyday style into something extraordinary
         </p>
+
         <button
           style={{
             boxShadow: "0px 11px 22px 0px rgba(255, 92, 0, 0.25)",
           }}
-          className="text-[14px] text-[#fefefe] font-[600] active:scale-75 active:duration-100 transform flex py-[12px] px-[16px] items-center flex-col justify-center gap-[10px] rounded-[8px] bg-[#ff5c00] "
+          className="text-[14px] text-[#fefefe] font-[600] z-50 active:scale-75 active:duration-100 transform flex py-[12px] px-[16px] items-center flex-col justify-center gap-[10px] rounded-[8px] bg-[#ff5c00] "
         >
           Start Shopping
         </button>
+      </div>
+      <div className="mt-[100px] sm:mt-[50px]">
+        <div className="float-left mt-[-250px] relative ">
+          <Image
+            src={VectorLeft1}
+            alt="Vector"
+            className="w-[160px] md:w-[100%]"
+          />
+          <Image
+            src={VectorLeft2}
+            alt="Vector"
+            className="mt-[-50px] md:mt-[-100px] w-[160px] md:w-[100%] "
+          />
+        </div>
+        <div className="float-right mt-[-250px] relative">
+          <Image
+            src={VectorRight1}
+            alt="Vector"
+            className="mb-[-50px] md:mb-[-100px] w-[160px] md:w-[100%] "
+          />
+          <Image
+            src={VectorRight2}
+            alt="Vector"
+            className="w-[160px] md:w-[100%]"
+          />
+        </div>
+        <div className="flex slides gap-4 flex-nowrap overflow-scroll float-right mt-[-40px] ">
+          <Image
+            src={Slide1}
+            alt="Vector"
+            className="h-[340px] rounded-lg z-50 rounded- border   "
+          />
+          <Image src={Slide2} alt="Vector" className="h-[340px] rounded-lg " />
+          <Image
+            src={Slide3}
+            alt="Vector"
+            className="h-[255px] mt-[82px] rounded-lg "
+          />
+          <Image src={Slide4} alt="Vector" className="h-[340px] rounded-lg " />
+          <Image
+            src={Slide}
+            alt="Vector"
+            className="h-[340px] rounded-lg rounded-tr-none rounded-br-none "
+          />
+        </div>
       </div>
     </div>
   );

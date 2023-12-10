@@ -13,3 +13,17 @@
 .gilroy {
   font-family: "gilroy";
 }
+
+.slides::-webkit-scrollbar {
+  display: none;
+}
+
+/* Optional: You may also want to hide the scrollbar track */
+.slides::-webkit-scrollbar-track {
+  display: none;
+}
+
+/* Optional: You may also want to style the scrollbar thumb */
+.slides::-webkit-scrollbar-thumb {
+  display: none;
+}
