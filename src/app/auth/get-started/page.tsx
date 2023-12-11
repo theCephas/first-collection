@@ -105,8 +105,10 @@ const Login = () => {
             >
               Password
               <div
-                className={`flex h-11 px-3 py-2 rounded-md border border-zinc-400 ${
-                  passwordFocus && "border-2 border-orange-600"
+                className={`flex h-11 px-3 py-2 rounded-md   ${
+                  passwordFocus
+                    ? "border-2 border-orange-600"
+                    : "border border-zinc-400"
                 }`}
               >
                 <input
