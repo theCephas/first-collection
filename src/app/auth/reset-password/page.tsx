@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
 import { BackIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
+import { ButtonPrimary } from "@/app/components/Buttons";
 
 const ResetPassword = () => {
   const [emailConfirmed, setEmailConfirmed] = useState(false);
@@ -127,13 +128,11 @@ const ResetPassword = () => {
 
             {/* ACTION BUTTONS */}
             <div className="w-full flex flex-col gap-3  ">
-              <a
-                onClick={handleSendLink}
-                href=""
-                className="w-full h-11 flex justify-center items-center  bg-orange-600 rounded-lg text-zinc-100 text-sm font-semibold gilroy leading-tight"
-              >
-                {emailConfirmed ? "Reset password" : "Send the link"}
-              </a>
+              <aside onClick={handleSendLink}>
+                <ButtonPrimary classes="w-full">
+                  {emailConfirmed ? "Reset password" : "Send the link"}
+                </ButtonPrimary>
+              </aside>
             </div>
           </form>
         </section>

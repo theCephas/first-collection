@@ -2,15 +2,15 @@ import Image from "next/image";
 import Header from "./components/header";
 import Herosection from "./components/herosection";
 import Handpicked from "./components/handpickedforu";
+import PageWrapper from "./components/PageWrapper";
 
 export default function Home() {
   return (
-    <main className="max-w-[1440px] mx-auto">
+    <PageWrapper>
       <div className="bg-[#fffafa]">
-        <Header />
         <Herosection />
       </div>
       <Handpicked />
-    </main>
+    </PageWrapper>
   );
 }

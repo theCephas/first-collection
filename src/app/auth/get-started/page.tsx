@@ -8,6 +8,7 @@ import {
   HideIcon,
   ShowIcon,
 } from "../(components)/AuthIcons";
+import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -140,18 +141,13 @@ const Login = () => {
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  ">
-              <a
-                href=""
-                className="w-full h-11 flex justify-center items-center  bg-orange-600 rounded-lg text-zinc-100 text-sm font-semibold gilroy leading-tight"
-              >
+              <ButtonPrimary classes="w-full">
                 {hasAcc ? "Sign In" : "Sign Up"}
-              </a>
-              <a
-                href=""
-                className="w-full h-11 flex justify-center items-center  rounded-lg border border-black text-black text-sm font-semibold gilroy leading-tight"
-              >
+              </ButtonPrimary>
+              <ButtonSecondary classes="w-full">
                 {hasAcc ? "Sign In" : "Sign Up"} with Google
-              </a>
+              </ButtonSecondary>
+
               <div className="text-neutral-700 text-sm font-normal font-['Gilroy'] leading-tight flex gap-1">
                 {"Don't have an account?"}
                 <span
