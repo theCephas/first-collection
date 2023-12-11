@@ -136,56 +136,89 @@ const Header = () => {
               </button>
               <motion.div className="px-8">
                 {" "}
-                <p
-                  className="cursor-pointer duration-700 text-black pt-5 pb-3"
-                  onClick={() => setIsDropDownVisible(!isDropDownVisible)}
-                >
-                  Features
-                  {isDropDownVisible ? (
-                    <ChevronUp className="inline mb-[1px]" />
-                  ) : (
-                    <ChevronDown className="inline mb-[1px]" />
-                  )}
-                  {isDropDownVisible && (
-                    <AnimatePresence>
-                      <motion.div
-                        variants={{
-                          open: {
-                            opacity: 1,
-                            transition: {
-                              duration: 0.2,
-                              ease: "easeInOut",
+                <div className="flex flex-col gap-8 mt-10 font-[600] text-[14px] leading-[20.3px] ">
+                  <Link
+                    href=""
+                    className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
+                  >
+                    Products
+                  </Link>
+                  <Link
+                    href=""
+                    className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
+                  >
+                    Contact Us
+                  </Link>
+                  <Link
+                    href=""
+                    className="cursor-pointer duration-700 text-[#060606] focus:text-[#ff5c00] "
+                    onClick={() => setIsDropDownVisible(!isDropDownVisible)}
+                  >
+                    Account
+                    {isDropDownVisible ? (
+                      <ChevronUp className="inline mb-[1px]" />
+                    ) : (
+                      <ChevronDown className="inline mb-[1px]" />
+                    )}
+                    {isDropDownVisible && (
+                      <AnimatePresence>
+                        <motion.div
+                          variants={{
+                            open: {
+                              opacity: 1,
+                              transition: {
+                                duration: 0.2,
+                                ease: "easeInOut",
+                              },
                             },
-                          },
-                          closed: {
-                            opacity: 0,
-                            transition: {
-                              duration: 0.2,
-                              ease: "easeInOut",
+                            closed: {
+                              opacity: 0,
+                              transition: {
+                                duration: 0.2,
+                                ease: "easeInOut",
+                              },
                             },
-                          },
-                        }}
-                        initial="closed"
-                        animate="open"
-                        exit="closed"
-                        className="flex flex-col bg-white text-black text-[14px] rounded-[8px]"
-                      >
-                        <Link
-                          className="rounded-t-[8px] pt-6 pb-3 hover:text-[#E0B0FF] duration-700"
-                          href="/"
+                          }}
+                          initial="closed"
+                          animate="open"
+                          exit="closed"
+                          className="flex flex-col gap-4 bg-white text-[#060606] text-[14px] rounded-[8px] focus:text-[#ff5c00] my-6"
                         >
-                          Event Management
-                        </Link>
-                        <Link
-                          className="py-3 hover:text-[#E0B0FF] duration-700"
-                          href="/"
-                        >
-                          Guest Management
-                        </Link>
-                      </motion.div>
-                    </AnimatePresence>
-                  )}
-                </p>
+                          <Link
+                            className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                            href=""
+                          >
+                            Profile
+                          </Link>
+                          <Link
+                            className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                            href=""
+                          >
+                            Orders
+                          </Link>
+                          <Link
+                            href=""
+                            className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] rounded-[8px] text-[#f2f2f2] "
+                          >
+                            Sign In
+                          </Link>
+                          <Link
+                            href=""
+                            className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] text-[#d42620] border border-[#d42620] "
+                          >
+                            Logout
+                          </Link>
+                        </motion.div>
+                      </AnimatePresence>
+                    )}
+                  </Link>
+                  <Link
+                    href="/"
+                    className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
+                  >
+                    Cart
+                  </Link>
+                </div>
               </motion.div>
             </motion.div>
           </MotionConfig>
