@@ -2,12 +2,19 @@
 import React, { useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
-import { BackIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
+import {
+  BackIcon,
+  CheckIcon,
+  HideIcon,
+  ShowIcon,
+} from "../(components)/AuthIcons";
+import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
   const [hasAcc, setHasAcc] = useState(true);
   const [passwordFocus, setPasswordFocus] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   return (
     <AuthWrapper
@@ -99,8 +106,10 @@ const Login = () => {
             >
               Password
               <div
-                className={`flex h-11 px-3 py-2 rounded-md border border-zinc-400 ${
-                  passwordFocus && "border-2 border-orange-600"
+                className={`flex h-11 px-3 py-2 rounded-md   ${
+                  passwordFocus
+                    ? "border-2 border-orange-600"
+                    : "border border-zinc-400"
                 }`}
               >
                 <input
@@ -119,25 +128,26 @@ const Login = () => {
                 </aside>
               </div>
             </label>
-            {/* Check */}
-            <p className="text-neutral-700 text-sm font-normal gilroy leading-tight">
-              Keep me logged In.
-            </p>
+            {/* CheckBox */}
+            <div className="text-neutral-700 text-sm font-normal gilroy leading-tight flex items-center gap-1">
+              <div
+                onClick={() => setChecked((prev) => !prev)}
+                className={`bg-transparent rounded border border-black w-4 h-4 cursor-pointer flex items-center justify-center`}
+              >
+                {checked && <CheckIcon />}
+              </div>
+              <span>Keep me logged In.</span>
+            </div>
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  ">
-              <a
-                href=""
-                className="w-full h-11 flex justify-center items-center  bg-orange-600 rounded-lg text-zinc-100 text-sm font-semibold gilroy leading-tight"
-              >
+              <ButtonPrimary classes="w-full">
                 {hasAcc ? "Sign In" : "Sign Up"}
-              </a>
-              <a
-                href=""
-                className="w-full h-11 flex justify-center items-center  rounded-lg border border-black text-black text-sm font-semibold gilroy leading-tight"
-              >
+              </ButtonPrimary>
+              <ButtonSecondary classes="w-full">
                 {hasAcc ? "Sign In" : "Sign Up"} with Google
-              </a>
+              </ButtonSecondary>
+
               <div className="text-neutral-700 text-sm font-normal font-['Gilroy'] leading-tight flex gap-1">
                 {"Don't have an account?"}
                 <span

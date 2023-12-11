@@ -15,8 +15,8 @@ const Header = () => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
 
   return (
-    <div className="pt-4 gilroy fixed w-full z-20">
-      <div className="bg-[#000] mb-10 p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] mx-8 lg:mx-10 pt-4  ">
+    <div className="max-w-[67.5rem] pt-4 gilroy fixed left-1/2 -translate-x-1/2 w-full z-20">
+      <div className="bg-[#000] mb-10 p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] mx-4 lg:mx-0 pt-4  ">
         <Image src={Logo} alt="Logo" width={0} />
         <form className="relative hidden md:flex">
           <label className="hidden">Search</label>
@@ -40,17 +40,17 @@ const Header = () => {
               aria-label="Search-Icon"
             >
               <path
-                clip-rule="evenodd"
+                clipRule="evenodd"
                 d="m8.82264 10.3833c-.92307.7008-2.07429 1.1167-3.32264 1.1167-3.03757 0-5.5-2.46243-5.5-5.5s2.46243-5.5 5.5-5.5 5.5 2.46243 5.5 5.5c0 1.24835-.4159 2.39957-1.1167 3.32264l2.897 2.89706c.2929.2929.2929.7677 0 1.0606s-.7677.2929-1.0606 0zm.67736-4.3833c0 2.20914-1.79086 4-4 4s-4-1.79086-4-4 1.79086-4 4-4 4 1.79086 4 4z"
                 fill="#B5B5B5"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               />
             </svg>
           </button>
         </form>
         <div className="text-[14px] font-[600] hidden items-center justify-center text-[#b3b3b3] md:flex gap-6">
           <Link
-            href="/"
+            href="/products"
             className="focus:text-[#ff5c00] active:scale-75 transform"
           >
             Products
