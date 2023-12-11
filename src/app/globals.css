@@ -3,13 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "gilroy";
-  src: url(../../public/fonts/gilroy.ttf);
-  font-weight: normal;
-  font-style: normal;
+.slides::-webkit-scrollbar {
+  display: none;
 }
 
-.gilroy {
-  font-family: "gilroy";
+/* Optional: You may also want to hide the scrollbar track */
+.slides::-webkit-scrollbar-track {
+  display: none;
+}
+
+/* Optional: You may also want to style the scrollbar thumb */
+.slides::-webkit-scrollbar-thumb {
+  display: none;
 }
