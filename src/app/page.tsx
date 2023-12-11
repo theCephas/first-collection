@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Header from "./components/header";
 import Herosection from "./components/herosection";
+import Handpicked from "./components/handpickedforu";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
         <Header />
         <Herosection />
       </div>
+      <Handpicked />
     </main>
   );
 }
