@@ -164,10 +164,11 @@ const Handpicked: React.FC = (props) => {
       <div className="px-8 lg:px-10 ">
         <p>Handpicked for you</p>
       </div>
-      <Slider {...settings} className="flex gap-3 ml-8 lg:ml-10 ">
+      <Slider {...settings} className="flex gap-8 ml-8 lg:ml-10 ">
         {Slides.map((item, index) => (
           <div key={index} className="w-full m-auto py-10">
             <ProductCard
+              classes={"w-[160px]"}
               imageSrc={item.url}
               name={item.name}
               price={item.price}

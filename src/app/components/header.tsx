@@ -15,7 +15,7 @@ const Header = () => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
 
   return (
-    <div className="max-w-[67.5rem] pt-4 gilroy fixed left-1/2 -translate-x-1/2 w-full z-20">
+    <div className="max-w-[67.5rem] top-4 gilroy fixed left-1/2 -translate-x-1/2 w-full z-20">
       <div className="bg-[#000] mb-10 p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] mx-4 lg:mx-0 pt-4  ">
         <Image src={Logo} alt="Logo" width={0} />
         <form className="relative hidden md:flex">
