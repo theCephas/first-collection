@@ -6,18 +6,26 @@ interface ProductCardProps {
   imageSrc: string;
   name: string;
   price: number;
+  classes: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ imageSrc, name, price }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  imageSrc,
+  name,
+  price,
+  classes,
+}) => {
   return (
-    <div className="gilroy w-[160px] relative rounded-[12px] border border-[#f6f6f6] bg-[#fbfbfb] ">
-      <div className="p-[14px]">
+    <div
+      className={`gilroy w-full relative rounded-[12px] border border-[#f6f6f6] bg-[#fbfbfb] ${classes}`}
+    >
+      <div className="p-[14px] w-full">
         <Image
           width={0}
           height={0}
           src={imageSrc}
           alt={name}
-          className="m-auto"
+          className="m-auto w-full"
         />
         <div className="text-[14px] font-[400] leading-[20.3px]">
           <h3 className="pt-2 ">{name}</h3>
