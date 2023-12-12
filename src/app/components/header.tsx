@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Logo from "../../../public/logo.svg";
 import User from "../../../public/user.svg";
 import Cart from "../../../public/cart.svg";
+import Search from "../../../public/search.svg";
 import Image from "next/image";
 import Link from "next/link";
 import "../../../src/fonts.css";
@@ -17,7 +18,9 @@ const Header = () => {
   return (
     <div className="max-w-[67.5rem] top-4 gilroy fixed left-1/2 -translate-x-1/2 w-full z-20">
       <div className="bg-[#000] mb-10 p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] mx-4 lg:mx-0 pt-4  ">
-        <Image src={Logo} alt="Logo" width={0} />
+        <Link href="/">
+          <Image src={Logo} alt="Logo" width={0} />
+        </Link>
         <form className="relative hidden md:flex">
           <label className="hidden">Search</label>
           <input
@@ -62,14 +65,19 @@ const Header = () => {
             Contact Us
           </Link>
         </div>
+
         <div className="hidden md:flex items-center justify-center gap-6">
           <Image src={User} alt="User icon" />
           <Image src={Cart} alt="Cart icon" />
         </div>
-        <div className="relative z-50 content md:hidden">
+
+        <div className="relative z-50 flex gap-3 items-center md:hidden">
+          <button>
+            <Image width={0} height={0} src={Search} alt="Seach Icon" />
+          </button>
           <motion.button
             animate={mobileNav ? "open" : "closed"}
-            className="flex flex-col space-y-[5px] z-"
+            className="flex flex-col space-y-[5px]"
             onClick={() => toggleMobileNav()}
           >
             <motion.span
@@ -126,7 +134,7 @@ const Header = () => {
               animate="open"
               initial="closed"
               exit="closed"
-              className="fixed inset-0 bg-white w-[80%] h-screen"
+              className="fixed top-[-20px] inset-0 bg-white w-[80%] h-screen"
             >
               <button
                 onClick={() => toggleMobileNav()}
@@ -138,7 +146,7 @@ const Header = () => {
                 {" "}
                 <div className="flex flex-col gap-8 mt-10 font-[600] text-[14px] leading-[20.3px] ">
                   <Link
-                    href=""
+                    href="/products"
                     className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
                   >
                     Products
@@ -149,17 +157,19 @@ const Header = () => {
                   >
                     Contact Us
                   </Link>
-                  <Link
-                    href=""
+                  <div
                     className="cursor-pointer duration-700 text-[#060606] focus:text-[#ff5c00] "
                     onClick={() => setIsDropDownVisible(!isDropDownVisible)}
                   >
-                    Account
-                    {isDropDownVisible ? (
-                      <ChevronUp className="inline mb-[1px]" />
-                    ) : (
-                      <ChevronDown className="inline mb-[1px]" />
-                    )}
+                    <p>
+                      Account
+                      {isDropDownVisible ? (
+                        <ChevronUp className="inline mb-[1px]" />
+                      ) : (
+                        <ChevronDown className="inline mb-[1px]" />
+                      )}
+                    </p>
+
                     {isDropDownVisible && (
                       <AnimatePresence>
                         <motion.div
@@ -197,21 +207,21 @@ const Header = () => {
                             Orders
                           </Link>
                           <Link
-                            href=""
-                            className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] rounded-[8px] text-[#f2f2f2] "
+                            href="/auth/get-started"
+                            className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
                           >
                             Sign In
                           </Link>
                           <Link
                             href=""
-                            className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] text-[#d42620] border border-[#d42620] "
+                            className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
                           >
                             Logout
                           </Link>
                         </motion.div>
                       </AnimatePresence>
                     )}
-                  </Link>
+                  </div>
                   <Link
                     href="/"
                     className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"

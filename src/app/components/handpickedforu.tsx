@@ -12,7 +12,6 @@ import ProductCard from "../productcard/ProductCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { url } from "inspector";
 
 const Handpicked: React.FC = (props) => {
   function SampleNextArrow(props: {
@@ -29,7 +28,7 @@ const Handpicked: React.FC = (props) => {
           display: "block",
           background: "black",
           borderRadius: "100%",
-          padding: "0px",
+          padding: "0.35px",
           border: "none",
           position: "absolute",
           right: "30px",
@@ -53,11 +52,11 @@ const Handpicked: React.FC = (props) => {
           display: "block",
           background: "black",
           borderRadius: "100%",
-          padding: "0px",
+          padding: "0.35px",
           border: "none",
           position: "absolute",
-          left: "10px",
-          zIndex: 100,
+          left: "30px",
+          zIndex: "10",
         }}
         onClick={onClick}
       />
@@ -168,24 +167,26 @@ const Handpicked: React.FC = (props) => {
     },
   ];
   return (
-    <div className="max-w-[1080px] mx-auto ">
-      <div className="px-8 lg:px-10 ">
+    <div className="max-w-[1080px] mx-auto mb-[-80px] lg:mb-[-100px]">
+      <div className="px-8 lg:px-0 ">
         <p className="gilroy text-[14px] text-[#040404] font-[600] leading-[20.3px] ">
           Handpicked for you
         </p>
       </div>
-      <Slider {...settings} className="flex gap-8 ml-8 lg:ml-10 ">
-        {Slides.map((item, index) => (
-          <div key={index} className="w-full m-auto py-10">
-            <ProductCard
-              classes={"w-[160px]"}
-              imageSrc={item.url}
-              name={item.name}
-              price={item.price}
-            />
-          </div>
-        ))}
-      </Slider>
+      <div className="w-full m-auto ">
+        <Slider {...settings} className="flex gap-20  ">
+          {Slides.map((item, index) => (
+            <div key={index} className="w-full m-auto py-10">
+              <ProductCard
+                classes={"w-[160px] m-auto"}
+                imageSrc={item.url}
+                name={item.name}
+                price={item.price}
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
     </div>
   );
 };

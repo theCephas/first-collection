@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   return (
     <div
-      className={`gilroy w-full relative rounded-[12px] border border-[#f6f6f6] bg-[#fbfbfb] ${classes}`}
+      className={`gilroy relative rounded-[12px] border border-[#f6f6f6] bg-[#fbfbfb] ${classes}`}
     >
       <div className="p-[14px] w-full">
         <Image
