@@ -90,10 +90,18 @@ const Handpicked: React.FC = (props) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 4,
+          slidesToScroll: 4,
           infinite: true,
           dots: true,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          initialSlide: 3,
         },
       },
       {
@@ -162,7 +170,9 @@ const Handpicked: React.FC = (props) => {
   return (
     <div className="max-w-[1080px] mx-auto ">
       <div className="px-8 lg:px-10 ">
-        <p>Handpicked for you</p>
+        <p className="gilroy text-[14px] text-[#040404] font-[600] leading-[20.3px] ">
+          Handpicked for you
+        </p>
       </div>
       <Slider {...settings} className="flex gap-8 ml-8 lg:ml-10 ">
         {Slides.map((item, index) => (
