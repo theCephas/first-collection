@@ -9,17 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/slick-carousel": "^1.6.40",
     "framer-motion": "^10.16.15",
     "lucide-react": "^0.294.0",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-slick": "^0.29.0"
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.12",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",

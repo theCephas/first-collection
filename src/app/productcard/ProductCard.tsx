@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ imageSrc, name, price }) => {
   return (
-    <div className="gilroy w-[160px] relative rounded-[12px] border border-[#f6f6f6] bg-[#fbfbfb] p-[14p] ">
+    <div className="gilroy w-[160px] relative rounded-[12px] border border-[#f6f6f6] bg-[#fbfbfb] ">
       <div className="p-[14px]">
         <Image
           width={0}
