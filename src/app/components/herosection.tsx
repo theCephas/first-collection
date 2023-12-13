@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import VectorLeft1 from "../../../public/vectorleft1.svg";
 import VectorLeft2 from "../../../public/vectorleft2.svg";
 import VectorRight1 from "../../../public/vectorright1.svg";
@@ -11,20 +11,33 @@ import Slide3 from "../../../public/slide3.svg";
 import Slide4 from "../../../public/slide4.svg";
 import Slide from "../../../public/slide.png";
 import Image from "next/image";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Herosection = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <div className="mb-10 bg-[#fffafa h-[140vh] sm:h-[150vh]">
       <div className="px-8 lg:px-10 pb-[150px] m-auto flex flex-col items-center justify-center text-center gap-6 pt-[100px] lg:pt-[130px]">
-        <p className="text-[40px] sm:text-[56px] w-full md:w-[679px] font-judson font-[700] leading-[56px] text-[#060606] text-center ">
+        <p
+          data-aos="zoom-in"
+          className="text-[40px] sm:text-[56px] w-full md:w-[679px] font-judson font-[700] leading-[56px] text-[#060606] text-center "
+        >
           Shop quality and affordable fashion accessories{" "}
         </p>
-        <p className="text-[14px] w-full sm:w-[535px] gilroy font-[400] leading-[20.3px] text-[#060606] text-center ">
+        <p
+          data-aos="zoom-in-up"
+          className="text-[14px] w-full sm:w-[535px] gilroy font-[400] leading-[20.3px] text-[#060606] text-center "
+        >
           Get trendy shoes, bags, purses, and headties, and transform your
           everyday style into something extraordinary
         </p>
 
         <button
+          data-aos="fade-up"
           style={{
             boxShadow: "0px 11px 22px 0px rgba(255, 92, 0, 0.25)",
           }}
@@ -34,7 +47,11 @@ const Herosection = () => {
         </button>
       </div>
       <div className="mt-[100px] sm:mt-[50px]">
-        <div className="float-left mt-[-250px] relative ">
+        <div
+          data-aos-duration="800"
+          data-aos="zoom-in-up"
+          className="float-left mt-[-250px] relative "
+        >
           <Image
             src={VectorLeft1}
             alt="Vector"
@@ -46,7 +63,11 @@ const Herosection = () => {
             className="mt-[-50px] md:mt-[-100px] w-[160px] md:w-[100%] "
           />
         </div>
-        <div className="float-right mt-[-250px] relative">
+        <div
+          data-aos-duration="800"
+          data-aos="zoom-in-up"
+          className="float-right mt-[-250px] relative"
+        >
           <Image
             src={VectorRight1}
             alt="Vector"
@@ -58,7 +79,10 @@ const Herosection = () => {
             className="w-[160px] md:w-[100%]"
           />
         </div>
-        <div className="flex slides gap-6 z-30 flex-nowrap overflow-scroll float-right mt-[-40px] ">
+        <div
+          data-aos="fade-up"
+          className="flex slides gap-6 z-30 flex-nowrap overflow-scroll float-right mt-[-40px] "
+        >
           <Image src={Slide1} alt="Vector" className="h-[340px] rounded-lg  " />
           <Image src={Slide2} alt="Vector" className="h-[340px] rounded-lg " />
           <Image

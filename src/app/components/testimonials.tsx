@@ -1,118 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Star from "../../../public/star.svg";
 import Image from "next/image";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+import Glider from "react-glider";
+import "glider-js/glider.min.css";
 
 const Testimonials = () => {
-  function SampleNextArrow(props: {
-    className: any;
-    style: any;
-    onClick: any;
-  }) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          display: "block",
-          background: "black",
-          borderRadius: "100%",
-          padding: "0.35px",
-          border: "none",
-          position: "absolute",
-          right: "30px",
-        }}
-        onClick={onClick}
-      />
-    );
-  }
-
-  function SamplePrevArrow(props: {
-    className: any;
-    style: any;
-    onClick: any;
-  }) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          display: "block",
-          background: "black",
-          borderRadius: "100%",
-          padding: "0.35px",
-          border: "none",
-          position: "absolute",
-          left: "30px",
-          zIndex: "10",
-        }}
-        onClick={onClick}
-      />
-    );
-  }
-  const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    speed: 500,
-    nextArrow: (
-      <SampleNextArrow
-        className={undefined}
-        style={undefined}
-        onClick={undefined}
-      />
-    ),
-    prevArrow: (
-      <SamplePrevArrow
-        className={undefined}
-        style={undefined}
-        onClick={undefined}
-      />
-    ),
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 3,
-
-          initialSlide: 3,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 375,
-        settings: {
-          slidesToShow: 1,
-
-          initialSlide: 1,
-        },
-      },
-    ],
-  };
   const Evidences = [
     {
       id: 1,
@@ -145,6 +42,17 @@ const Testimonials = () => {
       name: "Ukeme Bassey",
     },
   ];
+  // const [currentIndex, setCurrentIndex] = useState(0);
+
+  // const handleNext = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % Evidences.length);
+  // };
+
+  // const handlePrev = () => {
+  //   setCurrentIndex((prevIndex) =>
+  //     prevIndex === 0 ? Evidences.length - 1 : prevIndex - 1
+  //   );
+  // };
 
   return (
     <div className="max-w-[1080px] mx-auto px-8 lg:px-10 py-[60px]">
@@ -163,20 +71,13 @@ const Testimonials = () => {
         </div>
       </div>
       {/* <div>
-        
-        <Slider {...settings} className="flex gap-20  ">
-          {Evidences.map((evidence, index) => (
-            <div
-              key={index}
-              className="w-[148px] flex items-start gap-[7.34px] h-[203px] rounded-[12px] bg-[#040404]  "
-            >
-              <p>{evidence.report}</p>
-              <p>{evidence.name}</p>
-            </div>
-          ))}
-        </Slider>
-      </div>
-         */}
+        {Evidences.map((evidence, index) => (
+          <div key={index}>
+            {evidence.name}
+            {evidence.report}
+          </div>
+        ))}
+      </div> */}
     </div>
   );
 };

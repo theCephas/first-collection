@@ -14,11 +14,19 @@ import { motion, useCycle, AnimatePresence, MotionConfig } from "framer-motion";
 const Header = () => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
+  const [isSearchOpen, setSearchOpen] = useState(false);
+
+  // const handleSearchClick = () => {
+  //   setSearchOpen(!isSearchOpen);
+  // };
 
   return (
     <div className="max-w-[67.5rem] top-4 gilroy fixed left-1/2 -translate-x-1/2 w-full z-20">
       <div className="bg-[#000] mb-10 p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] mx-4 lg:mx-0 pt-4  ">
-        <Link href="/">
+        <Link
+          href="/"
+          className={`${isSearchOpen ? "hidden sm:flex" : "flex"}`}
+        >
           <Image src={Logo} alt="Logo" width={0} />
         </Link>
         <form className="relative hidden md:flex">
@@ -54,7 +62,7 @@ const Header = () => {
         <div className="text-[14px] font-[600] hidden items-center justify-center text-[#b3b3b3] md:flex gap-6">
           <Link
             href="/products"
-            className="focus:text-[#ff5c00] active:scale-75 transform"
+            className="focus:text-[#ff5c00] active:text-[#ff5c00] active:scale-75 transform"
           >
             Products
           </Link>
@@ -72,9 +80,48 @@ const Header = () => {
         </div>
 
         <div className="relative z-50 flex gap-3 items-center md:hidden">
-          <button>
+          <button
+            onClick={() => setSearchOpen(!isSearchOpen)}
+            className={`${isSearchOpen ? "hidden" : "flex"}`}
+          >
             <Image width={0} height={0} src={Search} alt="Seach Icon" />
           </button>
+          {isSearchOpen && (
+            <div className="flex gap-4 items-center">
+              <button onClick={() => setSearchOpen(false)}>
+                <X className="text-[40px] text-white " />
+              </button>
+              <form className="relative z-40">
+                <input
+                  type="text"
+                  placeholder="Search for products"
+                  className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[10px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 "
+                />
+                <button
+                  type="submit"
+                  aria-label="Submit-search"
+                  className="absolute left-3 top-[29%]"
+                >
+                  <svg
+                    fill="none"
+                    viewBox="0 0 13 14"
+                    width="20"
+                    height={20}
+                    xmlns="http://www.w3.org/2000/svg"
+                    role="img"
+                    aria-label="Search-Icon"
+                  >
+                    <path
+                      clipRule="evenodd"
+                      d="m8.82264 10.3833c-.92307.7008-2.07429 1.1167-3.32264 1.1167-3.03757 0-5.5-2.46243-5.5-5.5s2.46243-5.5 5.5-5.5 5.5 2.46243 5.5 5.5c0 1.24835-.4159 2.39957-1.1167 3.32264l2.897 2.89706c.2929.2929.2929.7677 0 1.0606s-.7677.2929-1.0606 0zm.67736-4.3833c0 2.20914-1.79086 4-4 4s-4-1.79086-4-4 1.79086-4 4-4 4 1.79086 4 4z"
+                      fill="#B5B5B5"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </form>
+            </div>
+          )}
           <motion.button
             animate={mobileNav ? "open" : "closed"}
             className="flex flex-col space-y-[5px]"

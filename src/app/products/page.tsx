@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import PageWrapper from "../components/PageWrapper";
 import ProductsHero from "./(components)/ProductsHero";
 import FilterSection from "./(components)/FilterSection";
-import ProductCard from "../productcard/ProductCard";
+import ProductCard from "../(components)/ProductCard";
 import Item1 from "../../../public/item1.svg";
 import Item2 from "../../../public/item5.svg";
 import Item3 from "../../../public/item3.svg";
