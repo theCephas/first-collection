@@ -16,16 +16,12 @@ const Header = () => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
 
-  // const handleSearchClick = () => {
-  //   setSearchOpen(!isSearchOpen);
-  // };
-
   return (
     <div className="max-w-[67.5rem] top-4 gilroy fixed left-1/2 -translate-x-1/2 w-full z-20">
       <div className="bg-[#000] mb-10 p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] mx-4 lg:mx-0 pt-4  ">
         <Link
           href="/"
-          className={`${isSearchOpen ? "hidden sm:flex" : "flex"}`}
+          // className={`${isSearchOpen ? "hidden sm:flex" : "flex"}`}
         >
           <Image src={Logo} alt="Logo" width={0} />
         </Link>
@@ -88,25 +84,22 @@ const Header = () => {
           </button>
           {isSearchOpen && (
             <div className="flex gap-4 items-center">
-              <button onClick={() => setSearchOpen(false)}>
-                <X className="text-[40px] text-white " />
-              </button>
               <form className="relative z-40">
                 <input
                   type="text"
                   placeholder="Search for products"
-                  className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[10px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 "
+                  className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[8px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 "
                 />
                 <button
                   type="submit"
                   aria-label="Submit-search"
-                  className="absolute left-3 top-[29%]"
+                  className="absolute left-3 top-[30%]"
                 >
                   <svg
                     fill="none"
                     viewBox="0 0 13 14"
-                    width="20"
-                    height={20}
+                    width="16"
+                    height={16}
                     xmlns="http://www.w3.org/2000/svg"
                     role="img"
                     aria-label="Search-Icon"
@@ -119,6 +112,12 @@ const Header = () => {
                     />
                   </svg>
                 </button>
+                <div
+                  className="absolute right-2 top-[25%] cursor-pointer "
+                  onClick={() => setSearchOpen(false)}
+                >
+                  <X className="w-[20px] h-[20px] text-[#b3b3b3] z-40 bg-[#040404] " />
+                </div>
               </form>
             </div>
           )}
