@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
-import { BackIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
+import { HideIcon, ShowIcon } from "../(components)/AuthIcons";
 import { ButtonPrimary } from "@/app/components/Buttons";
+import { BackIcon } from "@/app/components/Icons";
 
 const ResetPassword = () => {
   const [emailConfirmed, setEmailConfirmed] = useState(false);

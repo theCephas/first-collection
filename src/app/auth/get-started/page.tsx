@@ -2,13 +2,9 @@
 import React, { useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
-import {
-  BackIcon,
-  CheckIcon,
-  HideIcon,
-  ShowIcon,
-} from "../(components)/AuthIcons";
+import { CheckIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
+import { BackIcon } from "@/app/components/Icons";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);

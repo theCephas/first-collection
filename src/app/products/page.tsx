@@ -7,6 +7,7 @@ import ProductCard from "../productcard/ProductCard";
 import Item1 from "../../../public/item1.svg";
 import Item2 from "../../../public/item5.svg";
 import Item3 from "../../../public/item3.svg";
+import Link from "next/link";
 
 const Five: number[] = [1, 2, 3, 4, 5];
 
@@ -20,7 +21,7 @@ const Products = () => {
         <aside className="col-span-5 flex flex-col items-center mb-14">
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 h-fit gap-6">
             {[...Five, ...Five, ...Five, ...Five, ...Five].map((item, i) => (
-              <div key={i + 1}>
+              <Link href="/product-details" key={i + 1}>
                 {
                   <ProductCard
                     classes={""}
@@ -33,7 +34,7 @@ const Products = () => {
                     price={17000}
                   />
                 }
-              </div>
+              </Link>
             ))}
           </div>
           {/* Pagination */}
