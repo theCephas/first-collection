@@ -1,10 +1,14 @@
 "use client";
 import { Star } from "lucide-react";
 import React from "react";
+import { ProductDescriptionAndRating } from "./ProductDescriptionAndRating";
 
 const ProductReview = () => {
   return (
-    <section className="mt-14 max-w-[67.5rem] mx-auto px-6 xl:px-0 flex flex-col gap-6">
+    <section className="mt-14 max-w-[67.5rem] mx-auto px-6 xl:px-0 flex flex-col sm:grid grid-cols-3 gap-6">
+      <div className=" lg:hidden">
+        <ProductDescriptionAndRating />
+      </div>
       <div className="px-4 py-6 bg-white rounded-xl border border-neutral-100 justify-start items-start gap-2.5 inline-flex">
         <div className="self-stretch text-black text-sm font-normal gilroy leading-tight flex flex-col gap-6">
           <p className="text-black text-base font-semibold gilroy leading-normal">
