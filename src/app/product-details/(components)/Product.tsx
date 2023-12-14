@@ -7,11 +7,11 @@ import { ProductDescriptionAndRating } from "./ProductDescriptionAndRating";
 
 const Product = () => {
   return (
-    <section className="mt-24 max-w-[67.5rem] mx-auto px-6 xl:px-0">
-      <Link href="/products">
+    <section className="mt-24 sm:mt-28 max-w-[67.5rem] mx-auto px-6 xl:px-0">
+      <Link className="" href="/products">
         <BackIcon />
       </Link>
-      <div className="mt-6 flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-1 gap-6">
+      <div className="mt-6 sm:mt-14 md:mt-24 flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-1 gap-6">
         <aside className="h-full w-full col-span-3 col-start-2  overflow-hidden">
           <Image
             className="w-full h-72 lg:h-full rounded-xl border border-neutral-100 object-cover"

@@ -5,7 +5,7 @@ import { ProductDescriptionAndRating } from "./ProductDescriptionAndRating";
 
 const ProductReview = () => {
   return (
-    <section className="mt-14 max-w-[67.5rem] mx-auto px-6 xl:px-0 flex flex-col sm:grid grid-cols-3 gap-6">
+    <section className="mt-14 max-w-[67.5rem] mx-auto px-6 xl:px-0 flex flex-col sm:grid grid-cols-3 lg:grid-cols-2 gap-6">
       <div className=" lg:hidden">
         <ProductDescriptionAndRating />
       </div>
@@ -26,9 +26,9 @@ const ProductReview = () => {
       </div>
 
       {/* PRODUCT REVIEW */}
-      <div className="px-4 py-6 bg-white rounded-xl border border-neutral-100 flex-col justify-start items-start gap-4 inline-flex">
+      <div className="px-4 py-6 bg-white rounded-xl border border-neutral-100 flex-col justify-start items-start gap-6 inline-flex">
         <div className="justify-start items-center gap-2 inline-flex">
-          <p className="text-black text-base font-medium gilroy leading-normal">
+          <p className="text-black text-base font-semibold gilroy leading-normal">
             Product Reviews
           </p>
           <div className="justify-start items-start gap-0.5 flex">
@@ -63,7 +63,7 @@ const ProductReview = () => {
             Adesola Benita | Oct 1, 2023
           </p>
         </div>
-        <div className="self-stretch h-20 flex-col justify-start items-start gap-1.5 flex">
+        <div className="self-stretch  flex-col justify-start items-start gap-1.5 flex">
           <div className="justify-start items-center gap-2 inline-flex">
             <p className="text-black text-sm font-medium gilroy leading-tight">
               WOW{" "}
@@ -87,7 +87,7 @@ const ProductReview = () => {
             Bosun Bamidele | Sep 20, 2023
           </p>
         </div>
-        <div className="self-stretch h-20 flex-col justify-start items-start gap-1.5 flex">
+        <div className="self-stretch flex-col justify-start items-start gap-1.5 flex">
           <div className="justify-start items-center gap-2 inline-flex">
             <p className="text-black text-sm font-medium gilroy leading-tight">
               Exactly what I ordered
@@ -106,9 +106,9 @@ const ProductReview = () => {
             When I got the shoe, I wore it and it fits perfectly
           </p>
 
-          <p className="w-full text-neutral-700 text-xs font-normal gilroy leading-none flex justify-between">
+          <p className="w-full text-neutral-700 text-xs font-normal gilroy leading-none flex gap-0.5 justify-between">
             Benjamin Nice | Sep 20, 2023
-            <span className="text-orange-600 text-sm font-normal gilroy leading-tight">
+            <span className="text-orange-600 text-sm font-normal gilroy leading-tight whitespace-nowrap">
               View more
             </span>
           </p>

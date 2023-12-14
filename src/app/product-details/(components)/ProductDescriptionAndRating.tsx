@@ -5,7 +5,7 @@ import React from "react";
 
 export const ProductDescriptionAndRating = () => {
   return (
-    <section className="w-full h-full mt-14 sm:m-0 sm:px-4 sm:py-6 sm:border border-neutral-100 lg:p-0 lg:border-none flex flex-col gap-8">
+    <section className="w-full h-full mt-14 sm:m-0 sm:px-4 sm:py-6 sm:border border-neutral-100 rounded-xl lg:rounded-none lg:p-0 lg:border-none flex flex-col gap-8">
       {/* DESCRIPTION AND RATING */}
       <div className="flex-col justify-start items-start gap-2 flex">
         <p className="text-black text-sm font-medium gilroy leading-tight">
@@ -57,7 +57,7 @@ export const ProductDescriptionAndRating = () => {
             size guide
           </p>
         </div>
-        <div className="justify-start items-start gap-3 inline-flex">
+        <div className="justify-start items-start gap-3 sm:gap-1 md:gap-3 inline-flex">
           {[38, 40, 42].map((item) => (
             <div
               key={item}
@@ -90,9 +90,9 @@ export const ProductDescriptionAndRating = () => {
       </div>
 
       {/* ACTIONS */}
-      <div className="w-full flex gap-6 lg:gap-4">
-        <ButtonSecondary classes="">{"Add to cart"}</ButtonSecondary>
-        <ButtonPrimary classes="w-full">{"Checkout"}</ButtonPrimary>
+      <div className="w-full flex sm:flex-col gap-6">
+        <ButtonSecondary classes=" sm:px-1">{"Add to cart"}</ButtonSecondary>
+        <ButtonPrimary classes="w-full sm:px-1">{"Checkout"}</ButtonPrimary>
       </div>
     </section>
   );
