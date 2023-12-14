@@ -17,8 +17,8 @@ const Header = () => {
   const [isSearchOpen, setSearchOpen] = useState(false);
 
   return (
-    <div className="max-w-[67.5rem] top-4 gilroy fixed left-1/2 -translate-x-1/2 w-full z-20">
-      <div className="bg-[#000] mb-10 p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] mx-4 lg:mx-0 pt-4  ">
+    <div className="pt-4 gilroy w-full">
+      <div className="bg-[#000] p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] pt-4 max-w-[67.5rem] mx-4 lg:mx-auto ">
         <Link
           href="/"
           // className={`${isSearchOpen ? "hidden sm:flex" : "flex"}`}
@@ -71,7 +71,9 @@ const Header = () => {
         </div>
 
         <div className="hidden md:flex items-center justify-center gap-6">
-          <Image src={User} alt="User icon" />
+          <Link href="/profiles">
+            <Image src={User} alt="User icon" />
+          </Link>
           <Image src={Cart} alt="Cart icon" />
         </div>
 
@@ -180,7 +182,7 @@ const Header = () => {
               animate="open"
               initial="closed"
               exit="closed"
-              className="fixed top-[-20px] inset-0 bg-white w-[80%] h-screen"
+              className="fixed z-50 inset-0 bg-white w-[80%] h-screen"
             >
               <button
                 onClick={() => toggleMobileNav()}
@@ -242,7 +244,7 @@ const Header = () => {
                         >
                           <Link
                             className="focus:text-[#ff5c00] px-10 sm:px-20 "
-                            href=""
+                            href="/profiles/profile"
                           >
                             Profile
                           </Link>
