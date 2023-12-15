@@ -7,7 +7,7 @@ import { ProductDescriptionAndRating } from "./ProductDescriptionAndRating";
 
 const Product = () => {
   return (
-    <section className="mt-24 sm:mt-28 max-w-[67.5rem] mx-auto px-6 xl:px-0">
+    <section className="mt-6 max-w-[67.5rem] mx-auto px-6 xl:px-0">
       <Link className="" href="/products">
         <BackIcon />
       </Link>

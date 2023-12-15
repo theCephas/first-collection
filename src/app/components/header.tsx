@@ -63,7 +63,7 @@ const Header = () => {
             Products
           </Link>
           <Link
-            href="/"
+            href="/contact-us"
             className="focus:text-[#ff5c00] active:scale-75 transform"
           >
             Contact Us
@@ -200,7 +200,7 @@ const Header = () => {
                     Products
                   </Link>
                   <Link
-                    href=""
+                    href="/contact-us"
                     className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
                   >
                     Contact Us

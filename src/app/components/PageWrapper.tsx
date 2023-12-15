@@ -10,7 +10,7 @@ interface PageProps {
 export const PageWrapper = ({ children }: PageProps) => {
   return (
     <main>
-      <div className="max-w-[1440px] mx-auto">
+      <div className="">
         <Header />
         {children}
       </div>
