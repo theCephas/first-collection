@@ -8,7 +8,7 @@ const ContactUs = () => {
   // mb-40 sm:mb-80 md:mb-[1300px]
   return (
     <PageWrapper>
-      <section className="max-w-[67.5rem] mx-auto mt-8 md:mt-20 lg:mt-36 mb-[30%] px-6 xl:px-0 flex flex-col md:grid md:grid-cols-2 gap-8 ">
+      <section className="max-w-[67.5rem] mx-auto h-screen px-6 xl:px-0 flex flex-col justify-center md:grid md:grid-cols-2 md:place-content-center gap-8 ">
         <aside className="flex flex-col gap-4">
           <h1 className=" text-black text-2xl md:text-3xl lg:text-4xl font-bold font-judson leading-7">
             Do you have a question or complaint. We would love to hear from you!
