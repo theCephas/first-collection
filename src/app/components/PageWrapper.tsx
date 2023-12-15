@@ -9,8 +9,8 @@ interface PageProps {
 
 export const PageWrapper = ({ children }: PageProps) => {
   return (
-    <main className="flex flex-col justify-between">
-      <div className="max-w-[1440px] mx-auto">
+    <main>
+      <div className="">
         <Header />
         {children}
       </div>
