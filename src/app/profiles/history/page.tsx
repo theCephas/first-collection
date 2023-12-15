@@ -1,12 +1,13 @@
-import React from "react";
-import ProfileWrapper from "@/layout/ProfileWrapper";
+"use client";
 
-const History = () => {
-  return (
-    <ProfileWrapper>
-      <div className="mt-20 border-b border-red-500">Hi History</div>
-    </ProfileWrapper>
-  );
-};
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-export default History;
+export default function Index() {
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/orders/ongoing-orders");
+  }, [router]);
+
+  return null;
+}

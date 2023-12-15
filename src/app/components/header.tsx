@@ -71,9 +71,68 @@ const Header = () => {
         </div>
 
         <div className="hidden md:flex items-center justify-center gap-6">
-          <Link href="/profiles">
-            <Image src={User} alt="User icon" />
-          </Link>
+          <div>
+            <Image
+              src={User}
+              alt="User icon"
+              onClick={() => setIsDropDownVisible(!isDropDownVisible)}
+              // onMouseLeave={() => setIsDropDownVisible(isDropDownVisible)}
+              className="cursor-pointer focus:text-[#ff5c00]"
+            />
+            <div className="absolute right-0 z-[100] bg-white rounded-[8px] top-[70px]">
+              {isDropDownVisible && (
+                <AnimatePresence>
+                  <motion.div
+                    variants={{
+                      open: {
+                        opacity: 1,
+                        transition: {
+                          duration: 0.2,
+                          ease: "easeInOut",
+                        },
+                      },
+                      closed: {
+                        opacity: 0,
+                        transition: {
+                          duration: 0.2,
+                          ease: "easeInOut",
+                        },
+                      },
+                    }}
+                    initial="closed"
+                    animate="open"
+                    exit="closed"
+                    className="flex flex-col gap-4 relative z-50 text-[#060606] text-[14px] rounded-[8px] focus:text-[#ff5c00] my-6"
+                  >
+                    <Link
+                      className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                      href="/profiles/profile"
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                      href=""
+                    >
+                      Orders
+                    </Link>
+                    <Link
+                      href="/auth/get-started"
+                      className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      href=""
+                      className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
+                    >
+                      Logout
+                    </Link>
+                  </motion.div>
+                </AnimatePresence>
+              )}
+            </div>
+          </div>
           <Image src={Cart} alt="Cart icon" />
         </div>
 
