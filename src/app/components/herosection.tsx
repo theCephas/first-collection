@@ -21,7 +21,7 @@ const Herosection = () => {
 
   return (
     <div className="mb-10 mt-[-90px] pt-[50px] h-[140vh] sm:h-[150vh]">
-      <div className="relative z-0 px-8 lg:px-10 pb-[150px] m-auto flex flex-col items-center justify-center text-center gap-6 pt-[50px] lg:pt-[80px]">
+      <div className="px-8 lg:px-10 pb-[150px] m-auto flex flex-col items-center justify-center text-center gap-6 pt-[50px] lg:pt-[80px]">
         <p
           data-aos="zoom-in"
           className="text-[40px] sm:text-[56px] w-full md:w-[679px] font-judson font-[700] leading-[56px] text-[#060606] text-center "
