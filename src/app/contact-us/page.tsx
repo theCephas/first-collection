@@ -10,7 +10,7 @@ const ContactUs = () => {
     <PageWrapper>
       <section className="max-w-[67.5rem] mx-auto mt-8 md:mt-20 lg:mt-36 mb-[50%] md:mb-[100%] lg:mb-[20%] px-6 xl:px-0 flex flex-col md:grid md:grid-cols-2 gap-8 ">
         <aside className="flex flex-col gap-4">
-          <h1 className=" text-black text-2xl md:text-3xl lg:text-4xl font-bold font-['Judson'] leading-7">
+          <h1 className=" text-black text-2xl md:text-3xl lg:text-4xl font-bold font-judson leading-7">
             Do you have a question or complaint. We would love to hear from you!
           </h1>
           <div className="max-w-[30rem] text-zinc-950 text-sm font-normal gilroy leading-tight">
@@ -23,7 +23,7 @@ const ContactUs = () => {
             <div className="p-1.5 bg-green-500 bg-opacity-20 rounded-full border border-green-500 justify-start items-start flex">
               <WhatsappIcon />
             </div>
-            <p className="text-orange-600 text-sm font-medium font-['Gilroy'] leading-tight">
+            <p className="text-orange-600 text-sm font-medium gilroy leading-tight">
               Contact us on Whatsapp
             </p>
           </div>
@@ -35,7 +35,7 @@ const ContactUs = () => {
                 }}
               />
             </div>
-            <p className="text-orange-600 text-sm font-medium font-['Gilroy'] leading-tight">
+            <p className="text-orange-600 text-sm font-medium gilroy leading-tight">
               Contact us on Instagram
             </p>
           </div>
@@ -43,7 +43,7 @@ const ContactUs = () => {
             <div className="p-1.5 bg-blue-600 bg-opacity-20 rounded-full border border-blue-600 justify-start items-start flex">
               <FacebookIcon />
             </div>
-            <p className="text-orange-600 text-sm font-medium font-['Gilroy'] leading-tight">
+            <p className="text-orange-600 text-sm font-medium gilroy leading-tight">
               Contact us on Facebook
             </p>
           </div>
