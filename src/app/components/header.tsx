@@ -16,6 +16,7 @@ const Header = () => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div className="pt-4 gilroy w-full relative">
@@ -29,9 +30,11 @@ const Header = () => {
         <form className="relative hidden md:flex">
           <label className="hidden">Search</label>
           <input
+            onChange={(e) => setSearchQuery(e.target.value)}
+            value={searchQuery}
             type="text"
             placeholder="Search for products"
-            className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[10px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 "
+            className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[10px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 focus:border-orange-600"
           />
           <button
             type="submit"
@@ -72,20 +75,15 @@ const Header = () => {
         </div>
 
         <div className="hidden md:flex items-center justify-center gap-6">
-          <div>
-            {/* <Image
-              src={User}
-              alt="User icon"
-              onClick={() => setIsDropDownVisible(!isDropDownVisible)}
-              // onMouseLeave={() => setIsDropDownVisible(isDropDownVisible)}
-              className="cursor-pointer focus:text-[#ff5c00]"
-            /> */}
+          <div
+            className="relative"
+            onMouseEnter={() => setIsDropDownVisible(true)}
+            onMouseLeave={() => setIsDropDownVisible(false)}
+          >
             <svg
-              onClick={() => setIsDropDownVisible(!isDropDownVisible)}
               width="20"
               height="20"
               viewBox="0 0 20 20"
-              // fill="none"
               xmlns="http://www.w3.org/2000/svg"
               className="cursor-pointer fill-[#b3b3b3] focus:fill-[#ff5c00]"
             >
@@ -101,8 +99,8 @@ const Header = () => {
               />
             </svg>
 
-            <div className="absolute right-0 z-[100] bg-white rounded-[8px] top-[70px]">
-              {isDropDownVisible && (
+            {isDropDownVisible && (
+              <div className="absolute p-4 -right-full z-[100] bg-white rounded-[8px] top-5 w-[16rem] shadow">
                 <AnimatePresence>
                   <motion.div
                     variants={{
@@ -124,36 +122,37 @@ const Header = () => {
                     initial="closed"
                     animate="open"
                     exit="closed"
-                    className="flex flex-col gap-4 relative z-50 text-[#060606] text-[14px] rounded-[8px] focus:text-[#ff5c00] my-6"
+                    className="flex flex-col gap-4 items-center  relative z-50 text-[#060606] text-[14px]  focus:text-[#ff5c00]"
                   >
                     <Link
-                      className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                      className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
                       href="/profiles/profile"
                     >
                       Profile
                     </Link>
                     <Link
-                      className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                      className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
                       href=""
                     >
                       Orders
                     </Link>
+
                     <Link
                       href="/auth/get-started"
-                      className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
+                      className="w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
                     >
                       Sign In
                     </Link>
                     <Link
                       href=""
-                      className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
+                      className=" w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
                     >
                       Logout
                     </Link>
                   </motion.div>
                 </AnimatePresence>
-              )}
-            </div>
+              </div>
+            )}
           </div>
           <Image src={Cart} alt="Cart icon" />
         </div>
@@ -169,9 +168,12 @@ const Header = () => {
             <div className="flex gap-4 items-center">
               <form className="relative z-40">
                 <input
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={searchQuery}
                   type="text"
                   placeholder="Search for products"
-                  className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[8px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 "
+                  className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[8px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 focus:border-orange-600"
+                  autoFocus
                 />
                 <button
                   type="submit"
@@ -197,7 +199,10 @@ const Header = () => {
                 </button>
                 <div
                   className="absolute right-2 top-[25%] cursor-pointer "
-                  onClick={() => setSearchOpen(false)}
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSearchOpen(false);
+                  }}
                 >
                   <X className="w-[20px] h-[20px] text-[#b3b3b3] z-40 bg-[#040404] " />
                 </div>
@@ -363,7 +368,7 @@ const Header = () => {
           </MotionConfig>
         )}
       </AnimatePresence>
-      <SearchResults />
+      {searchQuery.length > 0 && <SearchResults />}
     </div>
   );
 };
