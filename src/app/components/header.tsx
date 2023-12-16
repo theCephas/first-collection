@@ -10,6 +10,7 @@ import Link from "next/link";
 import "../../../src/fonts.css";
 import { ChevronDown, ChevronUp, AlignJustify, X } from "lucide-react";
 import { motion, useCycle, AnimatePresence, MotionConfig } from "framer-motion";
+import { SearchResults } from "./SearchResults";
 
 const Header = () => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
@@ -17,7 +18,7 @@ const Header = () => {
   const [isSearchOpen, setSearchOpen] = useState(false);
 
   return (
-    <div className="pt-4 gilroy w-full">
+    <div className="pt-4 gilroy w-full relative">
       <div className="bg-[#000] p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] pt-4 max-w-[67.5rem] mx-4 lg:mx-auto ">
         <Link
           href="/"
@@ -362,6 +363,7 @@ const Header = () => {
           </MotionConfig>
         )}
       </AnimatePresence>
+      <SearchResults />
     </div>
   );
 };
