@@ -21,8 +21,8 @@ const Header = () => {
   const [showCart, setShowCart] = useState(false);
 
   return (
-    <div className="pt-4 gilroy w-full relative">
-      <div className="bg-[#000] p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] pt-4 max-w-[67.5rem] mx-4 lg:mx-auto ">
+    <div className="pt-4 gilroy w-full relative z-50">
+      <div className="bg-[#000] p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] pt-4 max-w-[67.5rem] mx-4 lg:mx-auto">
         <Link
           href="/"
           // className={`${isSearchOpen ? "hidden sm:flex" : "flex"}`}
@@ -61,7 +61,7 @@ const Header = () => {
             </svg>
           </button>
         </form>
-        <div className="text-[14px] font-[600] hidden items-center justify-center text-[#b3b3b3] md:flex gap-6">
+        <div className="text-[14px] font-[600] hidden items-center justify-center text-[#b3b3b3] lg:flex gap-6">
           <Link
             href="/products"
             className="focus:text-[#ff5c00] active:text-[#ff5c00] active:scale-75 transform"
@@ -76,9 +76,9 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="hidden md:flex items-center justify-center gap-6">
+        <div className="hidden lg:flex items-center justify-center gap-6">
           <div
-            className="relative"
+            className="relative z-50"
             onMouseEnter={() => setIsDropDownVisible(true)}
             onMouseLeave={() => setIsDropDownVisible(false)}
           >
@@ -102,7 +102,7 @@ const Header = () => {
             </svg>
 
             {isDropDownVisible && (
-              <div className="absolute p-4 -right-full z-[100] bg-white rounded-[8px] top-5 w-[16rem] shadow">
+              <div className="absolute p-4 -right-full z-50 bg-white rounded-[8px] top-5 w-[16rem] shadow">
                 <AnimatePresence>
                   <motion.div
                     variants={{
@@ -156,16 +156,23 @@ const Header = () => {
               </div>
             )}
           </div>
-          <Image onClick={() => setShowCart(true)} src={Cart} alt="Cart icon" />
+          <Image
+            className="cursor-pointer"
+            onClick={() => setShowCart(true)}
+            src={Cart}
+            alt="Cart icon"
+          />
         </div>
 
-        <div className="relative z-50 flex gap-3 items-center md:hidden">
-          <button
-            onClick={() => setSearchOpen(!isSearchOpen)}
-            className={`${isSearchOpen ? "hidden" : "flex"}`}
-          >
-            <Image width={0} height={0} src={Search} alt="Seach Icon" />
-          </button>
+        <div className="relative z-50 flex gap-3 items-center lg:hidden">
+          {!isSearchOpen && (
+            <button
+              onClick={() => setSearchOpen(!isSearchOpen)}
+              className={`md:hidden flex`}
+            >
+              <Image width={0} height={0} src={Search} alt="Seach Icon" />
+            </button>
+          )}
           {isSearchOpen && (
             <div className="flex gap-4 items-center">
               <form className="relative z-40">
