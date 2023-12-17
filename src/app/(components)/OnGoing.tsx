@@ -21,7 +21,7 @@ const OnGoing: React.FC<OnGoingProps> = ({
   return (
     <div className={`gilroy ${classes}`}>
       <div className="flex justify-between w-full rounded-[12px] border border-[#f6f6f6] bg-[#fbfbfb] p-[8px] ">
-        <div className="flex ">
+        <div className="flex gap-3">
           <Image src={imageSrc} alt={name} width={0} height={0} />
           <div className="flex flex-col gap-2 text-[#040404]">
             <p className="text-[16px] font-[400] leading-[23.2px]">{name}</p>
