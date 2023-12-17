@@ -3,7 +3,6 @@ import React from "react";
 import PageWrapper from "../components/PageWrapper";
 import { Instagram } from "lucide-react";
 import { WhatsappIcon, FacebookIcon } from "./(components)/ContactIcons";
-import Cart from "../components/Cart";
 
 const ContactUs = () => {
   return (
@@ -49,7 +48,6 @@ const ContactUs = () => {
           </div>
         </aside>
       </section>
-      <Cart />
     </PageWrapper>
   );
 };

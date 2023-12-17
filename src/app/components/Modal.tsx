@@ -11,9 +11,14 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="fixed inset-0 bg-black opacity-50"></div>
-      <div className="ml-auto h-full z-50 bg-white p-4">{children}</div>
+    <div className="fixed top-0 inset-0 z-50 flex items-center justify-center">
+      <div
+        onClick={onClose}
+        className="fixed inset-0 bg-black opacity-50"
+      ></div>
+      <div className="w-full h-full sm:w-[25.5rem] lg:w-[34rem] sm:ml-auto z-50 bg-white p-3 sm:p-6 lg:pr-20 overflow-scroll hide-scroll">
+        {children}
+      </div>
     </div>
   );
 };
