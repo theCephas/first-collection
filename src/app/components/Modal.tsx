@@ -33,7 +33,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
         initial="closed"
         animate="open"
         exit="closed"
-        className="fixed top-0 inset-0 z-50 flex items-center justify-center"
+        className="fixed top-0 inset-0 z-50 flex items-center justify-center cursor-pointer"
       >
         <div
           onClick={onClose}

@@ -17,7 +17,7 @@ const Cart = ({ close }: CartProps) => {
           <p className="text-black text-2xl font-normal font-judson leading-7 ">
             Cart (3)
           </p>
-          <X onClick={close} />
+          <X onClick={close} className="cursor-pointer" />
         </div>
         {/*  */}
         <div className="flex flex-col items-start gap-6">
