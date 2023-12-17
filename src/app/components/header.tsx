@@ -258,7 +258,7 @@ const Header = () => {
             <motion.div
               variants={{
                 open: {
-                  x: "70%",
+                  x: "50%",
                   transition: {
                     type: "spring",
                     bounce: 0,
@@ -277,11 +277,12 @@ const Header = () => {
               animate="open"
               initial="closed"
               exit="closed"
-              className="fixed z-50 inset-0 bg-white w-[80%] h-screen"
+              className="fixed z-50 inset-0 bg-white h-screen"
             >
               <button
                 onClick={() => toggleMobileNav()}
-                className="mt-8  ml-[130px] sm:ml-[230px]"
+                // className="mt-8  ml-[130px] sm:ml-[230px]"
+                className="mt-8 relative left-[40%] md:left-[45%] z-100"
               >
                 <X />
               </button>
@@ -365,8 +366,7 @@ const Header = () => {
                       </AnimatePresence>
                     )}
                   </div>
-                  <Link
-                    href=""
+                  <p
                     onClick={() => {
                       toggleMobileNav();
                       setShowCart(true);
@@ -374,7 +374,7 @@ const Header = () => {
                     className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
                   >
                     Cart
-                  </Link>
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
