@@ -10,14 +10,18 @@ import Link from "next/link";
 import "../../../src/fonts.css";
 import { ChevronDown, ChevronUp, AlignJustify, X } from "lucide-react";
 import { motion, useCycle, AnimatePresence, MotionConfig } from "framer-motion";
+import { SearchResults } from "./SearchResults";
+import CartComponent from "./Cart";
 
 const Header = () => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showCart, setShowCart] = useState(false);
 
   return (
-    <div className="pt-4 gilroy w-full">
+    <div className="pt-4 gilroy w-full relative">
       <div className="bg-[#000] p-[16px] flex justify-between items-center rounded-[16px] backdrop-blur-[10px] pt-4 max-w-[67.5rem] mx-4 lg:mx-auto ">
         <Link
           href="/"
@@ -28,9 +32,11 @@ const Header = () => {
         <form className="relative hidden md:flex">
           <label className="hidden">Search</label>
           <input
+            onChange={(e) => setSearchQuery(e.target.value)}
+            value={searchQuery}
             type="text"
             placeholder="Search for products"
-            className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[10px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 "
+            className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[10px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 focus:border-orange-600"
           />
           <button
             type="submit"
@@ -71,37 +77,32 @@ const Header = () => {
         </div>
 
         <div className="hidden md:flex items-center justify-center gap-6">
-          <div>
-            {/* <Image
-              src={User}
-              alt="User icon"
-              onClick={() => setIsDropDownVisible(!isDropDownVisible)}
-              // onMouseLeave={() => setIsDropDownVisible(isDropDownVisible)}
-              className="cursor-pointer focus:text-[#ff5c00]"
-            /> */}
+          <div
+            className="relative"
+            onMouseEnter={() => setIsDropDownVisible(true)}
+            onMouseLeave={() => setIsDropDownVisible(false)}
+          >
             <svg
-              onClick={() => setIsDropDownVisible(!isDropDownVisible)}
               width="20"
               height="20"
               viewBox="0 0 20 20"
-              // fill="none"
               xmlns="http://www.w3.org/2000/svg"
               className="cursor-pointer fill-[#b3b3b3] focus:fill-[#ff5c00]"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M10 1.66669C7.69885 1.66669 5.83337 3.53217 5.83337 5.83335C5.83337 8.13454 7.69885 10 10 10C12.3012 10 14.1667 8.13454 14.1667 5.83335C14.1667 3.53217 12.3012 1.66669 10 1.66669ZM7.50004 5.83335C7.50004 4.45264 8.61933 3.33335 10 3.33335C11.3808 3.33335 12.5 4.45264 12.5 5.83335C12.5 7.21407 11.3808 8.33335 10 8.33335C8.61933 8.33335 7.50004 7.21407 7.50004 5.83335Z"
               />
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M10 19.1667C8.71629 19.1667 6.85822 18.8752 5.4629 18.2645C4.7779 17.9647 4.08125 17.5356 3.6765 16.9145C3.46364 16.5879 3.32907 16.2031 3.33348 15.7735C3.33785 15.3479 3.47791 14.9401 3.7133 14.5607C4.85447 12.7214 7.18903 10.8334 10 10.8334C12.811 10.8334 15.1456 12.7214 16.2868 14.5607C16.5222 14.9401 16.6622 15.3479 16.6666 15.7735C16.671 16.2031 16.5364 16.5879 16.3236 16.9145C15.9188 17.5356 15.2222 17.9647 14.5372 18.2645C13.1419 18.8752 11.2838 19.1667 10 19.1667ZM5.12953 15.4394C5.01981 15.6162 5.00068 15.7298 5.00006 15.7906C4.99947 15.8476 5.01409 15.9144 5.07284 16.0046C5.21132 16.2171 5.5476 16.4823 6.13114 16.7377C7.27291 17.2374 8.8944 17.5 10 17.5C11.1057 17.5 12.7272 17.2374 13.8689 16.7377C14.4525 16.4823 14.7888 16.2171 14.9272 16.0046C14.986 15.9144 15.0006 15.8476 15 15.7906C14.9994 15.7298 14.9803 15.6162 14.8705 15.4394C13.9354 13.9321 12.0703 12.5 10 12.5C7.92976 12.5 6.06466 13.9321 5.12953 15.4394Z"
               />
             </svg>
 
-            <div className="absolute right-0 z-[100] bg-white rounded-[8px] top-[70px]">
-              {isDropDownVisible && (
+            {isDropDownVisible && (
+              <div className="absolute p-4 -right-full z-[100] bg-white rounded-[8px] top-5 w-[16rem] shadow">
                 <AnimatePresence>
                   <motion.div
                     variants={{
@@ -123,38 +124,39 @@ const Header = () => {
                     initial="closed"
                     animate="open"
                     exit="closed"
-                    className="flex flex-col gap-4 relative z-50 text-[#060606] text-[14px] rounded-[8px] focus:text-[#ff5c00] my-6"
+                    className="flex flex-col gap-4 items-center  relative z-50 text-[#060606] text-[14px]  focus:text-[#ff5c00]"
                   >
                     <Link
-                      className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                      className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
                       href="/profiles/profile"
                     >
                       Profile
                     </Link>
                     <Link
-                      className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                      className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
                       href=""
                     >
                       Orders
                     </Link>
+
                     <Link
                       href="/auth/get-started"
-                      className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
+                      className="w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
                     >
                       Sign In
                     </Link>
                     <Link
                       href=""
-                      className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
+                      className=" w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
                     >
                       Logout
                     </Link>
                   </motion.div>
                 </AnimatePresence>
-              )}
-            </div>
+              </div>
+            )}
           </div>
-          <Image src={Cart} alt="Cart icon" />
+          <Image onClick={() => setShowCart(true)} src={Cart} alt="Cart icon" />
         </div>
 
         <div className="relative z-50 flex gap-3 items-center md:hidden">
@@ -168,9 +170,12 @@ const Header = () => {
             <div className="flex gap-4 items-center">
               <form className="relative z-40">
                 <input
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={searchQuery}
                   type="text"
                   placeholder="Search for products"
-                  className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[8px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 "
+                  className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[8px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 focus:border-orange-600"
+                  autoFocus
                 />
                 <button
                   type="submit"
@@ -196,7 +201,10 @@ const Header = () => {
                 </button>
                 <div
                   className="absolute right-2 top-[25%] cursor-pointer "
-                  onClick={() => setSearchOpen(false)}
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSearchOpen(false);
+                  }}
                 >
                   <X className="w-[20px] h-[20px] text-[#b3b3b3] z-40 bg-[#040404] " />
                 </div>
@@ -351,7 +359,11 @@ const Header = () => {
                     )}
                   </div>
                   <Link
-                    href="/"
+                    href=""
+                    onClick={() => {
+                      toggleMobileNav();
+                      setShowCart(true);
+                    }}
                     className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
                   >
                     Cart
@@ -362,6 +374,8 @@ const Header = () => {
           </MotionConfig>
         )}
       </AnimatePresence>
+      {searchQuery.length > 0 && <SearchResults />}
+      {showCart && <CartComponent close={() => setShowCart(false)} />}
     </div>
   );
 };
