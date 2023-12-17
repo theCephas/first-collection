@@ -21,17 +21,16 @@ export default function ProfileHeader() {
   return (
     <div className="flex justify-center items-center gap-6">
       {links?.map((item, index) => (
-        <Link
-          key={index}
-          href={item.href}
-          className={` ${
+        <div
+          className={`font-[600] ${
             pathname.toLowerCase() === item.href.toLowerCase()
-              ? "border-[#ff5c00] border-b text-black"
-              : "text-zinc-600 "
+              ? "text-[#ff5c00] border-b border-[#ff5c00]"
+              : "text-zinc-600"
           }`}
+          key={index}
         >
-          {item.name}
-        </Link>
+          <Link href={item.href}>{item.name}</Link>
+        </div>
       ))}
     </div>
   );

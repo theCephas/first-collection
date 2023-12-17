@@ -10,7 +10,7 @@ const Page = () => {
   return (
     <ProfileWrapper>
       <HistoryWrapper>
-        <div className="w-full flex flex-col gap-8">
+        <div className="w-full flex flex-col gap-8 mb-14">
           <div className="w-full">
             <p className="text-[12px] pb-4 font-[400] leading-[17.4px] text-[#040404] ">
               Nov 2, 2023
