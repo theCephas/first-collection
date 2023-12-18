@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import { Minus, Plus, X } from "lucide-react";
 import Image from "next/image";
 import { Delete } from "./Icons";
+import { ButtonPrimary } from "./Buttons";
 
 interface CartProps {
   close: () => void;
@@ -12,7 +13,7 @@ interface CartProps {
 const Cart = ({ close }: CartProps) => {
   return (
     <Modal isOpen={true} onClose={close}>
-      <section className="">
+      <div className="p-3 sm:p-6 lg:pr-20">
         <div className="justify-between items-center flex mb-12">
           <p className="text-black text-2xl font-normal font-judson leading-7 ">
             Cart (3)
@@ -30,7 +31,7 @@ const Cart = ({ close }: CartProps) => {
                 alt=""
                 width={10000}
                 height={10000}
-                className="w-auto h-[9rem]  sm:h-44 rounded-xl border border-neutral-100"
+                className="w-auto h-[8rem]  sm:h-44 rounded-xl border border-neutral-100"
                 src="/shoe1.png"
               />
 
@@ -66,7 +67,18 @@ const Cart = ({ close }: CartProps) => {
             </div>
           ))}
         </div>
-      </section>
+      </div>
+      <div className="w-full pl-6 pr-24 py-4 border-t border-neutral-200 flex-col justify-center items-start gap-8 flex">
+        <div className="self-stretch justify-between items-center  flex">
+          <p className="text-neutral-700 text-sm font-normal gilroy leading-tight">
+            Total Amount:
+          </p>
+          <p className="text-orange-600 text-lg font-semibold gilroy leading-relaxed">
+            ₦ 51,000
+          </p>
+        </div>
+        <ButtonPrimary classes="w-full">{"Checkout"}</ButtonPrimary>
+      </div>
     </Modal>
   );
 };

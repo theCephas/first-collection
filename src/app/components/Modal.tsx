@@ -39,9 +39,9 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
           onClick={onClose}
           className="fixed inset-0 bg-black opacity-50"
         ></div>
-        <div className="w-full h-full sm:w-[25.5rem] lg:w-[34rem] sm:ml-auto z-50 bg-white p-3 sm:p-6 lg:pr-20 overflow-scroll hide-scroll">
+        <section className="w-full h-full sm:w-[25.5rem] lg:w-[34rem] sm:ml-auto z-50 bg-white  overflow-scroll hide-scroll">
           {children}
-        </div>
+        </section>
       </motion.div>
     </AnimatePresence>
   );
