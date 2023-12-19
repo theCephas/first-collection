@@ -16,7 +16,7 @@ const Popup = ({ text, type }: PopupProps) => {
         exit={{ x: -300, opacity: 0 }}
         className={`absolute right-0 top-0 lg:top-12 w-[15rem] md:w-[19rem] lg:w-[27rem] h-fit p-4 bg-white rounded-xl shadow border ${
           type === "error" ? "border-red-600" : "border-green-600"
-        } items-start gap-3 md:gap-6 flex z-50`}
+        } justify-between gap-3 md:gap-6 flex z-50`}
       >
         <p className="text-neutral-700 text-sm font-normal gilroy leading-tight">
           {text}

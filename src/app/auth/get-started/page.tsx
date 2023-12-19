@@ -6,12 +6,26 @@ import { CheckIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
 import Popup from "@/app/components/Popup";
+import Link from "next/link";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
   const [hasAcc, setHasAcc] = useState(true);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [status, setStatus] = useState("");
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    setMsg("Oops! Incorrect email or password. Try again.");
+    setStatus("error");
+    setShowForgotPassword(true);
+    setTimeout(() => {
+      setStatus("");
+    }, 5000);
+  };
 
   return (
     <AuthWrapper
@@ -55,7 +69,11 @@ const Login = () => {
           </div>
 
           {/* FORM SIDE */}
-          <form className="flex flex-col gap-6" action="">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-6"
+            action=""
+          >
             {/* First Name */}
             {!hasAcc && (
               <label
@@ -137,7 +155,18 @@ const Login = () => {
             </div>
 
             {/* ACTION BUTTONS */}
-            <div className="w-full mt-8 flex flex-col gap-3  ">
+            <div className="w-full mt-8 flex flex-col gap-3  items-center">
+              {hasAcc && showForgotPassword && (
+                <p className="text-sm gilroy flex gap-2">
+                  Forgot Password?
+                  <Link
+                    href="/auth/reset-password"
+                    className="text-orange-600 font-medium"
+                  >
+                    Reset
+                  </Link>
+                </p>
+              )}
               <ButtonPrimary classes="w-full">
                 {hasAcc ? "Sign In" : "Sign Up"}
               </ButtonPrimary>
@@ -157,12 +186,7 @@ const Login = () => {
             </div>
           </form>
         </section>
-        <Popup
-          text={
-            "Oops! It seems there was an issue check your password and try again."
-          }
-          type={"error"}
-        />
+        {status.length > 0 && <Popup text={msg} type={status} />}
       </main>
     </AuthWrapper>
   );
