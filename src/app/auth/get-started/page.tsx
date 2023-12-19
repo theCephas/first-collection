@@ -20,10 +20,11 @@ const Login = () => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setMsg("Oops! Incorrect email or password. Try again.");
+    setShowForgotPassword(false);
     setStatus("error");
-    setShowForgotPassword(true);
     setTimeout(() => {
       setStatus("");
+      setShowForgotPassword(true);
     }, 5000);
   };
 
