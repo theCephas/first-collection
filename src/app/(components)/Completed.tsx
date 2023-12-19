@@ -37,7 +37,7 @@ const Completed: React.FC<CompletedProps> = ({
                 ₦ {price}
               </p>
               <Link
-                href=""
+                href="/orders/review"
                 className="text-[#FF5C00] text-[14px] font-[600] leading-[20.3px] "
               >
                 Give a review
@@ -50,7 +50,7 @@ const Completed: React.FC<CompletedProps> = ({
             ₦ {price}
           </p>
           <Link
-            href=""
+            href="/orders/review"
             className="text-[#FF5C00] text-[14px] font-[600] leading-[20.3px] "
           >
             Give a review
