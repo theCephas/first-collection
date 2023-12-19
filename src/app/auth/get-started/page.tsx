@@ -5,6 +5,7 @@ import Image from "next/image";
 import { CheckIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
+import Popup from "@/app/components/Popup";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -156,6 +157,12 @@ const Login = () => {
             </div>
           </form>
         </section>
+        <Popup
+          text={
+            "Oops! It seems there was an issue check your password and try again."
+          }
+          type={"error"}
+        />
       </main>
     </AuthWrapper>
   );
