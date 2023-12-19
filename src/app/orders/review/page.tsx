@@ -9,7 +9,7 @@ const Page = () => {
   return (
     <ProfileWrapper>
       <HistoryWrapper>
-        <div className="gilroy w-full">
+        <div className="gilroy w-full mb-12">
           <p className="text-[12px] font-[400] text-[#040404] ">
             Select the stars to rate this product
           </p>
@@ -43,12 +43,21 @@ const Page = () => {
           </div>
 
           <form>
-            <p className="mb-2">Leave a review for this product</p>
+            <p className="text-[12px] font-[400] text-[#040404] ">
+              Leave a review for this product
+            </p>
             <input
               type="text"
               placeholder="Review title"
-              className="outline-none my-4 border h-[44px] flex flex-col items-center border-[#b3b3b3] text-[#b3b3b3] text-[14px] font-[400] hover:border-[#ff5c00] focus:border-[#ff5c00] "
+              className="outline-none my-4 w-full border py-[8px] px-[12px] rounded-[6px] flex flex-col items-center border-[#b3b3b3] text-[#b3b3b3] text-[14px] font-[400] hover:border-[#ff5c00] focus:border-[#ff5c00] "
             />
+            <textarea
+              placeholder="Type your review"
+              className="outline-none h-[171px] w-full border py-[8px] px-[12px] rounded-[6px] flex flex-col items-center border-[#b3b3b3] text-[#b3b3b3] text-[14px] font-[400] hover:border-[#ff5c00] focus:border-[#ff5c00] "
+            />
+            <button className="py-[12px] px-[16px] text-[14px] text-[#f2f2f2] font-[600] duration-700 hover:bg-[#e96d26] mt-4 rounded-[8px] bg-[#ff5c00] w-full sm:w-[200px] flex items-center justify-center gap-[10px] ">
+              Submit Your Review
+            </button>
           </form>
         </div>
       </HistoryWrapper>
