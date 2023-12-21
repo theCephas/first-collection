@@ -40,7 +40,7 @@ const Page = () => {
         <p className="text-black pb-5 text-2xl font-normal font-['Judson'] leading-[28.80px]">
           Order Summary (3)
         </p>
-        <div className="flex flex-col md:flex-row md:justify-between gap-4 mb-8">
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mb-8">
           <div>
             <div className="flex flex-col gap-3">
               <OnGoing
@@ -83,7 +83,7 @@ const Page = () => {
 
             <button
               onClick={handleProceed}
-              className="w-full h-11 px-4 mb-4 py-3 bg-orange-600 rounded-lg flex-col justify-center items-center gap-2.5 hidden md:inline-flex "
+              className="w-full h-11 px-4 mb-4 py-3 bg-orange-600 rounded-lg flex-col justify-center items-center gap-2.5 hidden lg:inline-flex "
             >
               <div className="justify-center items-center gap-2 inline-flex">
                 <div className="text-zinc-100 text-sm font-semibold font-['Gilroy'] leading-tight">
@@ -134,7 +134,7 @@ const Page = () => {
 
           <button
             onClick={handleProceed}
-            className="w-full h-11 px-4 mb-10 py-3 bg-orange-600 rounded-lg flex-col justify-center items-center gap-2.5 md:hidden inline-flex "
+            className="w-full h-11 px-4 mb-10 py-3 bg-orange-600 rounded-lg flex-col justify-center items-center gap-2.5 lg:hidden inline-flex "
           >
             <div className="justify-center items-center gap-2 inline-flex">
               <div className="text-zinc-100 text-sm font-semibold font-['Gilroy'] leading-tight">
