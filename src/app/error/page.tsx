@@ -21,9 +21,9 @@ const Error = () => {
   return (
     <PageWrapper>
       <section className="max-w-[67.5rem] mx-auto px-6 xl:px-0 h-screen flex flex-col gap-6 items-center sm:place-content-center mt-10 sm:mt-0">
-        <aside className="relative">
+        <aside className="max-w-[19rem] h-auto relative">
           <Image
-            className="max-w-[19rem] h-auto"
+            className=""
             src="/Illustrations.svg"
             alt="error"
             width={1000}
