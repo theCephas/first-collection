@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
 
 interface CarouselProps {
   name: string;
@@ -153,12 +154,14 @@ const Carousel: React.FC<CarouselProps> = ({ name, slides }) => {
         <Slider {...settings} className="flex gap-20  ">
           {slides.map((item, index) => (
             <div key={index} className="w-full m-auto py-10">
-              <ProductCard
-                classes={"w-[160px] m-auto"}
-                imageSrc={item.url}
-                name={item.name}
-                price={item.price}
-              />
+              <Link href="/product-details">
+                <ProductCard
+                  classes={"w-[160px] m-auto"}
+                  imageSrc={item.url}
+                  name={item.name}
+                  price={item.price}
+                />
+              </Link>
             </div>
           ))}
         </Slider>

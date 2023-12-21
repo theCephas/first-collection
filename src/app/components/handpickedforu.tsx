@@ -10,6 +10,7 @@ import Item6 from "../../../public/item6.svg";
 import Item7 from "../../../public/item7.svg";
 import ProductCard from "../(components)/ProductCard";
 import Slider from "react-slick";
+import Link from "next/link";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -177,12 +178,14 @@ const Handpicked: React.FC = (props) => {
         <Slider {...settings} className="flex gap-20  ">
           {Slides.map((item, index) => (
             <div key={index} className="w-full m-auto py-10">
-              <ProductCard
-                classes={"w-[160px] m-auto"}
-                imageSrc={item.url}
-                name={item.name}
-                price={item.price}
-              />
+              <Link href="/product-details">
+                <ProductCard
+                  classes={"w-[160px] m-auto"}
+                  imageSrc={item.url}
+                  name={item.name}
+                  price={item.price}
+                />
+              </Link>
             </div>
           ))}
         </Slider>
