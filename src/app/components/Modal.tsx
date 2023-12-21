@@ -37,7 +37,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       >
         <div
           onClick={onClose}
-          className="fixed inset-0 bg-black opacity-50"
+          className="fixed inset-0 backdrop-brightness-[25%] backdrop-opacity-50 blur-2xl"
         ></div>
         <section className="w-full h-full sm:w-[25.5rem] lg:w-[34rem] sm:ml-auto z-50 bg-white  overflow-scroll hide-scroll">
           {children}

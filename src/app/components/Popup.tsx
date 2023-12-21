@@ -6,9 +6,10 @@ import React from "react";
 interface PopupProps {
   text: string;
   type: string;
+  cancel: () => void;
 }
 
-const Popup = ({ text, type }: PopupProps) => {
+const Popup = ({ text, type, cancel }: PopupProps) => {
   return (
     <AnimatePresence>
       <motion.div
@@ -22,7 +23,7 @@ const Popup = ({ text, type }: PopupProps) => {
         <p className="text-neutral-700 text-sm font-normal gilroy leading-tight">
           {text}
         </p>
-        <X size={24} className="cursor-pointer min-w-[24px]" />
+        <X onClick={cancel} size={24} className="cursor-pointer min-w-[24px]" />
       </motion.div>
     </AnimatePresence>
   );

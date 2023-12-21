@@ -13,6 +13,7 @@ import Slide from "../../../public/slide.png";
 import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { ButtonPrimary } from "./Buttons";
 
 const Herosection = () => {
   useEffect(() => {
@@ -35,16 +36,9 @@ const Herosection = () => {
           Get trendy shoes, bags, purses, and headties, and transform your
           everyday style into something extraordinary
         </p>
-
-        <button
-          data-aos="fade-up"
-          style={{
-            boxShadow: "0px 11px 22px 0px rgba(255, 92, 0, 0.25)",
-          }}
-          className="text-[14px] text-[#fefefe] font-[600] z-10 active:scale-75 active:duration-100 transform flex py-[12px] px-[16px] items-center flex-col justify-center gap-[10px] rounded-[8px] bg-[#ff5c00] "
-        >
-          Start Shopping
-        </button>
+        <ButtonPrimary classes="w-fit px-4 shadow-xl shadow-orange-600/50">
+          {"Start Shopping"}
+        </ButtonPrimary>
       </div>
       <div className="mt-[100px] sm:mt-[50px]">
         <div data-aos="zoom-in-up" className="float-left mt-[-250px] relative ">

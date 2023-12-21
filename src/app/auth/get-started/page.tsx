@@ -17,14 +17,17 @@ const Login = () => {
   const [status, setStatus] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
+  const cancelPopup = () => {
+    setStatus("");
+  };
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setMsg("Oops! Incorrect email or password. Try again.");
     setShowForgotPassword(false);
     setStatus("error");
     setTimeout(() => {
-      setStatus("");
-      setShowForgotPassword(true);
+      cancelPopup();
     }, 5000);
   };
 
@@ -187,7 +190,9 @@ const Login = () => {
             </div>
           </form>
         </section>
-        {status.length > 0 && <Popup text={msg} type={status} />}
+        {status.length > 0 && (
+          <Popup cancel={cancelPopup} text={msg} type={status} />
+        )}
       </main>
     </AuthWrapper>
   );
