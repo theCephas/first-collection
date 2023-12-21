@@ -49,7 +49,7 @@ const Page = () => {
                 color="Purple"
                 size={40}
                 price={17000}
-                classes="w-full md:w-[500px]"
+                classes="w-full lg:w-[500px]"
               />
               <OnGoing
                 imageSrc={Balenciaga2}
@@ -57,7 +57,7 @@ const Page = () => {
                 color="Purple"
                 size={40}
                 price={17000}
-                classes="w-full md:w-[500px]"
+                classes="w-full lg:w-[500px]"
               />
               <OnGoing
                 imageSrc={Balenciaga1}
@@ -65,7 +65,7 @@ const Page = () => {
                 color="Purple"
                 size={40}
                 price={17000}
-                classes="w-full md:w-[500px]"
+                classes="w-full lg:w-[500px]"
               />
             </div>
             <div className="w-full h-[58px] my-6 p-4 bg-neutral-50 rounded-xl border border-neutral-100 flex-col justify-start items-start gap-2.5 inline-flex">
