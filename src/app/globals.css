@@ -51,3 +51,10 @@ input[type="radio"] {
 input[type="radio"]:checked {
   background-color: #ff5c00;
 }
+
+@media screen and (max-width: 600px) {
+  input[type="radio"] {
+    width: 35px;
+    height: 22px;
+  }
+}

@@ -106,7 +106,7 @@ const Page = () => {
                 <p className="text-black text-base font-medium gilroy leading-normal">
                   Home Delivery
                 </p>
-                <p className="w-auto md:w-[378px] text-neutral-700 text-xs font-normal gilroy leading-[17.40px]">
+                <p className="w-auto sm:w-[378px] text-neutral-700 text-xs font-normal gilroy leading-[17.40px]">
                   We will deliver the products to your door step. Delivery fee
                   will be communicated to you shortly
                 </p>
@@ -124,7 +124,7 @@ const Page = () => {
                 <p className="text-black text-base font-medium font-['Gilroy'] leading-normal">
                   Store Pick-up
                 </p>
-                <p className="w-auto md:w-[378px] text-neutral-700 text-xs font-normal font-['Gilroy'] leading-[17.40px]">
+                <p className="w-auto sm:w-[378px] text-neutral-700 text-xs font-normal font-['Gilroy'] leading-[17.40px]">
                   The product will be available for pick-up from our store at
                   Shop A49 main market, Ughelli, Delta State.
                 </p>

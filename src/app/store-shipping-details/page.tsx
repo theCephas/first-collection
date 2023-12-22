@@ -116,7 +116,7 @@ const page = () => {
           </div>
 
           <Link
-            href="/shipping-details"
+            href="/order-summary"
             className="w-full h-11 px-4 mb-10 py-3 bg-orange-600 rounded-lg flex-col justify-center items-center gap-2.5 lg:hidden inline-flex "
           >
             <div className="justify-center items-center gap-2 inline-flex">
