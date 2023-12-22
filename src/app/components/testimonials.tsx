@@ -3,11 +3,6 @@
 import React, { useState } from "react";
 import Star from "../../../public/star.svg";
 import Image from "next/image";
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-import Glider from "react-glider";
-import "glider-js/glider.min.css";
 import { TestimonialDesign } from "./Icons";
 
 const Testimonials = () => {
@@ -75,12 +70,13 @@ const Testimonials = () => {
         {Evidences.map((evidence, index) => (
           <div
             key={index}
-            className={`w-52 h-52 ${
+            className={` py-10 ${
               index === 1 && "scale-75 mr-10 blur-[1.5px]"
-            } ${index === 3 && "scale-75 ml-10 blur-[1.5px]"} ${
-              index === 4 && "scale-50 blur-[2px]"
             } ${
-              index === 0 && "scale-50 blur-[2px]"
+              index === 3 &&
+              "hidden sm:hidden md:flex scale-75 ml-10 blur-[1.5px]"
+            } ${index === 4 && "scale-50 blur-[2px]"} ${
+              index === 0 && "hidden sm:hidden md:flex scale-50 blur-[2px]"
             } p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative`}
           >
             <p className=" text-zinc-100 text-sm font-normal font-['Gilroy'] leading-tight">
