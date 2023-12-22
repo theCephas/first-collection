@@ -8,6 +8,7 @@ import Image from "next/image";
 // import "slick-carousel/slick/slick-theme.css";
 import Glider from "react-glider";
 import "glider-js/glider.min.css";
+import { TestimonialDesign } from "./Icons";
 
 const Testimonials = () => {
   const Evidences = [
@@ -55,8 +56,8 @@ const Testimonials = () => {
   // };
 
   return (
-    <div className="max-w-[1080px] mx-auto px-8 lg:px-10 py-[60px]">
-      <div className="flex">
+    <div className="max-w-[1080px] mx-auto px-6 xl:px-0 py-[60px]">
+      <div className="flex mb-16">
         <div className="flex gap-4 items-center justify-center m-auto ">
           <span className="font-judson w-full sm:w-[528px] text-[18px] sm:text-[40px] font-[700] leading-[120%] text-[#060606] text-center m-auto pt-14 ">
             What our customers have said about our products
@@ -70,14 +71,30 @@ const Testimonials = () => {
           />
         </div>
       </div>
-      {/* <div>
+      <div className="flex">
         {Evidences.map((evidence, index) => (
-          <div key={index}>
-            {evidence.name}
-            {evidence.report}
+          <div
+            key={index}
+            className={`w-52 h-52 ${
+              index === 1 && "scale-75 mr-10 blur-[1.5px]"
+            } ${index === 3 && "scale-75 ml-10 blur-[1.5px]"} ${
+              index === 4 && "scale-50 blur-[2px]"
+            } ${
+              index === 0 && "scale-50 blur-[2px]"
+            } p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative`}
+          >
+            <p className=" text-zinc-100 text-sm font-normal font-['Gilroy'] leading-tight">
+              {evidence.report}
+            </p>
+            <p className="text-neutral-200 text-sm font-semibold font-['Gilroy'] leading-tight">
+              {evidence.name}
+            </p>
+            <div className="absolute bottom-0 right-0">
+              <TestimonialDesign />
+            </div>
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };
