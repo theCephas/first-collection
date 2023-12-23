@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  overflow-x: hidden;
+}
+
 /* Contact us instagram gradient */
 .insta-gradient {
   background: radial-gradient(

@@ -51,32 +51,29 @@ const Testimonials = () => {
   // };
 
   return (
-    <div className="max-w-[1080px] mx-auto px-6 xl:px-0 py-[60px]">
-      <div className="flex mb-16">
-        <div className="flex gap-4 items-center justify-center m-auto ">
-          <span className="font-judson w-full sm:w-[528px] text-[18px] sm:text-[40px] font-[700] leading-[120%] text-[#060606] text-center m-auto pt-14 ">
-            What our customers have said about our products
-          </span>
+    <div className="max-w-[1080px] mx-auto px-6 xl:px-0 py-[60px] flex flex-col items-center overflow-hidden">
+      <div className="flex mb-16 w-full">
+        <p className="font-judson w-[11.8rem] sm:w-[24rem] lg:w-[33rem] text-[18px] sm:text-[40px] font-[700] leading-[120%] text-[#060606] text-center m-auto pt-14 relative">
+          What our customers have said about our products
           <Image
             width={0}
             height={0}
             src={Star}
             alt="Star Icon"
-            className="w-[79px] h-[76.098px] flex-shrink-0 sm:w-[200.999px] sm:h-[193.616px] "
+            className="w-[5rem] h-auto sm:w-[9rem] lg:w-[12rem] flex-shrink-0  absolute top-10 lg:top-0 -right-16 sm:-right-28 lg:-right-48"
           />
-        </div>
+        </p>
       </div>
-      <div className="flex">
+      <div className="flex ">
         {Evidences.map((evidence, index) => (
           <div
             key={index}
-            className={` py-10 ${
-              index === 1 && "scale-75 mr-10 blur-[1.5px]"
+            className={`h-[10.6rem] min-w-[12rem] md:h-[12.6rem] ${
+              index === 1 && "scale-75 sm:mr-10 blur-[1.5px]"
+            } ${index === 3 && "scale-75 sm:ml-10 blur-[1.5px]"} ${
+              index === 4 && "scale-50 blur-[2px]"
             } ${
-              index === 3 &&
-              "hidden sm:hidden md:flex scale-75 ml-10 blur-[1.5px]"
-            } ${index === 4 && "scale-50 blur-[2px]"} ${
-              index === 0 && "hidden sm:hidden md:flex scale-50 blur-[2px]"
+              index === 0 && " scale-50 blur-[2px]"
             } p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative`}
           >
             <p className=" text-zinc-100 text-sm font-normal font-['Gilroy'] leading-tight">
