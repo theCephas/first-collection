@@ -34,7 +34,7 @@ const Evidences: evidence[] = [
     id: 4,
     report:
       "I absolutely love my purchase! The quality of the shoes exceeded my expectations. Comfortable, stylish, and worth every penny",
-    name: "Adesola Benita",
+    name: "John Doe",
   },
   {
     id: 5,
@@ -46,40 +46,46 @@ const Evidences: evidence[] = [
 
 const Testimonials = () => {
   const [evidences, setEvidences] = useState<evidence[]>(Evidences);
-  const [transition, setTransition] = useState(false);
-
-  const wait = async (num: number) => setTimeout(() => {}, num * 1000);
+  const [transition, setTransition] = useState("");
 
   const handleNext = async () => {
-    setTransition(true);
-    await wait(3);
+    setTransition("-translate-x-full");
+
     let newEvidence: evidence[] = [];
     evidences.forEach((_, index) => {
       const newIndex =
-        index === 0 ? 4 : (index - 1 + evidences.length) % evidences.length;
+        index === 0 ? 4 : (index + 1 + evidences.length) % evidences.length;
 
       newEvidence.push(evidences[newIndex]);
     });
 
-    setTransition(false);
+    setTimeout(() => {
+      setEvidences(newEvidence);
+    }, 500);
 
-    setEvidences(newEvidence);
+    setTimeout(() => {
+      setTransition("");
+    }, 500);
   };
 
   const handlePrev = async () => {
-    setTransition(true);
-    await wait(3);
+    setTransition("translate-x-full");
+
     let newEvidence: evidence[] = [];
     evidences.forEach((_, index) => {
       const newIndex =
-        index === 4 ? 0 : (index + 1 + evidences.length) % evidences.length;
+        index === 4 ? 0 : (index - 1 + evidences.length) % evidences.length;
 
       newEvidence.push(evidences[newIndex]);
     });
 
-    setTransition(false);
+    setTimeout(() => {
+      setEvidences(newEvidence);
+    }, 500);
 
-    setEvidences(newEvidence);
+    setTimeout(() => {
+      setTransition("");
+    }, 500);
   };
 
   return (
@@ -116,9 +122,7 @@ const Testimonials = () => {
             )}
 
             <div
-              className={`h-[10.6rem] min-w-[12rem] md:h-[12.6rem]  p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative ${
-                transition && "-translate-x-full"
-              }`}
+              className={`h-[10.6rem] min-w-[12rem] md:h-[12.6rem]  p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative ease-out  duration-500 ${transition}`}
             >
               <p className=" text-zinc-100 text-sm font-normal font-['Gilroy'] leading-tight">
                 {evidence.report}
