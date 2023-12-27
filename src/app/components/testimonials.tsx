@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Star from "../../../public/star.svg";
 import Image from "next/image";
 import { BackIcon, TestimonialDesign } from "./Icons";
@@ -48,11 +48,10 @@ const Testimonials = () => {
   const [evidences, setEvidences] = useState<evidence[]>(Evidences);
   const [transition, setTransition] = useState("");
 
-  const handleNext = async () => {
+  const handleNext = useCallback(async () => {
     let newEvidence: evidence[] = [];
     evidences.forEach((_, index) => {
-      const newIndex =
-        index === 0 ? 4 : (index + 1 + evidences.length) % evidences.length;
+      const newIndex = index === 4 ? 0 : index + 1;
 
       newEvidence.push(evidences[newIndex]);
     });
@@ -61,27 +60,29 @@ const Testimonials = () => {
     setTransition("translate-x-full");
 
     setTimeout(() => {
-      setTransition("ease-out  duration-500");
+      setTransition("ease-out duration-500");
     }, 500);
-  };
+  }, [evidences]);
+
+  useEffect(() => {
+    const intervalId = setInterval(handleNext, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [handleNext]);
 
   const handlePrev = async () => {
-    setTransition("translate-x-full");
-
     let newEvidence: evidence[] = [];
     evidences.forEach((_, index) => {
-      const newIndex =
-        index === 4 ? 0 : (index - 1 + evidences.length) % evidences.length;
+      const newIndex = index === 0 ? 4 : index - 1;
 
       newEvidence.push(evidences[newIndex]);
     });
 
-    setTimeout(() => {
-      setEvidences(newEvidence);
-    }, 500);
+    setEvidences(newEvidence);
+    setTransition("-translate-x-full");
 
     setTimeout(() => {
-      setTransition("");
+      setTransition("ease-in duration-500");
     }, 500);
   };
 
@@ -119,7 +120,7 @@ const Testimonials = () => {
             )}
 
             <div
-              className={`h-[10.6rem] min-w-[12rem] md:h-[12.6rem]  p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative  ${transition}`}
+              className={`h-[10.6rem] min-w-[12rem] md:h-[12.6rem]  p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative ${transition}`}
             >
               <p className=" text-zinc-100 text-sm font-normal font-['Gilroy'] leading-tight">
                 {evidence.report}
