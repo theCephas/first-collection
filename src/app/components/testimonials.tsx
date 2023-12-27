@@ -57,7 +57,7 @@ const Testimonials = () => {
     });
     setEvidences(newEvidence);
 
-    setTransition("translate-x-full");
+    setTransition("translate-x-3/4 md:translate-x-full");
 
     setTimeout(() => {
       setTransition("ease-out duration-500");
