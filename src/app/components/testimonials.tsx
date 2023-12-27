@@ -49,8 +49,6 @@ const Testimonials = () => {
   const [transition, setTransition] = useState("");
 
   const handleNext = async () => {
-    setTransition("-translate-x-full");
-
     let newEvidence: evidence[] = [];
     evidences.forEach((_, index) => {
       const newIndex =
@@ -58,13 +56,12 @@ const Testimonials = () => {
 
       newEvidence.push(evidences[newIndex]);
     });
+    setEvidences(newEvidence);
+
+    setTransition("translate-x-full");
 
     setTimeout(() => {
-      setEvidences(newEvidence);
-    }, 500);
-
-    setTimeout(() => {
-      setTransition("");
+      setTransition("ease-out  duration-500");
     }, 500);
   };
 
@@ -122,7 +119,7 @@ const Testimonials = () => {
             )}
 
             <div
-              className={`h-[10.6rem] min-w-[12rem] md:h-[12.6rem]  p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative ease-out  duration-500 ${transition}`}
+              className={`h-[10.6rem] min-w-[12rem] md:h-[12.6rem]  p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative  ${transition}`}
             >
               <p className=" text-zinc-100 text-sm font-normal font-['Gilroy'] leading-tight">
                 {evidence.report}
