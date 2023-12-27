@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Star from "../../../public/star.svg";
 import Image from "next/image";
 import { BackIcon, TestimonialDesign } from "./Icons";
@@ -34,7 +34,7 @@ const Evidences: evidence[] = [
     id: 4,
     report:
       "I absolutely love my purchase! The quality of the shoes exceeded my expectations. Comfortable, stylish, and worth every penny",
-    name: "Adesola Benita",
+    name: "John Doe",
   },
   {
     id: 5,
@@ -46,40 +46,44 @@ const Evidences: evidence[] = [
 
 const Testimonials = () => {
   const [evidences, setEvidences] = useState<evidence[]>(Evidences);
-  const [transition, setTransition] = useState(false);
+  const [transition, setTransition] = useState("");
 
-  const wait = async (num: number) => setTimeout(() => {}, num * 1000);
-
-  const handleNext = async () => {
-    setTransition(true);
-    await wait(3);
+  const handleNext = useCallback(async () => {
     let newEvidence: evidence[] = [];
     evidences.forEach((_, index) => {
-      const newIndex =
-        index === 0 ? 4 : (index - 1 + evidences.length) % evidences.length;
+      const newIndex = index === 4 ? 0 : index + 1;
 
       newEvidence.push(evidences[newIndex]);
     });
-
-    setTransition(false);
-
     setEvidences(newEvidence);
-  };
+
+    setTransition("translate-x-3/4 md:translate-x-full");
+
+    setTimeout(() => {
+      setTransition("ease-out duration-500");
+    }, 500);
+  }, [evidences]);
+
+  useEffect(() => {
+    const intervalId = setInterval(handleNext, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [handleNext]);
 
   const handlePrev = async () => {
-    setTransition(true);
-    await wait(3);
     let newEvidence: evidence[] = [];
     evidences.forEach((_, index) => {
-      const newIndex =
-        index === 4 ? 0 : (index + 1 + evidences.length) % evidences.length;
+      const newIndex = index === 0 ? 4 : index - 1;
 
       newEvidence.push(evidences[newIndex]);
     });
 
-    setTransition(false);
-
     setEvidences(newEvidence);
+    setTransition("-translate-x-full");
+
+    setTimeout(() => {
+      setTransition("ease-in duration-500");
+    }, 500);
   };
 
   return (
@@ -116,9 +120,7 @@ const Testimonials = () => {
             )}
 
             <div
-              className={`h-[10.6rem] min-w-[12rem] md:h-[12.6rem]  p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative ${
-                transition && "-translate-x-full"
-              }`}
+              className={`h-[10.6rem] min-w-[12rem] md:h-[12.6rem]  p-3 bg-black rounded-xl items-start gap-2.5 flex flex-col justify-between overflow-hidden relative ${transition}`}
             >
               <p className=" text-zinc-100 text-sm font-normal font-['Gilroy'] leading-tight">
                 {evidence.report}
