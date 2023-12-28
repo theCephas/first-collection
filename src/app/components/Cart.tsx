@@ -1,16 +1,18 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
 import { Minus, Plus, X } from "lucide-react";
 import Image from "next/image";
 import { Delete } from "./Icons";
 import { ButtonPrimary } from "./Buttons";
+import { Quantity } from "../(components)/Quantity";
 
 interface CartProps {
   close: () => void;
 }
 
 const Cart = ({ close }: CartProps) => {
+  const [quantity, setQuantity] = useState(1);
   return (
     <Modal isOpen={true} onClose={close}>
       <div className="p-3 sm:p-6 lg:pr-20">
@@ -52,14 +54,11 @@ const Cart = ({ close }: CartProps) => {
                     Size: 40
                   </p>
                 </div>
-
-                <div className="py-1 sm:px-3 sm:py-2 rounded-lg border border-zinc-100 justify-center items-center gap-6 inline-flex">
-                  <Minus />
-                  <span className="text-black text-sm font-semibold gilroy leading-tight">
-                    1
-                  </span>
-                  <Plus />
-                </div>
+                <Quantity
+                  classes="py-1 sm:px-3 sm:py-2"
+                  text={quantity}
+                  setQuantity={setQuantity}
+                />
               </div>
               <aside className="w-[24px] h-[24px]">
                 <Delete />

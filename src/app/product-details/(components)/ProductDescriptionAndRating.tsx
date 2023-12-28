@@ -1,4 +1,5 @@
 "use client";
+import { Quantity } from "@/app/(components)/Quantity";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { Minus, Plus, Star } from "lucide-react";
 import React, { useState } from "react";
@@ -80,27 +81,11 @@ export const ProductDescriptionAndRating = () => {
         <div className="text-black text-sm font-medium gilroy leading-tight">
           Quantity
         </div>
-        <div className="px-3 py-2 rounded-lg border border-zinc-100 flex-col justify-center items-center gap-2.5 flex">
-          <div className="justify-center items-center gap-6 inline-flex">
-            <Minus
-              onClick={() => {
-                if (quantity === 0) return;
-                setQuantity((prev) => prev - 1);
-              }}
-              className="cursor-pointer"
-              style={{ color: quantity === 0 ? "#B3B3B3" : "" }}
-            />
-            <p className="text-black text-sm font-semibold gilroy leading-tight">
-              {quantity}
-            </p>
-            <Plus
-              onClick={() => {
-                setQuantity((prev) => prev + 1);
-              }}
-              className="cursor-pointer"
-            />
-          </div>
-        </div>
+        <Quantity
+          classes="px-3 py-2"
+          text={quantity}
+          setQuantity={setQuantity}
+        />
       </div>
 
       {/* ACTIONS */}

@@ -154,14 +154,12 @@ const Carousel: React.FC<CarouselProps> = ({ name, slides }) => {
         <Slider {...settings} className="flex gap-20  ">
           {slides.map((item, index) => (
             <div key={index} className="w-full m-auto py-10">
-              <Link href="/product-details">
-                <ProductCard
-                  classes={"w-[160px] m-auto"}
-                  imageSrc={item.url}
-                  name={item.name}
-                  price={item.price}
-                />
-              </Link>
+              <ProductCard
+                classes={"w-[160px] m-auto"}
+                imageSrc={item.url}
+                name={item.name}
+                price={item.price}
+              />
             </div>
           ))}
         </Slider>
