@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         />
         <div className="text-[14px] font-[400] leading-[20.3px]">
           <Link href="/product-details">
-            <h3 className="pt-2 ">{name}</h3>
+            <h3 className="pt-2 hover:underline">{name}</h3>
           </Link>
           <p className="font-[600] py-2">₦ {price}</p>
         </div>
