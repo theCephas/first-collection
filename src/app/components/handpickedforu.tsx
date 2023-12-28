@@ -178,14 +178,12 @@ const Handpicked: React.FC = (props) => {
         <Slider {...settings} className="flex gap-20  ">
           {Slides.map((item, index) => (
             <div key={index} className="w-full m-auto py-10">
-              <Link href="/product-details">
-                <ProductCard
-                  classes={"w-[160px] m-auto"}
-                  imageSrc={item.url}
-                  name={item.name}
-                  price={item.price}
-                />
-              </Link>
+              <ProductCard
+                classes={"w-[160px] m-auto"}
+                imageSrc={item.url}
+                name={item.name}
+                price={item.price}
+              />
             </div>
           ))}
         </Slider>

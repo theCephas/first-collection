@@ -1,9 +1,12 @@
 "use client";
+import { Quantity } from "@/app/(components)/Quantity";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { Minus, Plus, Star } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 export const ProductDescriptionAndRating = () => {
+  const [quantity, setQuantity] = useState(1);
+
   return (
     <section className="w-full h-full mt-14 sm:m-0 sm:px-4 sm:py-6 sm:border border-neutral-100 rounded-xl lg:rounded-none lg:p-0 lg:border-none flex flex-col gap-8">
       {/* DESCRIPTION AND RATING */}
@@ -78,15 +81,11 @@ export const ProductDescriptionAndRating = () => {
         <div className="text-black text-sm font-medium gilroy leading-tight">
           Quantity
         </div>
-        <div className="px-3 py-2 rounded-lg border border-zinc-100 flex-col justify-center items-center gap-2.5 flex">
-          <div className="justify-center items-center gap-6 inline-flex">
-            <Minus style={{ color: "#B3B3B3" }} />
-            <div className="text-black text-sm font-semibold gilroy leading-tight">
-              1
-            </div>
-            <Plus />
-          </div>
-        </div>
+        <Quantity
+          classes="px-3 py-2"
+          text={quantity}
+          setQuantity={setQuantity}
+        />
       </div>
 
       {/* ACTIONS */}
