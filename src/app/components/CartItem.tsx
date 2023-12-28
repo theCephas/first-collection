@@ -1,5 +1,5 @@
 "use client";
-import { Delete } from "lucide-react";
+import { Delete } from "./Icons";
 import React, { useState } from "react";
 import { Quantity } from "../(components)/Quantity";
 import Image from "next/image";
