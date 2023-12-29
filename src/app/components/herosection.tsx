@@ -14,6 +14,7 @@ import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ButtonPrimary } from "./Buttons";
+import Link from "next/link";
 
 const Herosection = () => {
   useEffect(() => {
@@ -36,9 +37,11 @@ const Herosection = () => {
           Get trendy shoes, bags, purses, and headties, and transform your
           everyday style into something extraordinary
         </p>
-        <ButtonPrimary classes="w-fit px-4 shadow-xl shadow-orange-600/50">
-          {"Start Shopping"}
-        </ButtonPrimary>
+        <Link href="/products">
+          <ButtonPrimary classes="w-fit px-4 shadow-xl shadow-orange-600/50">
+            {"Start Shopping"}
+          </ButtonPrimary>
+        </Link>
       </div>
       <div className="mt-[100px] sm:mt-[50px]">
         <div data-aos="zoom-in-up" className="float-left mt-[-250px] relative ">
