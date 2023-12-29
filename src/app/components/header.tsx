@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../../../public/logo.svg";
 import User from "../../../public/user.svg";
 import Cart from "../../../public/cart.svg";
@@ -12,6 +12,7 @@ import { ChevronDown, ChevronUp, AlignJustify, X } from "lucide-react";
 import { motion, useCycle, AnimatePresence, MotionConfig } from "framer-motion";
 import { SearchResults } from "./SearchResults";
 import CartComponent from "./Cart";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
@@ -19,6 +20,20 @@ const Header = () => {
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCart, setShowCart] = useState(false);
+  const router = useRouter();
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    // Check if the current route matches the link's href
+    return;
+  }, [router]);
+
+  const handleClick = () => {
+    // Use router.push to navigate to the /products page
+    router.push("/products");
+    // Set isActive to true
+    setIsActive(true);
+  };
 
   return (
     <div className="pt-4 gilroy w-full relative z-50">
@@ -64,7 +79,9 @@ const Header = () => {
         <div className="text-[14px] font-[600] hidden items-center justify-center text-[#b3b3b3] lg:flex gap-6">
           <Link
             href="/products"
-            className="focus:text-[#ff5c00] active:text-[#ff5c00] active:scale-75 transform"
+            className={`focus:text-[#ff5c00] text-${
+              isActive ? "#ff5c00" : "#b3b3b3"
+            } active:scale-75 transform`}
           >
             Products
           </Link>
