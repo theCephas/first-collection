@@ -57,10 +57,10 @@ const Testimonials = () => {
     });
     setEvidences(newEvidence);
 
-    setTransition("translate-x-3/4 md:translate-x-full");
+    setTransition("translate-x-[-20%] md:translate-x-[-15%]");
 
     setTimeout(() => {
-      setTransition("ease-out duration-500");
+      setTransition("duration-500");
     }, 500);
   }, [evidences]);
 
@@ -82,7 +82,7 @@ const Testimonials = () => {
     setTransition("-translate-x-full");
 
     setTimeout(() => {
-      setTransition("ease-in duration-500");
+      setTransition("duration-500");
     }, 500);
   };
 

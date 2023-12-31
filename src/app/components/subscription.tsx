@@ -13,7 +13,7 @@ const Subscription = () => {
           height={0}
           src={PrettyShoe}
           alt="Pretty Shoe"
-          className="w-[300px] lg:w-[400px] m-auto lg:m-0 rounded-[8px] transform rotate-[-30deg] "
+          className="w-[300px] lg:w-[400px] m-auto lg:m-0 rounded-[8px] transform rotate-[-20deg] "
         />
         <div className="flex flex-col items-center mt-[120px] lg:mt-10">
           <Image
