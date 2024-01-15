@@ -8,9 +8,9 @@ import { BackIcon } from "@/app/components/Icons";
 import Popup from "@/app/components/Popup";
 import Link from "next/link";
 
-const Login = () => {
+const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
-  const [hasAcc, setHasAcc] = useState(true);
+  // const [hasAcc, setHasAcc] = useState(true);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [checked, setChecked] = useState(false);
   const [msg, setMsg] = useState("");
@@ -23,9 +23,9 @@ const Login = () => {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    setMsg("Oops! Incorrect email or password. Try again.");
-    setShowForgotPassword(false);
-    setStatus("error");
+    setMsg("Account created");
+    setShowForgotPassword(true);
+    setStatus("success");
     setTimeout(() => {
       cancelPopup();
     }, 5000);
@@ -36,15 +36,9 @@ const Login = () => {
       classes={"hue-rotate-[-10deg] saturate-[150%]"}
       url={"/auth-female.png"}
       alt={"lady"}
-      heroHeader={
-        hasAcc
-          ? "Welcome back to First Collection"
-          : "Get started with First Collection"
-      }
+      heroHeader={"Get started with First Collection"}
       heroText={
-        hasAcc
-          ? "Be in the loop for exclusive deals."
-          : "Be in the loop for exclusive deals. Your unique fashion story begins with a simple sign-up"
+        "Be in the loop for exclusive deals. Your unique fashion story begins with a simple sign-up"
       }
     >
       <main className="h-full w-full flex relative pt-20 md:py-14 sm:px-10 md:px-0">
@@ -63,12 +57,10 @@ const Login = () => {
         <section className="my-auto flex flex-col gap-6 w-full">
           <div className="flex-col justify-start items-start gap-0.5 inline-flex">
             <h3 className="text-black text-2xl font-semibold gilroy leading-9">
-              {hasAcc ? "Sign In" : "Sign Up"}
+              {"Sign Up"}
             </h3>
             <p className="text-black text-sm font-normal font-['Gilroy'] leading-tight">
-              {hasAcc
-                ? " Welcome back to our store!!!"
-                : "Fill in your details let's get you started"}
+              {"Fill in your details let's get you started"}
             </p>
           </div>
 
@@ -79,33 +71,33 @@ const Login = () => {
             action=""
           >
             {/* First Name */}
-            {!hasAcc && (
-              <label
-                className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-                htmlFor="first-name"
-              >
-                First Name
-                <input
-                  className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
-                  type="text"
-                  placeholder="First name"
-                />
-              </label>
-            )}
+
+            <label
+              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
+              htmlFor="first-name"
+            >
+              First Name
+              <input
+                className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
+                type="text"
+                placeholder="First name"
+              />
+            </label>
+
             {/* Last Name */}
-            {!hasAcc && (
-              <label
-                className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-                htmlFor="last-name"
-              >
-                Last Name
-                <input
-                  className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
-                  type="text"
-                  placeholder="Last name"
-                />
-              </label>
-            )}
+
+            <label
+              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
+              htmlFor="last-name"
+            >
+              Last Name
+              <input
+                className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
+                type="text"
+                placeholder="Last name"
+              />
+            </label>
+
             {/* Email */}
             <label
               className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
@@ -160,32 +152,19 @@ const Login = () => {
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  items-center">
-              {hasAcc && showForgotPassword && (
-                <p className="text-sm gilroy flex gap-2">
-                  Forgot Password?
-                  <Link
-                    href="/auth/reset-password"
-                    className="text-orange-600 font-medium"
-                  >
-                    Reset
-                  </Link>
-                </p>
-              )}
-              <ButtonPrimary classes="w-full">
-                {hasAcc ? "Sign In" : "Sign Up"}
-              </ButtonPrimary>
+              <ButtonPrimary classes="w-full">{"Sign Up"}</ButtonPrimary>
               <ButtonSecondary classes="w-full">
-                {hasAcc ? "Sign In" : "Sign Up"} with Google
+                {"Sign Up"} with Google
               </ButtonSecondary>
 
               <div className="text-neutral-700 text-sm font-normal font-['Gilroy'] leading-tight flex gap-1">
                 {"Don't have an account?"}
-                <span
-                  onClick={() => setHasAcc((prev) => !prev)}
+                <Link
+                  href="/auth/log-in"
                   className="text-orange-600 cursor-pointer"
                 >
-                  {hasAcc ? "Sign Up" : "Sign In"}
-                </span>
+                  {"Sign In"}
+                </Link>
               </div>
             </div>
           </form>
@@ -197,4 +176,4 @@ const Login = () => {
     </AuthWrapper>
   );
 };
-export default Login;
+export default SignUp;
