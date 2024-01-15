@@ -368,7 +368,7 @@ const Header = () => {
                             Orders
                           </Link>
                           <Link
-                            href="/auth/get-started"
+                            href="/auth/log-in"
                             className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
                           >
                             Sign In

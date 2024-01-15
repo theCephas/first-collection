@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
-import { CheckIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
-import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
-import Popup from "@/app/components/Popup";
+import { CheckIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
 import Link from "next/link";
+import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
+import Popup from "@/app/components/Popup";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -24,7 +24,7 @@ const Login = () => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setMsg("Oops! Incorrect email or password. Try again.");
-    setShowForgotPassword(false);
+    setShowForgotPassword(true);
     setStatus("error");
     setTimeout(() => {
       cancelPopup();
@@ -197,4 +197,5 @@ const Login = () => {
     </AuthWrapper>
   );
 };
+
 export default Login;
