@@ -157,7 +157,7 @@ const Header = () => {
                     </Link>
 
                     <Link
-                      href="/auth/get-started"
+                      href="/auth/log-in"
                       className="w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
                     >
                       Sign In
