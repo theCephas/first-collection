@@ -10,25 +10,71 @@ import Link from "next/link";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
-  // const [hasAcc, setHasAcc] = useState(true);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [checked, setChecked] = useState(false);
   const [msg, setMsg] = useState("");
   const [status, setStatus] = useState("");
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [userInput, setUserInput] = useState({
+    firstName: "",
+    lastName: "",
+    password: "",
+    email: "",
+  });
 
   const cancelPopup = () => {
     setStatus("");
   };
 
+  const changeHandler = (
+    identifier: string,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setUserInput((prev) => ({
+      ...prev,
+      [identifier]: e.target.value,
+    }));
+  };
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    setMsg("Account created");
-    setShowForgotPassword(true);
-    setStatus("success");
-    setTimeout(() => {
-      cancelPopup();
-    }, 5000);
+
+    const url = "https://first-collectionz.vercel.app/api/accounts/create/";
+    const csrfToken =
+      "g6qDP1Pc5S1TxI4pvuj7nVAvZ6TZ7sWRJ3awjtGXgrE5B1Qx2Y5h9oPfdxN5cj9t";
+
+    const userData = {
+      username: `${userInput.firstName}_${userInput.lastName}`,
+      email: userInput.email,
+      password: userInput.password,
+    };
+
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        body: JSON.stringify(userData),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(...data.username);
+      }
+
+      // console.log(data);
+      setMsg("Account created");
+      setStatus("success");
+    } catch (err: any) {
+      setMsg(err.message);
+      setStatus("error");
+    } finally {
+      setTimeout(() => {
+        cancelPopup();
+      }, 5000);
+    }
   };
 
   return (
@@ -81,6 +127,8 @@ const SignUp = () => {
                 className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
                 type="text"
                 placeholder="First name"
+                onChange={(e) => changeHandler("firstName", e)}
+                value={userInput.firstName}
               />
             </label>
 
@@ -95,6 +143,8 @@ const SignUp = () => {
                 className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
                 type="text"
                 placeholder="Last name"
+                onChange={(e) => changeHandler("lastName", e)}
+                value={userInput.lastName}
               />
             </label>
 
@@ -108,6 +158,8 @@ const SignUp = () => {
                 className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
                 type="email"
                 placeholder="Email address"
+                onChange={(e) => changeHandler("email", e)}
+                value={userInput.email}
               />
             </label>
             {/* Password */}
@@ -129,6 +181,8 @@ const SignUp = () => {
                   className="w-full  placeholder:text-zinc-400 text-sm font-normal font-['Gilroy'] leading-tight focus:outline-none"
                   type={seePassword ? "text" : "password"}
                   placeholder="Pasword"
+                  onChange={(e) => changeHandler("password", e)}
+                  value={userInput.password}
                 />
                 <aside
                   onClick={() => setSeePassword((prev) => !prev)}
