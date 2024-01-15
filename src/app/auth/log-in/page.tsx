@@ -10,7 +10,6 @@ import Popup from "@/app/components/Popup";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
-  // const [hasAcc, setHasAcc] = useState(true);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [checked, setChecked] = useState(false);
   const [msg, setMsg] = useState("");
