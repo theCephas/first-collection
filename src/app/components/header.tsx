@@ -151,7 +151,7 @@ const Header = () => {
                     </Link>
                     <Link
                       className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
-                      href=""
+                      href="/orders/ongoing-orders"
                     >
                       Orders
                     </Link>
@@ -363,7 +363,7 @@ const Header = () => {
                           </Link>
                           <Link
                             className="focus:text-[#ff5c00] px-10 sm:px-20 "
-                            href=""
+                            href="/orders/ongoing-orders"
                           >
                             Orders
                           </Link>

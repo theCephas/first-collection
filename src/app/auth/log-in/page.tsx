@@ -7,6 +7,10 @@ import { CheckIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
 import Link from "next/link";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import Popup from "@/app/components/Popup";
+import { Fetch } from "@/app/Helpers/Fetch";
+import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
+import { LoaderIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -15,19 +19,65 @@ const Login = () => {
   const [msg, setMsg] = useState("");
   const [status, setStatus] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [userInput, setUserInput] = useState({
+    username: "",
+    password: "",
+  });
+  const router = useRouter();
+
+  const csrfToken =
+    "mSIS6Zl5GXSxcogcjdQRyyS8hOW74FYRG4pesxTGjzh9ViEqXCfykYAbOzZC11CI";
 
   const cancelPopup = () => {
     setStatus("");
   };
 
+  const changeHandler = (
+    identifier: string,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setUserInput((prev) => ({
+      ...prev,
+      [identifier]: e.target.value,
+    }));
+  };
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    setMsg("Oops! Incorrect email or password. Try again.");
-    setShowForgotPassword(true);
-    setStatus("error");
-    setTimeout(() => {
-      cancelPopup();
-    }, 5000);
+
+    const userData = {
+      username: userInput.username,
+      password: userInput.password,
+    };
+
+    setLoading(true);
+
+    try {
+      const data = await Fetch("accounts/token/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        body: userData,
+      });
+
+      console.log(data);
+
+      setMsg("Successful Login");
+      setStatus("Success");
+      router.push("/");
+    } catch (err: any) {
+      setMsg(err.message);
+      setStatus("error");
+    } finally {
+      setTimeout(() => {
+        cancelPopup();
+      }, 5000);
+      setLoading(false);
+    }
   };
 
   return (
@@ -68,46 +118,29 @@ const Login = () => {
             action=""
           >
             {/* Email */}
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="email"
+            <AuthInput
+              name={"Username"}
+              identifier="username"
+              changeHandler={changeHandler}
+              inputType="username"
+              val={userInput.username}
             >
-              Email Address
-              <input
-                className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
-                type="email"
-                placeholder="Email address"
-              />
-            </label>
+              User Name
+            </AuthInput>
             {/* Password */}
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="password"
+            <AuthPasswordInput
+              name=""
+              identifier=""
+              passwordFocus={passwordFocus}
+              setPasswordFocus={setPasswordFocus}
+              seePassword={seePassword}
+              setSeePassword={setSeePassword}
+              changeHandler={changeHandler}
+              inputType="password"
+              val={userInput.password}
             >
               Password
-              <div
-                className={`flex h-11 px-3 py-2 rounded-md   ${
-                  passwordFocus
-                    ? "border-2 border-orange-600"
-                    : "border border-zinc-400"
-                }`}
-              >
-                <input
-                  onFocus={() => setPasswordFocus(true)}
-                  onBlur={() => setPasswordFocus(false)}
-                  className="w-full  placeholder:text-zinc-400 text-sm font-normal font-['Gilroy'] leading-tight focus:outline-none"
-                  type={seePassword ? "text" : "password"}
-                  placeholder="Pasword"
-                />
-                <aside
-                  onClick={() => setSeePassword((prev) => !prev)}
-                  className="cursor-pointer"
-                >
-                  {!seePassword && <ShowIcon />}
-                  {seePassword && <HideIcon />}
-                </aside>
-              </div>
-            </label>
+            </AuthPasswordInput>
             {/* CheckBox */}
             <div className="text-neutral-700 text-sm font-normal gilroy leading-tight flex items-center gap-1">
               <div
@@ -132,7 +165,10 @@ const Login = () => {
                   </Link>
                 </p>
               )}
-              <ButtonPrimary classes="w-full">{"Sign In"}</ButtonPrimary>
+              <ButtonPrimary classes="w-full">
+                {" "}
+                {loading ? <LoaderIcon className="animate-spin" /> : "Sign In"}
+              </ButtonPrimary>
               <ButtonSecondary classes="w-full">
                 {"Sign In"} with Google
               </ButtonSecondary>
