@@ -7,6 +7,7 @@ import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
 import Popup from "@/app/components/Popup";
 import Link from "next/link";
+import { useFetch } from "@/app/Hooks/useFetch";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -20,6 +21,9 @@ const SignUp = () => {
     password: "",
     email: "",
   });
+  const url = "https://first-collectionz.vercel.app/api/accounts/create/";
+  const csrfToken =
+    "g6qDP1Pc5S1TxI4pvuj7nVAvZ6TZ7sWRJ3awjtGXgrE5B1Qx2Y5h9oPfdxN5cj9t";
 
   const cancelPopup = () => {
     setStatus("");
@@ -38,10 +42,6 @@ const SignUp = () => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    const url = "https://first-collectionz.vercel.app/api/accounts/create/";
-    const csrfToken =
-      "g6qDP1Pc5S1TxI4pvuj7nVAvZ6TZ7sWRJ3awjtGXgrE5B1Qx2Y5h9oPfdxN5cj9t";
-
     const userData = {
       username: `${userInput.firstName}_${userInput.lastName}`,
       email: userInput.email,
@@ -49,22 +49,33 @@ const SignUp = () => {
     };
 
     try {
-      const res = await fetch(url, {
+      // const res = await fetch(url, {
+      //   method: "POST",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //     "X-CSRFToken": csrfToken,
+      //   },
+      //   body: JSON.stringify(userData),
+      // });
+      // const data = await res.json();
+
+      // if (!res.ok) {
+      //   throw new Error(...data.username);
+      // }
+
+      const data = await useFetch(url, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
           "X-CSRFToken": csrfToken,
         },
-        body: JSON.stringify(userData),
+        body: userData,
       });
-      const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(...data.username);
-      }
+      console.log(data);
 
-      // console.log(data);
       setMsg("Account created");
       setStatus("success");
     } catch (err: any) {
