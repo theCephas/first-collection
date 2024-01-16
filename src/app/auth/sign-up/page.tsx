@@ -24,7 +24,7 @@ const SignUp = () => {
     password: "",
     email: "",
   });
-  const url = "https://first-collectionz.vercel.app/api/accounts/create/";
+
   const csrfToken =
     "g6qDP1Pc5S1TxI4pvuj7nVAvZ6TZ7sWRJ3awjtGXgrE5B1Qx2Y5h9oPfdxN5cj9t";
 
@@ -51,12 +51,10 @@ const SignUp = () => {
       password: userInput.password,
     };
 
-    console.log(userData);
-
     setLoading(true);
 
     try {
-      const data = await Fetch(url, {
+      const data = await Fetch("accounts/create/", {
         method: "POST",
         headers: {
           Accept: "application/json",

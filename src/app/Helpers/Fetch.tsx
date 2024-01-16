@@ -11,7 +11,7 @@ type method = {
 
 export const Fetch = async (url: url, method: method) => {
   try {
-    const res = await fetch(url, {
+    const res = await fetch(`https://first-collectionz.vercel.app/api/${url}`, {
       method: method.method,
       headers: method.headers,
       body: JSON.stringify(method.body),
