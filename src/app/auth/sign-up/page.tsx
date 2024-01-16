@@ -7,28 +7,76 @@ import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
 import Popup from "@/app/components/Popup";
 import Link from "next/link";
+import { Fetch } from "@/app/Helpers/Fetch";
+import { LoaderIcon } from "lucide-react";
+import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
-  // const [hasAcc, setHasAcc] = useState(true);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [checked, setChecked] = useState(false);
   const [msg, setMsg] = useState("");
   const [status, setStatus] = useState("");
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [userInput, setUserInput] = useState({
+    firstName: "",
+    lastName: "",
+    password: "",
+    email: "",
+  });
+
+  const csrfToken =
+    "g6qDP1Pc5S1TxI4pvuj7nVAvZ6TZ7sWRJ3awjtGXgrE5B1Qx2Y5h9oPfdxN5cj9t";
 
   const cancelPopup = () => {
     setStatus("");
   };
 
+  const changeHandler = (
+    identifier: string,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setUserInput((prev) => ({
+      ...prev,
+      [identifier]: e.target.value,
+    }));
+  };
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    setMsg("Account created");
-    setShowForgotPassword(true);
-    setStatus("success");
-    setTimeout(() => {
-      cancelPopup();
-    }, 5000);
+
+    const userData = {
+      username: `${userInput.firstName}_${userInput.lastName}`,
+      email: userInput.email,
+      password: userInput.password,
+    };
+
+    setLoading(true);
+
+    try {
+      const data = await Fetch("accounts/create/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        body: userData,
+      });
+
+      console.log(data);
+
+      setMsg("Account created");
+      setStatus("success");
+    } catch (err: any) {
+      setMsg(err.message);
+      setStatus("error");
+    } finally {
+      setTimeout(() => {
+        cancelPopup();
+      }, 5000);
+      setLoading(false);
+    }
   };
 
   return (
@@ -71,74 +119,53 @@ const SignUp = () => {
             action=""
           >
             {/* First Name */}
-
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="first-name"
+            <AuthInput
+              name={"First Name"}
+              identifier="firstName"
+              changeHandler={changeHandler}
+              inputType="text"
+              val={userInput.firstName}
             >
               First Name
-              <input
-                className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
-                type="text"
-                placeholder="First name"
-              />
-            </label>
+            </AuthInput>
 
             {/* Last Name */}
-
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="last-name"
+            <AuthInput
+              name={"Last name"}
+              identifier="lastName"
+              changeHandler={changeHandler}
+              inputType="text"
+              val={userInput.lastName}
             >
               Last Name
-              <input
-                className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
-                type="text"
-                placeholder="Last name"
-              />
-            </label>
+            </AuthInput>
 
             {/* Email */}
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="email"
+            <AuthInput
+              name={"Email address"}
+              identifier="email"
+              changeHandler={changeHandler}
+              inputType="email"
+              val={userInput.email}
             >
               Email Address
-              <input
-                className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
-                type="email"
-                placeholder="Email address"
-              />
-            </label>
+            </AuthInput>
+
             {/* Password */}
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="password"
+            <AuthPasswordInput
+              name=""
+              identifier=""
+              passwordFocus={passwordFocus}
+              setPasswordFocus={setPasswordFocus}
+              seePassword={seePassword}
+              setSeePassword={setSeePassword}
+              changeHandler={changeHandler}
+              inputType="password"
+              val={userInput.password}
             >
               Password
-              <div
-                className={`flex h-11 px-3 py-2 rounded-md   ${
-                  passwordFocus
-                    ? "border-2 border-orange-600"
-                    : "border border-zinc-400"
-                }`}
-              >
-                <input
-                  onFocus={() => setPasswordFocus(true)}
-                  onBlur={() => setPasswordFocus(false)}
-                  className="w-full  placeholder:text-zinc-400 text-sm font-normal font-['Gilroy'] leading-tight focus:outline-none"
-                  type={seePassword ? "text" : "password"}
-                  placeholder="Pasword"
-                />
-                <aside
-                  onClick={() => setSeePassword((prev) => !prev)}
-                  className="cursor-pointer"
-                >
-                  {!seePassword && <ShowIcon />}
-                  {seePassword && <HideIcon />}
-                </aside>
-              </div>
-            </label>
+            </AuthPasswordInput>
+
             {/* CheckBox */}
             <div className="text-neutral-700 text-sm font-normal gilroy leading-tight flex items-center gap-1">
               <div
@@ -152,7 +179,10 @@ const SignUp = () => {
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  items-center">
-              <ButtonPrimary classes="w-full">{"Sign Up"}</ButtonPrimary>
+              <ButtonPrimary classes="w-full">
+                {loading ? <LoaderIcon className="animate-spin" /> : "Sign Up"}
+              </ButtonPrimary>
+
               <ButtonSecondary classes="w-full">
                 {"Sign Up"} with Google
               </ButtonSecondary>
