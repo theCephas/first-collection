@@ -9,6 +9,7 @@ import Popup from "@/app/components/Popup";
 import Link from "next/link";
 import { Fetch } from "@/app/Helpers/useFetch";
 import { LoaderIcon } from "lucide-react";
+import { AuthInput } from "../(components)/AuthInput";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -118,51 +119,38 @@ const SignUp = () => {
             action=""
           >
             {/* First Name */}
-
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="first-name"
+            <AuthInput
+              name={"First Name"}
+              identifier="firstName"
+              changeHandler={changeHandler}
+              inputType="text"
+              val={userInput.firstName}
             >
               First Name
-              <input
-                className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
-                type="text"
-                placeholder="First name"
-                onChange={(e) => changeHandler("firstName", e)}
-                value={userInput.firstName}
-              />
-            </label>
+            </AuthInput>
 
             {/* Last Name */}
-
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="last-name"
+            <AuthInput
+              name={"Last name"}
+              identifier="lastName"
+              changeHandler={changeHandler}
+              inputType="text"
+              val={userInput.lastName}
             >
               Last Name
-              <input
-                className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
-                type="text"
-                placeholder="Last name"
-                onChange={(e) => changeHandler("lastName", e)}
-                value={userInput.lastName}
-              />
-            </label>
+            </AuthInput>
 
             {/* Email */}
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="email"
+            <AuthInput
+              name={"Email address"}
+              identifier="email"
+              changeHandler={changeHandler}
+              inputType="email"
+              val={userInput.email}
             >
               Email Address
-              <input
-                className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
-                type="email"
-                placeholder="Email address"
-                onChange={(e) => changeHandler("email", e)}
-                value={userInput.email}
-              />
-            </label>
+            </AuthInput>
+
             {/* Password */}
             <label
               className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
