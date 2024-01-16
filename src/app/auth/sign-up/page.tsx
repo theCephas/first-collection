@@ -8,6 +8,7 @@ import { BackIcon } from "@/app/components/Icons";
 import Popup from "@/app/components/Popup";
 import Link from "next/link";
 import { Fetch } from "@/app/Helpers/useFetch";
+import { LoaderIcon } from "lucide-react";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -15,6 +16,7 @@ const SignUp = () => {
   const [checked, setChecked] = useState(false);
   const [msg, setMsg] = useState("");
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
     firstName: "",
     lastName: "",
@@ -48,6 +50,8 @@ const SignUp = () => {
       password: userInput.password,
     };
 
+    setLoading(true);
+
     try {
       const data = await Fetch(url, {
         method: "POST",
@@ -70,6 +74,7 @@ const SignUp = () => {
       setTimeout(() => {
         cancelPopup();
       }, 5000);
+      setLoading(false);
     }
   };
 
@@ -202,7 +207,10 @@ const SignUp = () => {
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  items-center">
-              <ButtonPrimary classes="w-full">{"Sign Up"}</ButtonPrimary>
+              <ButtonPrimary classes="w-full">
+                {loading ? <LoaderIcon className="animate-spin" /> : "Sign Up"}
+              </ButtonPrimary>
+
               <ButtonSecondary classes="w-full">
                 {"Sign Up"} with Google
               </ButtonSecondary>

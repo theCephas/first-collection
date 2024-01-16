@@ -23,7 +23,6 @@ export const Fetch = async (url: url, method: method) => {
     }
 
     return data;
-    // console.log(data);
   } catch (err: any) {
     throw err;
   }
