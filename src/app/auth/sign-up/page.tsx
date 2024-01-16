@@ -7,9 +7,9 @@ import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
 import Popup from "@/app/components/Popup";
 import Link from "next/link";
-import { Fetch } from "@/app/Helpers/useFetch";
+import { Fetch } from "@/app/Helpers/Fetch";
 import { LoaderIcon } from "lucide-react";
-import { AuthInput } from "../(components)/AuthInput";
+import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -50,6 +50,8 @@ const SignUp = () => {
       email: userInput.email,
       password: userInput.password,
     };
+
+    console.log(userData);
 
     setLoading(true);
 
@@ -152,36 +154,20 @@ const SignUp = () => {
             </AuthInput>
 
             {/* Password */}
-            <label
-              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-              htmlFor="password"
+            <AuthPasswordInput
+              name=""
+              identifier=""
+              passwordFocus={passwordFocus}
+              setPasswordFocus={setPasswordFocus}
+              seePassword={seePassword}
+              setSeePassword={setSeePassword}
+              changeHandler={changeHandler}
+              inputType="password"
+              val={userInput.password}
             >
               Password
-              <div
-                className={`flex h-11 px-3 py-2 rounded-md   ${
-                  passwordFocus
-                    ? "border-2 border-orange-600"
-                    : "border border-zinc-400"
-                }`}
-              >
-                <input
-                  onFocus={() => setPasswordFocus(true)}
-                  onBlur={() => setPasswordFocus(false)}
-                  className="w-full  placeholder:text-zinc-400 text-sm font-normal font-['Gilroy'] leading-tight focus:outline-none"
-                  type={seePassword ? "text" : "password"}
-                  placeholder="Pasword"
-                  onChange={(e) => changeHandler("password", e)}
-                  value={userInput.password}
-                />
-                <aside
-                  onClick={() => setSeePassword((prev) => !prev)}
-                  className="cursor-pointer"
-                >
-                  {!seePassword && <ShowIcon />}
-                  {seePassword && <HideIcon />}
-                </aside>
-              </div>
-            </label>
+            </AuthPasswordInput>
+
             {/* CheckBox */}
             <div className="text-neutral-700 text-sm font-normal gilroy leading-tight flex items-center gap-1">
               <div
