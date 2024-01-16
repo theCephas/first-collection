@@ -9,7 +9,7 @@ type method = {
   body: Record<string, string>;
 };
 
-export const useFetch = async (url: url, method: method) => {
+export const Fetch = async (url: url, method: method) => {
   try {
     const res = await fetch(url, {
       method: method.method,

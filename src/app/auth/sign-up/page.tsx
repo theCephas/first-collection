@@ -7,7 +7,7 @@ import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
 import Popup from "@/app/components/Popup";
 import Link from "next/link";
-import { useFetch } from "@/app/Hooks/useFetch";
+import { Fetch } from "@/app/Helpers/useFetch";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -49,22 +49,7 @@ const SignUp = () => {
     };
 
     try {
-      // const res = await fetch(url, {
-      //   method: "POST",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //     "X-CSRFToken": csrfToken,
-      //   },
-      //   body: JSON.stringify(userData),
-      // });
-      // const data = await res.json();
-
-      // if (!res.ok) {
-      //   throw new Error(...data.username);
-      // }
-
-      const data = await useFetch(url, {
+      const data = await Fetch(url, {
         method: "POST",
         headers: {
           Accept: "application/json",
