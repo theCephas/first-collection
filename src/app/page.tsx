@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Header from "./components/header";
+"use client";
 import Herosection from "./components/herosection";
 import Handpicked from "./components/handpickedforu";
 import PageWrapper from "./components/PageWrapper";
