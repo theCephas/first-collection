@@ -3,7 +3,7 @@ type url = string;
 type method = {
   method: string;
   headers: Record<string, string>;
-  body: Record<string, string>;
+  body?: any;
 };
 
 export const Fetch = async (url: url, method: method) => {
