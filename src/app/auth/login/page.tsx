@@ -3,35 +3,31 @@ import React, { useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
 import { BackIcon } from "@/app/components/Icons";
-import { CheckIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
+import { CheckIcon } from "../(components)/AuthIcons";
 import Link from "next/link";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
-import Popup from "@/app/components/Popup";
 import { Fetch } from "@/app/Helpers/Fetch";
 import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
 import { LoaderIcon } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { setCookie } from "@/app/Helpers/Helpers";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [msg, setMsg] = useState("");
-  const [status, setStatus] = useState("");
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
-    username: "",
+    email: "",
     password: "",
   });
+
   const router = useRouter();
 
   const csrfToken =
-    "mSIS6Zl5GXSxcogcjdQRyyS8hOW74FYRG4pesxTGjzh9ViEqXCfykYAbOzZC11CI";
-
-  const cancelPopup = () => {
-    setStatus("");
-  };
+    "FfZcTHEVY2KcYoWknhgtHPZH8rTTAfF7auI3kFNxMoFu1J9kHqi7rG0JTJjByzW8";
 
   const changeHandler = (
     identifier: string,
@@ -47,7 +43,7 @@ const Login = () => {
     e.preventDefault();
 
     const userData = {
-      username: userInput.username,
+      email: userInput.email,
       password: userInput.password,
     };
 
@@ -64,18 +60,20 @@ const Login = () => {
         body: userData,
       });
 
-      console.log(data);
+      setCookie(data);
 
-      setMsg("Successful Login");
-      setStatus("Success");
-      router.push("/");
+      router.push("/products");
+
+      toast.success("Login successful!", {
+        position: "top-right",
+        autoClose: 5000,
+      });
     } catch (err: any) {
-      setMsg(err.message);
-      setStatus("error");
+      toast.error(err.message, {
+        position: "top-right",
+        autoClose: 5000,
+      });
     } finally {
-      setTimeout(() => {
-        cancelPopup();
-      }, 5000);
       setLoading(false);
     }
   };
@@ -119,13 +117,13 @@ const Login = () => {
           >
             {/* Email */}
             <AuthInput
-              name={"Username"}
-              identifier="username"
+              name={"Email"}
+              identifier="email"
               changeHandler={changeHandler}
-              inputType="username"
-              val={userInput.username}
+              inputType="email"
+              val={userInput.email}
             >
-              User Name
+              Email
             </AuthInput>
             {/* Password */}
             <AuthPasswordInput
@@ -154,17 +152,16 @@ const Login = () => {
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  items-center">
-              {showForgotPassword && (
-                <p className="text-sm gilroy flex gap-2">
-                  Forgot Password?
-                  <Link
-                    href="/auth/reset-password"
-                    className="text-orange-600 font-medium"
-                  >
-                    Reset
-                  </Link>
-                </p>
-              )}
+              <p className="text-sm gilroy flex gap-2">
+                Forgot Password?
+                <Link
+                  href="/auth/reset-password"
+                  className="text-orange-600 font-medium"
+                >
+                  Reset
+                </Link>
+              </p>
+
               <ButtonPrimary classes="w-full">
                 {" "}
                 {loading ? <LoaderIcon className="animate-spin" /> : "Sign In"}
@@ -176,7 +173,7 @@ const Login = () => {
               <div className="text-neutral-700 text-sm font-normal font-['Gilroy'] leading-tight flex gap-1">
                 {"Don't have an account?"}
                 <Link
-                  href="/auth/sign-up"
+                  href="/auth/register"
                   className="text-orange-600 cursor-pointer"
                 >
                   {"Sign Up"}
@@ -185,10 +182,8 @@ const Login = () => {
             </div>
           </form>
         </section>
-        {status.length > 0 && (
-          <Popup cancel={cancelPopup} text={msg} type={status} />
-        )}
       </main>
+      <ToastContainer />
     </AuthWrapper>
   );
 };

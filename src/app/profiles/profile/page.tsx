@@ -1,7 +1,14 @@
-import React from "react";
+"use client";
+import React, { useCallback, useEffect } from "react";
 import ProfileWrapper from "@/layout/ProfileWrapper";
+import withAuth from "@/app/auth/(components)/withAuth";
+import { Fetch } from "@/app/Helpers/Fetch";
+import { getToken } from "@/app/Helpers/Helpers";
+import { useUser } from "@/app/Helpers/useUser";
 
 const Profile = () => {
+  const user = useUser();
+
   return (
     <ProfileWrapper>
       <div className="mt-20 mb-[150px] flex flex-col md:flex-row gap-6">
@@ -14,30 +21,39 @@ const Profile = () => {
               Edit
             </p>
           </label>
+          <p className=" rounded-[6px] py-[8px] px-[12px] flex items-center  border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] ">
+            {user?.firstName}
+          </p>
           <input
             type="text"
             placeholder="John"
-            className="outline-none rounded-[6px] py-[8px] px-[12px] flex items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
+            className="hidden outline-none rounded-[6px] py-[8px] px-[12px] items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
             readOnly
           />
 
           <label className="gilroy text-[14px] font-[600] leading-[20.3px] text-[#040404] ">
             Last Name
           </label>
+          <p className=" rounded-[6px] py-[8px] px-[12px] flex items-center  border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] ">
+            {user?.lastName}
+          </p>
           <input
             type="text"
             placeholder="Bull"
-            className="outline-none rounded-[6px] py-[8px] px-[12px] flex items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
+            className="hidden outline-none rounded-[6px] py-[8px] px-[12px] items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
             readOnly
           />
 
           <label className="gilroy text-[14px] font-[600] leading-[20.3px] text-[#040404] ">
             Email Address
           </label>
+          <p className=" rounded-[6px] py-[8px] px-[12px] flex items-center  border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] ">
+            {user?.email}
+          </p>
           <input
             type="email"
             placeholder="johnbull@gmail.com"
-            className="outline-none rounded-[6px] py-[8px] px-[12px] flex items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
+            className="hidden outline-none rounded-[6px] py-[8px] px-[12px] items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
             readOnly
           />
         </form>
@@ -83,4 +99,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

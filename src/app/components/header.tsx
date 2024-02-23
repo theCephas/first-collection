@@ -13,6 +13,7 @@ import { motion, useCycle, AnimatePresence, MotionConfig } from "framer-motion";
 import { SearchResults } from "./SearchResults";
 import CartComponent from "./Cart";
 import { useRouter } from "next/navigation";
+import { clearCookie, getToken } from "../Helpers/Helpers";
 
 const Header = () => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
@@ -22,11 +23,14 @@ const Header = () => {
   const [showCart, setShowCart] = useState(false);
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check if the current route matches the link's href
-    return;
-  }, [router]);
+    const token = getToken();
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   const handleClick = () => {
     // Use router.push to navigate to the /products page
@@ -85,6 +89,7 @@ const Header = () => {
           >
             Products
           </Link>
+
           <Link
             href="/contact-us"
             className="focus:text-[#ff5c00] active:scale-75 transform"
@@ -143,42 +148,55 @@ const Header = () => {
                     exit="closed"
                     className="flex flex-col gap-4 items-center  relative z-50 text-[#060606] text-[14px]  focus:text-[#ff5c00]"
                   >
-                    <Link
-                      className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
-                      href="/profiles/profile"
-                    >
-                      Profile
-                    </Link>
-                    <Link
-                      className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
-                      href="/orders/ongoing-orders"
-                    >
-                      Orders
-                    </Link>
+                    {isAuthenticated && (
+                      <Link
+                        className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
+                        href="/profiles/profile"
+                      >
+                        Profile
+                      </Link>
+                    )}
+                    {isAuthenticated && (
+                      <Link
+                        className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
+                        href="/orders/ongoing-orders"
+                      >
+                        Orders
+                      </Link>
+                    )}
 
-                    <Link
-                      href="/auth/log-in"
-                      className="w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
-                    >
-                      Sign In
-                    </Link>
-                    <Link
-                      href=""
-                      className=" w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
-                    >
-                      Logout
-                    </Link>
+                    {!isAuthenticated && (
+                      <Link
+                        href="/auth/login"
+                        className="w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
+                      >
+                        Sign In
+                      </Link>
+                    )}
+                    {isAuthenticated && (
+                      <button
+                        onClick={() => {
+                          clearCookie();
+                          router.push("/auth/login");
+                        }}
+                        className=" w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
+                      >
+                        Logout
+                      </button>
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
             )}
           </div>
-          <Image
-            className="cursor-pointer"
-            onClick={() => setShowCart(true)}
-            src={Cart}
-            alt="Cart icon"
-          />
+          {isAuthenticated && (
+            <Image
+              className="cursor-pointer"
+              onClick={() => setShowCart(true)}
+              src={Cart}
+              alt="Cart icon"
+            />
+          )}
         </div>
 
         <div className="relative z-50 flex gap-3 items-center lg:hidden">
@@ -355,43 +373,56 @@ const Header = () => {
                           exit="closed"
                           className="flex flex-col gap-4 bg-white text-[#060606] text-[14px] rounded-[8px] focus:text-[#ff5c00] my-6"
                         >
-                          <Link
-                            className="focus:text-[#ff5c00] px-10 sm:px-20 "
-                            href="/profiles/profile"
-                          >
-                            Profile
-                          </Link>
-                          <Link
-                            className="focus:text-[#ff5c00] px-10 sm:px-20 "
-                            href="/orders/ongoing-orders"
-                          >
-                            Orders
-                          </Link>
-                          <Link
-                            href="/auth/log-in"
-                            className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
-                          >
-                            Sign In
-                          </Link>
-                          <Link
-                            href=""
-                            className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
-                          >
-                            Logout
-                          </Link>
+                          {isAuthenticated && (
+                            <Link
+                              className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                              href="/profiles/profile"
+                            >
+                              Profile
+                            </Link>
+                          )}
+                          {isAuthenticated && (
+                            <Link
+                              className="focus:text-[#ff5c00] px-10 sm:px-20 "
+                              href="/orders/ongoing-orders"
+                            >
+                              Orders
+                            </Link>
+                          )}
+                          {!isAuthenticated && (
+                            <Link
+                              href="/auth/login"
+                              className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
+                            >
+                              Sign In
+                            </Link>
+                          )}
+                          {isAuthenticated && (
+                            <button
+                              onClick={() => {
+                                clearCookie();
+                                router.push("/auth/login");
+                              }}
+                              className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
+                            >
+                              Logout
+                            </button>
+                          )}
                         </motion.div>
                       </AnimatePresence>
                     )}
                   </div>
-                  <p
-                    onClick={() => {
-                      toggleMobileNav();
-                      setShowCart(true);
-                    }}
-                    className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
-                  >
-                    Cart
-                  </p>
+                  {isAuthenticated && (
+                    <p
+                      onClick={() => {
+                        toggleMobileNav();
+                        setShowCart(true);
+                      }}
+                      className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
+                    >
+                      Cart
+                    </p>
+                  )}
                 </div>
               </motion.div>
             </motion.div>

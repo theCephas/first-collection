@@ -1,25 +1,30 @@
-"use client";
-import React from "react";
-
 type url = string;
 
 type method = {
   method: string;
   headers: Record<string, string>;
-  body: Record<string, string>;
+  body?: any;
 };
 
 export const Fetch = async (url: url, method: method) => {
   try {
-    const res = await fetch(`https://first-collectionz.vercel.app/api/${url}`, {
-      method: method.method,
-      headers: method.headers,
-      body: JSON.stringify(method.body),
-    });
+    const res: any = await fetch(
+      `https://first-collectionz-kappa.vercel.app/api/${url}`,
+      {
+        method: method.method,
+        headers: method.headers,
+        body: JSON.stringify(method.body),
+      }
+    );
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(...data.username);
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      if (data.detail) {
+        throw new Error(data.detail);
+      }
     }
 
     return data;
