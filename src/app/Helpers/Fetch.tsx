@@ -1,6 +1,3 @@
-"use client";
-import React from "react";
-
 type url = string;
 
 type method = {
@@ -11,7 +8,7 @@ type method = {
 
 export const Fetch = async (url: url, method: method) => {
   try {
-    const res = await fetch(
+    const res: any = await fetch(
       `https://first-collectionz-kappa.vercel.app/api/${url}`,
       {
         method: method.method,
@@ -22,7 +19,7 @@ export const Fetch = async (url: url, method: method) => {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(...data.username);
+      throw new Error(data.error);
     }
 
     return data;

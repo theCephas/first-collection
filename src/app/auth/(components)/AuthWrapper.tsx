@@ -20,8 +20,8 @@ export const AuthWrapper = ({
   heroText,
 }: ContainerProps) => {
   return (
-    <section className="h-full w-full max-w-[67.5rem] mx-auto md:grid md:grid-cols-2 py-6 md:gap-6 px-4 xl:px-0">
-      <section className="hidden bg-stone-950 rounded-2xl md:flex justify-end items-center overflow-hidden py-20 relative">
+    <div className="h-full w-full max-w-[67.5rem] mx-auto md:grid md:grid-cols-2 py-6 md:gap-6 px-4 xl:px-0">
+      <div className="hidden bg-stone-950 rounded-2xl md:flex justify-end items-center overflow-hidden py-20 relative">
         <Image
           alt="logo"
           width={32}
@@ -44,8 +44,8 @@ export const AuthWrapper = ({
           className={`h-full w-[60%] ${classes} object-cover rounded-tl-2xl rounded-bl-2xl`}
           src={url}
         />
-      </section>
+      </div>
       {children}
-    </section>
+    </div>
   );
 };

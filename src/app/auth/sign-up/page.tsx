@@ -2,22 +2,21 @@
 import React, { useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
-import { CheckIcon, HideIcon, ShowIcon } from "../(components)/AuthIcons";
+import { CheckIcon } from "../(components)/AuthIcons";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
-import Popup from "@/app/components/Popup";
 import Link from "next/link";
 import { Fetch } from "@/app/Helpers/Fetch";
 import { LoaderIcon } from "lucide-react";
 import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [msg, setMsg] = useState("");
-  const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
     firstName: "",
@@ -25,13 +24,10 @@ const SignUp = () => {
     password: "",
     email: "",
   });
+  const router = useRouter();
 
   const csrfToken =
-    "g6qDP1Pc5S1TxI4pvuj7nVAvZ6TZ7sWRJ3awjtGXgrE5B1Qx2Y5h9oPfdxN5cj9t";
-
-  const cancelPopup = () => {
-    setStatus("");
-  };
+    "QXXFTyqas1rI5W01ExT9njr9gQaDNL9hlcGwkwzMgnm08hd1YGVN7asb18AlL5qi";
 
   const changeHandler = (
     identifier: string,
@@ -47,7 +43,7 @@ const SignUp = () => {
     e.preventDefault();
 
     const userData = {
-      username: `${userInput.firstName}_${userInput.lastName}`,
+      full_name: `${userInput.firstName}_${userInput.lastName}`,
       email: userInput.email,
       password: userInput.password,
     };
@@ -65,21 +61,20 @@ const SignUp = () => {
         body: userData,
       });
 
-      console.log(data);
+      console.log(await data);
 
-      toast.success("🦄 Wow so easy!");
+      router.push("/auth/log-in");
 
-      // setMsg("Account created");
-      // setStatus("success");
+      toast.success("Account created successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+      });
     } catch (err: any) {
-      console.log(err.message);
-      // setMsg(err.message);
-      // setStatus("error");
-      toast.error("🦄 Wow so easy!");
+      toast.error(err.message, {
+        position: "top-right",
+        autoClose: 5000,
+      });
     } finally {
-      // setTimeout(() => {
-      //   cancelPopup();
-      // }, 5000);
       setLoading(false);
     }
   };
@@ -204,9 +199,6 @@ const SignUp = () => {
             </div>
           </form>
         </section>
-        {status.length > 0 && (
-          <Popup cancel={cancelPopup} text={msg} type={status} />
-        )}
       </main>
       <ToastContainer />
     </AuthWrapper>
