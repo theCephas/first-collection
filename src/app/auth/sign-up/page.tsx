@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
-import { CheckIcon } from "../(components)/AuthIcons";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
 import Link from "next/link";
@@ -16,7 +15,7 @@ import { useRouter } from "next/navigation";
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
-  const [checked, setChecked] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
     firstName: "",
@@ -165,17 +164,6 @@ const SignUp = () => {
             >
               Password
             </AuthPasswordInput>
-
-            {/* CheckBox */}
-            <div className="text-neutral-700 text-sm font-normal gilroy leading-tight flex items-center gap-1">
-              <div
-                onClick={() => setChecked((prev) => !prev)}
-                className={`bg-transparent rounded border border-black w-4 h-4 cursor-pointer flex items-center justify-center`}
-              >
-                {checked && <CheckIcon />}
-              </div>
-              <span>Keep me logged In.</span>
-            </div>
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  items-center">

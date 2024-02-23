@@ -1,5 +1,5 @@
 const setCookie = (data: any) => {
-  document.cookie = `token=${data.user.token}; path=/;`;
+  document.cookie = `token=${data.access}; path=/;`;
 };
 export { setCookie };
 
@@ -12,9 +12,12 @@ export const clearCookie = () => {
 };
 
 export const getToken = () => {
-  const token = document.cookie
+  const accesToken = document.cookie
     .split(";")
     .find((c) => c.trim().startsWith("token="));
+
+  const token = accesToken?.replace("token=", "");
+
   return token;
 };
 

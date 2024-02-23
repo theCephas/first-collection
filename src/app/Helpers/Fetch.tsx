@@ -18,8 +18,15 @@ export const Fetch = async (url: url, method: method) => {
     );
     const data = await res.json();
 
+    console.log(await data);
+
     if (!res.ok) {
-      throw new Error(data.error);
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      if (data.detail) {
+        throw new Error(data.detail);
+      }
     }
 
     return data;
