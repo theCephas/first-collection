@@ -1,22 +1,17 @@
-import { usePathname, useRouter } from "next/navigation";
+"use client";
+import { useRouter } from "next/navigation";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getToken } from "../../Helpers/Helpers";
 
 const withAuth = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
     const router = useRouter();
-    const path = usePathname();
 
     useEffect(() => {
-      const userToken = getToken();
-
-      if (userToken?.split("=")[1] && path.includes("/auth")) {
-        router.push("/dashboard/overview");
-      }
-
-      if (!userToken?.split("=")[1] && path.includes("/dashboard")) {
-        router.push("/auth/login");
+      const token = getToken();
+      if (!token) {
+        router.push("/auth/log-in");
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

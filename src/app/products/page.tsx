@@ -7,7 +7,6 @@ import ProductCard from "../(components)/ProductCard";
 import Item1 from "../../../public/item1.svg";
 import Item2 from "../../../public/item5.svg";
 import Item3 from "../../../public/item3.svg";
-import withAuth from "../auth/(components)/withAuth";
 
 const Five: number[] = [1, 2, 3, 4, 5];
 
@@ -71,7 +70,7 @@ const Products = () => {
     </PageWrapper>
   );
 };
-export default withAuth(Products);
+export default Products;
 
 //  imageSrc: string;
 // name: string;

@@ -60,7 +60,6 @@ const Login = () => {
         body: userData,
       });
 
-      console.log(data);
       setCookie(data);
 
       router.push("/products");

@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
 import ProfileWrapper from "@/layout/ProfileWrapper";
+import withAuth from "@/app/auth/(components)/withAuth";
 
 const Profile = () => {
   return (
@@ -83,4 +85,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

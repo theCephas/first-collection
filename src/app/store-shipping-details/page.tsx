@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
@@ -6,6 +7,7 @@ import Balenciaga1 from "../../../public/balenciaga1.svg";
 import Balenciaga2 from "../../../public/balenciaga2.svg";
 import PageWrapper from "../components/PageWrapper";
 import OnGoing from "../(components)/OnGoing";
+import withAuth from "../auth/(components)/withAuth";
 
 const page = () => {
   return (
@@ -131,4 +133,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);
