@@ -167,7 +167,7 @@ const Header = () => {
 
                     {!isAuthenticated && (
                       <Link
-                        href="/auth/log-in"
+                        href="/auth/login"
                         className="w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
                       >
                         Sign In
@@ -177,7 +177,7 @@ const Header = () => {
                       <button
                         onClick={() => {
                           clearCookie();
-                          router.push("/auth/log-in");
+                          router.push("/auth/login");
                         }}
                         className=" w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
                       >
@@ -391,7 +391,7 @@ const Header = () => {
                           )}
                           {!isAuthenticated && (
                             <Link
-                              href="/auth/log-in"
+                              href="/auth/login"
                               className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
                             >
                               Sign In
@@ -401,7 +401,7 @@ const Header = () => {
                             <button
                               onClick={() => {
                                 clearCookie();
-                                router.push("/auth/log-in");
+                                router.push("/auth/login");
                               }}
                               className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
                             >

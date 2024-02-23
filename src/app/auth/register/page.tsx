@@ -62,7 +62,7 @@ const SignUp = () => {
 
       console.log(await data);
 
-      router.push("/auth/log-in");
+      router.push("/auth/login");
 
       toast.success("Account created successfully!", {
         position: "top-right",
@@ -178,7 +178,7 @@ const SignUp = () => {
               <div className="text-neutral-700 text-sm font-normal font-['Gilroy'] leading-tight flex gap-1">
                 {"Don't have an account?"}
                 <Link
-                  href="/auth/log-in"
+                  href="/auth/login"
                   className="text-orange-600 cursor-pointer"
                 >
                   {"Sign In"}

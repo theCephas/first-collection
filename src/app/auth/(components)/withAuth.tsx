@@ -11,7 +11,7 @@ const withAuth = (WrappedComponent: any) => {
     useEffect(() => {
       const token = getToken();
       if (!token) {
-        router.push("/auth/log-in");
+        router.push("/auth/login");
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

@@ -173,7 +173,7 @@ const Login = () => {
               <div className="text-neutral-700 text-sm font-normal font-['Gilroy'] leading-tight flex gap-1">
                 {"Don't have an account?"}
                 <Link
-                  href="/auth/sign-up"
+                  href="/auth/register"
                   className="text-orange-600 cursor-pointer"
                 >
                   {"Sign Up"}

@@ -35,7 +35,7 @@ const ResetPassword = () => {
         />
 
         <a
-          href="/auth/log-in"
+          href="/auth/login"
           className="absolute top-8 md:top-4 left-0 sm:pl-10 md:pl-0"
         >
           <BackIcon />
