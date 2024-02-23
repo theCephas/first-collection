@@ -11,11 +11,14 @@ type method = {
 
 export const Fetch = async (url: url, method: method) => {
   try {
-    const res = await fetch(`https://first-collectionz.vercel.app/api/${url}`, {
-      method: method.method,
-      headers: method.headers,
-      body: JSON.stringify(method.body),
-    });
+    const res = await fetch(
+      `https://first-collectionz-kappa.vercel.app/api/${url}`,
+      {
+        method: method.method,
+        headers: method.headers,
+        body: JSON.stringify(method.body),
+      }
+    );
     const data = await res.json();
 
     if (!res.ok) {

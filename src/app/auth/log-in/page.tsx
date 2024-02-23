@@ -11,7 +11,6 @@ import { Fetch } from "@/app/Helpers/Fetch";
 import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
 import { LoaderIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/components/AuthContext";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -26,7 +25,6 @@ const Login = () => {
     password: "",
   });
   const router = useRouter();
-  const { signIn } = useAuth();
 
   const csrfToken =
     "mSIS6Zl5GXSxcogcjdQRyyS8hOW74FYRG4pesxTGjzh9ViEqXCfykYAbOzZC11CI";

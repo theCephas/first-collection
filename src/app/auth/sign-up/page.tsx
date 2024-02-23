@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Fetch } from "@/app/Helpers/Fetch";
 import { LoaderIcon } from "lucide-react";
 import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
+import { ToastContainer, toast } from "react-toastify";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -66,15 +67,19 @@ const SignUp = () => {
 
       console.log(data);
 
-      setMsg("Account created");
-      setStatus("success");
+      toast.success("🦄 Wow so easy!");
+
+      // setMsg("Account created");
+      // setStatus("success");
     } catch (err: any) {
-      setMsg(err.message);
-      setStatus("error");
+      console.log(err.message);
+      // setMsg(err.message);
+      // setStatus("error");
+      toast.error("🦄 Wow so easy!");
     } finally {
-      setTimeout(() => {
-        cancelPopup();
-      }, 5000);
+      // setTimeout(() => {
+      //   cancelPopup();
+      // }, 5000);
       setLoading(false);
     }
   };
@@ -203,6 +208,7 @@ const SignUp = () => {
           <Popup cancel={cancelPopup} text={msg} type={status} />
         )}
       </main>
+      <ToastContainer />
     </AuthWrapper>
   );
 };
