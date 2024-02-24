@@ -5,7 +5,10 @@ import Link from "next/link";
 import React from "react";
 import { ProductDescriptionAndRating } from "./ProductDescriptionAndRating";
 
-const Product = () => {
+interface Props {
+  params: any;
+}
+const Product = ({ params }: Props) => {
   return (
     <section className="mt-6 max-w-[67.5rem] mx-auto px-6 xl:px-0">
       <Link className="" href="/products">
@@ -34,7 +37,7 @@ const Product = () => {
           ))}
         </aside>
         <aside className="hidden lg:block">
-          <ProductDescriptionAndRating />
+          <ProductDescriptionAndRating params={params} />
         </aside>
       </div>
     </section>

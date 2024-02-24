@@ -28,7 +28,13 @@ const Products = () => {
                   (pageNum === 2 && Item2) ||
                   (pageNum === 3 && Item3)
                 }
-                name={"Nike Air Sneakers"}
+                name={
+                  pageNum === 1
+                    ? "Nike Air Sneakers"
+                    : pageNum === 2
+                    ? "Nike Female Sneakers"
+                    : "High heals"
+                }
                 price={17000}
               />
             ))}
