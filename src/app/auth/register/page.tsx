@@ -11,6 +11,7 @@ import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { validPassword } from "@/app/Helpers/Helpers";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -162,14 +163,61 @@ const SignUp = () => {
               inputType="password"
               val={userInput.password}
             >
-              Password
+              Create a strong Password
             </AuthPasswordInput>
+
+            {/* /\d/.test(str) */}
+            <ul
+              className="text-neutral-700 text-sm font-normal gilroy leading-tight flex flex-col sm:flex-row gap-1 sm:justify-between list-disc list-inside
+
+"
+            >
+              <li
+                className={`text-xs sm:text-center ${
+                  /[A-Z]/.test(userInput.password)
+                    ? "text-green-500"
+                    : "text-zinc-500"
+                }`}
+              >
+                Has uppercase letter
+              </li>
+              <li
+                className={`text-xs sm:text-center ${
+                  /\d/.test(userInput.password) ||
+                  /[!@#$%^&*]/.test(userInput.password)
+                    ? "text-green-500"
+                    : "text-zinc-500"
+                }`}
+              >
+                Has number or symbol
+              </li>
+              <li
+                className={`text-xs sm:text-center ${
+                  userInput.password.length >= 8
+                    ? "text-green-500"
+                    : "text-zinc-500"
+                }`}
+              >
+                Is at least 8 characters long
+              </li>
+            </ul>
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  items-center">
-              <ButtonPrimary classes="w-full">
-                {loading ? <LoaderIcon className="animate-spin" /> : "Sign Up"}
-              </ButtonPrimary>
+              {validPassword(userInput.password) && (
+                <ButtonPrimary buttonType="submit" classes={`w-full`}>
+                  {loading ? (
+                    <LoaderIcon className="animate-spin" />
+                  ) : (
+                    "Sign Up"
+                  )}
+                </ButtonPrimary>
+              )}
+              {!validPassword(userInput.password) && (
+                <ButtonPrimary classes={`w-full opacity-50 cursor-not-allowed`}>
+                  Sign Up
+                </ButtonPrimary>
+              )}
 
               <ButtonSecondary classes="w-full">
                 {"Sign Up"} with Google

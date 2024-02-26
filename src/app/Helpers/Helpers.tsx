@@ -21,9 +21,12 @@ export const getToken = () => {
   return token;
 };
 
-// export const Token = () => {
-//   const token = document?.cookie?.substring("token=".length);
-//   localStorage.setItem("token", token);
-//   if (!token) window.location.href = "/auth/login";
-//   return token;
-// };
+export const validPassword = (str: string) => {
+  if (
+    str.length >= 8 &&
+    /\d/.test(str) &&
+    (/[!@#$%^&*]/.test(str) || /[A-Z]/.test(str))
+  ) {
+    return true;
+  } else return false;
+};
