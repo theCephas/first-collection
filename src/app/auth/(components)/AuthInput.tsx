@@ -24,7 +24,7 @@ export const AuthInput = ({
 }: AuthInputProps) => {
   return (
     <label className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1">
-      {children}
+      <div className="flex">{children}</div>
       <input
         className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
         type={inputType}
@@ -56,7 +56,7 @@ export const AuthPasswordInput = ({
       className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
       htmlFor="password"
     >
-      {children}
+      <div className="flex">{children}</div>
       <div
         className={`flex h-11 px-3 py-2 rounded-md   ${
           passwordFocus

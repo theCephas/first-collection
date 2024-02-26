@@ -6,12 +6,12 @@ import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
 import Link from "next/link";
 import { Fetch } from "@/app/Helpers/Fetch";
-import { LoaderIcon } from "lucide-react";
+import { Asterisk, LoaderIcon } from "lucide-react";
 import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
-import { validPassword } from "@/app/Helpers/Helpers";
+import { isEmpty, isValidEmail, validPassword } from "@/app/Helpers/Helpers";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -127,6 +127,7 @@ const SignUp = () => {
               val={userInput.firstName}
             >
               First Name
+              <Asterisk size={10} color="#ff5c00" />
             </AuthInput>
 
             {/* Last Name */}
@@ -137,7 +138,7 @@ const SignUp = () => {
               inputType="text"
               val={userInput.lastName}
             >
-              Last Name
+              Last Name <Asterisk size={10} color="#ff5c00" />
             </AuthInput>
 
             {/* Email */}
@@ -148,7 +149,7 @@ const SignUp = () => {
               inputType="email"
               val={userInput.email}
             >
-              Email Address
+              Email Address <Asterisk size={10} color="#ff5c00" />
             </AuthInput>
 
             {/* Password */}
@@ -163,7 +164,7 @@ const SignUp = () => {
               inputType="password"
               val={userInput.password}
             >
-              Create a strong Password
+              Create a strong Password <Asterisk size={10} color="#ff5c00" />
             </AuthPasswordInput>
 
             {/* /\d/.test(str) */}
@@ -175,7 +176,7 @@ const SignUp = () => {
               <li
                 className={`text-xs sm:text-center ${
                   /[A-Z]/.test(userInput.password)
-                    ? "text-green-500"
+                    ? "text-green-600"
                     : "text-zinc-500"
                 }`}
               >
@@ -185,7 +186,7 @@ const SignUp = () => {
                 className={`text-xs sm:text-center ${
                   /\d/.test(userInput.password) ||
                   /[!@#$%^&*]/.test(userInput.password)
-                    ? "text-green-500"
+                    ? "text-green-600"
                     : "text-zinc-500"
                 }`}
               >
@@ -194,7 +195,7 @@ const SignUp = () => {
               <li
                 className={`text-xs sm:text-center ${
                   userInput.password.length >= 8
-                    ? "text-green-500"
+                    ? "text-green-600"
                     : "text-zinc-500"
                 }`}
               >
@@ -204,7 +205,10 @@ const SignUp = () => {
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  items-center">
-              {validPassword(userInput.password) && (
+              {validPassword(userInput.password) &&
+              !isEmpty(userInput.firstName) &&
+              !isEmpty(userInput.lastName) &&
+              isValidEmail(userInput.email) ? (
                 <ButtonPrimary buttonType="submit" classes={`w-full`}>
                   {loading ? (
                     <LoaderIcon className="animate-spin" />
@@ -212,8 +216,7 @@ const SignUp = () => {
                     "Sign Up"
                   )}
                 </ButtonPrimary>
-              )}
-              {!validPassword(userInput.password) && (
+              ) : (
                 <ButtonPrimary classes={`w-full opacity-50 cursor-not-allowed`}>
                   Sign Up
                 </ButtonPrimary>

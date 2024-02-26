@@ -21,6 +21,13 @@ export const getToken = () => {
   return token;
 };
 
+export const isEmpty = (param: string | null | any) =>
+  param === null || typeof param === "undefined" || param.length == 0;
+
+export const isValidEmail = (str: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
+};
+
 export const validPassword = (str: string) => {
   if (
     str.length >= 8 &&
