@@ -167,7 +167,7 @@ const SignUp = () => {
               Create a strong Password <Asterisk size={10} color="#ff5c00" />
             </AuthPasswordInput>
 
-            {/* /\d/.test(str) */}
+            {/* Strong password */}
             <ul
               className="text-neutral-700 text-sm font-normal gilroy leading-tight flex flex-col sm:flex-row gap-1 sm:justify-between list-disc list-inside
 
