@@ -148,8 +148,18 @@ const SignUp = () => {
               changeHandler={changeHandler}
               inputType="email"
               val={userInput.email}
+              focus={
+                userInput.email.length > 0 && !isValidEmail(userInput.email)
+                  ? "border-orange-600"
+                  : ""
+              }
             >
               Email Address <Asterisk size={10} color="#ff5c00" />
+              {userInput.email.length > 0 && !isValidEmail(userInput.email) && (
+                <p className="text-[10px] ml-3 font-light text-orange-600">
+                  Kindly enter a valid email address
+                </p>
+              )}
             </AuthInput>
 
             {/* Password */}

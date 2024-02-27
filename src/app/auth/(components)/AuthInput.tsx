@@ -12,6 +12,7 @@ interface AuthInputProps {
   ) => void;
   children: React.ReactNode;
   inputType: string;
+  focus?: string;
 }
 
 export const AuthInput = ({
@@ -21,12 +22,15 @@ export const AuthInput = ({
   changeHandler,
   children,
   inputType,
+  focus,
 }: AuthInputProps) => {
   return (
     <label className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1">
       <div className="flex">{children}</div>
       <input
-        className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight"
+        className={`w-full h-11 px-3 py-2 rounded-md border  placeholder:text-zinc-400 focus:outline-orange-600 text-sm font-normal font-['Gilroy'] leading-tight ${
+          focus || "border-zinc-400"
+        }`}
         type={inputType}
         placeholder={name}
         onChange={(e) => changeHandler(identifier, e)}

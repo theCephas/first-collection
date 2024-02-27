@@ -162,7 +162,7 @@ const Login = () => {
                 </Link>
               </p>
 
-              <ButtonPrimary classes="w-full">
+              <ButtonPrimary buttonType="submit" classes="w-full">
                 {" "}
                 {loading ? <LoaderIcon className="animate-spin" /> : "Sign In"}
               </ButtonPrimary>
