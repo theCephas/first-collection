@@ -28,16 +28,20 @@ export const clearCookie = () => {
 };
 
 export const getToken = () => {
-  const cookiesArray = document.cookie.split(";");
+  if (typeof document !== "undefined") {
+    const cookiesArray = document.cookie.split(";");
 
-  const tokens: any = {};
-  cookiesArray.forEach(function (cookie) {
-    const [cookieName, cookieValue] = cookie.trim().split("=");
+    const tokens: any = {};
+    cookiesArray.forEach(function (cookie) {
+      const [cookieName, cookieValue] = cookie?.trim().split("=");
 
-    tokens[cookieName] = cookieValue;
-  });
+      tokens[cookieName] = cookieValue;
+    });
 
-  return tokens;
+    return tokens;
+  }
+
+  return {};
 };
 
 export const isEmpty = (param: string | null | any) =>

@@ -11,10 +11,9 @@ const withAuth = (WrappedComponent: any) => {
 
     const csrfToken =
       "FfZcTHEVY2KcYoWknhgtHPZH8rTTAfF7auI3kFNxMoFu1J9kHqi7rG0JTJjByzW8";
+    const { refresh, token, persist } = getToken();
 
     const autoLogin = useCallback(async () => {
-      const { refresh, token, persist } = await getToken();
-
       if (token) return;
 
       if ((await refresh) && persist) {
@@ -38,13 +37,13 @@ const withAuth = (WrappedComponent: any) => {
           }
         } catch (err: any) {}
       }
-    }, []);
+    }, [refresh, token, persist]);
 
     useEffect(() => {
       autoLogin();
     }, [autoLogin]);
 
-    const { token, refresh } = getToken();
+    // const { token, refresh } = getToken();
     useEffect(() => {
       if (token && window.location.pathname === "/auth/login") {
         router.push("/products");
