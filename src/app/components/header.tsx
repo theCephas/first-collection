@@ -26,7 +26,7 @@ const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = getToken();
+    const { token } = getToken();
     if (token) {
       setIsAuthenticated(true);
     }

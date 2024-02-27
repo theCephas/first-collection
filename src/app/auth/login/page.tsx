@@ -166,6 +166,7 @@ const Login = () => {
                 {" "}
                 {loading ? <LoaderIcon className="animate-spin" /> : "Sign In"}
               </ButtonPrimary>
+
               <ButtonSecondary classes="w-full">
                 {"Sign In"} with Google
               </ButtonSecondary>

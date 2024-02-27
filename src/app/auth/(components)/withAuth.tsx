@@ -9,7 +9,7 @@ const withAuth = (WrappedComponent: any) => {
     const router = useRouter();
 
     useEffect(() => {
-      const token = getToken();
+      const { token } = getToken();
       if (!token) {
         router.push("/auth/login");
       }

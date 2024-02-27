@@ -16,7 +16,7 @@ type user = {
 export const useUser = () => {
   const [user, setUser] = React.useState<user | null>(null);
   const fetchUser = useCallback(async () => {
-    const token = getToken();
+    const { token } = getToken();
 
     try {
       const data = await Fetch("accounts/", {
