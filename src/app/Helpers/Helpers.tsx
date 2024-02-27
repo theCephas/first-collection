@@ -1,4 +1,4 @@
-const setCookie = (data: any) => {
+const setCookie = (data: any, checked: boolean) => {
   document.cookie = `token=${data.access}; expires=${new Date(
     new Date().getTime() + 7200 * 1000
   ).toUTCString()}; path=/;`;
@@ -6,6 +6,16 @@ const setCookie = (data: any) => {
   document.cookie = `refresh=${data.refresh}; expires=${new Date(
     new Date().getTime() + 30 * 24 * 3600 * 1000
   ).toUTCString()}; path=/;`;
+
+  if (checked) {
+    document.cookie = `persist=${checked}; expires=${new Date(
+      new Date().getTime() + 30 * 24 * 3600 * 1000
+    ).toUTCString()}; path=/;`;
+  } else if (!checked) {
+    document.cookie = `persist=${checked}; expires=${new Date(
+      new Date().getTime() + 7200 * 1000
+    ).toUTCString()}; path=/;`;
+  }
 };
 export { setCookie };
 

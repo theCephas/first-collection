@@ -13,11 +13,11 @@ const withAuth = (WrappedComponent: any) => {
       "FfZcTHEVY2KcYoWknhgtHPZH8rTTAfF7auI3kFNxMoFu1J9kHqi7rG0JTJjByzW8";
 
     const autoLogin = useCallback(async () => {
-      const { refresh, token } = await getToken();
+      const { refresh, token, persist } = await getToken();
 
       if (token) return;
 
-      if (await refresh) {
+      if ((await refresh) && persist) {
         try {
           const data = await Fetch("accounts/token/refresh/", {
             method: "POST",
