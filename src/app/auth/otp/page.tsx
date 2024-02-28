@@ -40,10 +40,11 @@ const OTP = () => {
 
   const handleInputChange = (index: number, val: string) => {
     if (!/^[0-9]*$/.test(val)) return;
-    if (otpValues.join("").length === 5 && val.length !== 0) return;
+    if (otpValues.join("").length >= 5 && val.length !== 0) return;
 
     const newOtpValues = [...otpValues];
     newOtpValues[index] = val;
+    console.log(newOtpValues);
     setOtpValues(newOtpValues);
 
     // Move focus to the next input
@@ -54,19 +55,20 @@ const OTP = () => {
   };
 
   const handlePaste = (val: string) => {
-    console.log(val);
-    if (val.length > 5) return;
+    if (val.length > 5 && otpValues.join("").length >= 5) return;
     if (val.length > 1) {
-      const digitArray = Array.from(String(val), Number);
+      // const digitArray = Array.from(String(val), Number);
+      const digitArray = val.split("");
 
       const paddedDigitArray = digitArray.concat(
         Array(5 - digitArray.length).fill("")
       );
-      console.log(paddedDigitArray);
+      // console.log(digitArray);
 
       setOtpValues([...paddedDigitArray]);
+
       // Move focus to the next input
-      if (val.length < 5) {
+      if (val.length <= 5) {
         const nextInput = document.getElementById(
           `otpInput_${digitArray?.length - 1}`
         );
