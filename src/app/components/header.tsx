@@ -98,32 +98,41 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="hidden lg:flex items-center justify-center gap-6">
-          <div
-            className="relative z-50"
-            onMouseEnter={() => setIsDropDownVisible(true)}
-            onMouseLeave={() => setIsDropDownVisible(false)}
+        {!isAuthenticated && (
+          <Link
+            href="/auth/login"
+            className="hidden lg:block text-center text-[#f2f2f2] "
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-              className="cursor-pointer fill-[#b3b3b3] focus:fill-[#ff5c00]"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M10 1.66669C7.69885 1.66669 5.83337 3.53217 5.83337 5.83335C5.83337 8.13454 7.69885 10 10 10C12.3012 10 14.1667 8.13454 14.1667 5.83335C14.1667 3.53217 12.3012 1.66669 10 1.66669ZM7.50004 5.83335C7.50004 4.45264 8.61933 3.33335 10 3.33335C11.3808 3.33335 12.5 4.45264 12.5 5.83335C12.5 7.21407 11.3808 8.33335 10 8.33335C8.61933 8.33335 7.50004 7.21407 7.50004 5.83335Z"
-              />
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M10 19.1667C8.71629 19.1667 6.85822 18.8752 5.4629 18.2645C4.7779 17.9647 4.08125 17.5356 3.6765 16.9145C3.46364 16.5879 3.32907 16.2031 3.33348 15.7735C3.33785 15.3479 3.47791 14.9401 3.7133 14.5607C4.85447 12.7214 7.18903 10.8334 10 10.8334C12.811 10.8334 15.1456 12.7214 16.2868 14.5607C16.5222 14.9401 16.6622 15.3479 16.6666 15.7735C16.671 16.2031 16.5364 16.5879 16.3236 16.9145C15.9188 17.5356 15.2222 17.9647 14.5372 18.2645C13.1419 18.8752 11.2838 19.1667 10 19.1667ZM5.12953 15.4394C5.01981 15.6162 5.00068 15.7298 5.00006 15.7906C4.99947 15.8476 5.01409 15.9144 5.07284 16.0046C5.21132 16.2171 5.5476 16.4823 6.13114 16.7377C7.27291 17.2374 8.8944 17.5 10 17.5C11.1057 17.5 12.7272 17.2374 13.8689 16.7377C14.4525 16.4823 14.7888 16.2171 14.9272 16.0046C14.986 15.9144 15.0006 15.8476 15 15.7906C14.9994 15.7298 14.9803 15.6162 14.8705 15.4394C13.9354 13.9321 12.0703 12.5 10 12.5C7.92976 12.5 6.06466 13.9321 5.12953 15.4394Z"
-              />
-            </svg>
+            Sign In
+          </Link>
+        )}
 
-            {isDropDownVisible && (
+        {isDropDownVisible && (
+          <div className="hidden lg:flex items-center justify-center gap-6">
+            <div
+              className="relative z-50"
+              onMouseEnter={() => setIsDropDownVisible(true)}
+              onMouseLeave={() => setIsDropDownVisible(false)}
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                className="cursor-pointer fill-[#b3b3b3] focus:fill-[#ff5c00]"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M10 1.66669C7.69885 1.66669 5.83337 3.53217 5.83337 5.83335C5.83337 8.13454 7.69885 10 10 10C12.3012 10 14.1667 8.13454 14.1667 5.83335C14.1667 3.53217 12.3012 1.66669 10 1.66669ZM7.50004 5.83335C7.50004 4.45264 8.61933 3.33335 10 3.33335C11.3808 3.33335 12.5 4.45264 12.5 5.83335C12.5 7.21407 11.3808 8.33335 10 8.33335C8.61933 8.33335 7.50004 7.21407 7.50004 5.83335Z"
+                />
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M10 19.1667C8.71629 19.1667 6.85822 18.8752 5.4629 18.2645C4.7779 17.9647 4.08125 17.5356 3.6765 16.9145C3.46364 16.5879 3.32907 16.2031 3.33348 15.7735C3.33785 15.3479 3.47791 14.9401 3.7133 14.5607C4.85447 12.7214 7.18903 10.8334 10 10.8334C12.811 10.8334 15.1456 12.7214 16.2868 14.5607C16.5222 14.9401 16.6622 15.3479 16.6666 15.7735C16.671 16.2031 16.5364 16.5879 16.3236 16.9145C15.9188 17.5356 15.2222 17.9647 14.5372 18.2645C13.1419 18.8752 11.2838 19.1667 10 19.1667ZM5.12953 15.4394C5.01981 15.6162 5.00068 15.7298 5.00006 15.7906C4.99947 15.8476 5.01409 15.9144 5.07284 16.0046C5.21132 16.2171 5.5476 16.4823 6.13114 16.7377C7.27291 17.2374 8.8944 17.5 10 17.5C11.1057 17.5 12.7272 17.2374 13.8689 16.7377C14.4525 16.4823 14.7888 16.2171 14.9272 16.0046C14.986 15.9144 15.0006 15.8476 15 15.7906C14.9994 15.7298 14.9803 15.6162 14.8705 15.4394C13.9354 13.9321 12.0703 12.5 10 12.5C7.92976 12.5 6.06466 13.9321 5.12953 15.4394Z"
+                />
+              </svg>
+
               <div className="absolute p-4 -right-full z-50 bg-white rounded-[8px] top-5 w-[16rem] shadow">
                 <AnimatePresence>
                   <motion.div
@@ -148,56 +157,42 @@ const Header = () => {
                     exit="closed"
                     className="flex flex-col gap-4 items-center  relative z-50 text-[#060606] text-[14px]  focus:text-[#ff5c00]"
                   >
-                    {isAuthenticated && (
-                      <Link
-                        className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
-                        href="/profiles/profile"
-                      >
-                        Profile
-                      </Link>
-                    )}
-                    {isAuthenticated && (
-                      <Link
-                        className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
-                        href="/orders/ongoing-orders"
-                      >
-                        Orders
-                      </Link>
-                    )}
+                    <Link
+                      className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
+                      href="/profiles/profile"
+                    >
+                      Profile
+                    </Link>
 
-                    {!isAuthenticated && (
-                      <Link
-                        href="/auth/login"
-                        className="w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
-                      >
-                        Sign In
-                      </Link>
-                    )}
-                    {isAuthenticated && (
-                      <button
-                        onClick={() => {
-                          clearCookie();
-                          router.push("/auth/login");
-                        }}
-                        className=" w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
-                      >
-                        Logout
-                      </button>
-                    )}
+                    <Link
+                      className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
+                      href="/orders/ongoing-orders"
+                    >
+                      Orders
+                    </Link>
+
+                    <button
+                      onClick={() => {
+                        clearCookie();
+                        router.push("/auth/login");
+                      }}
+                      className=" w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
+                    >
+                      Logout
+                    </button>
                   </motion.div>
                 </AnimatePresence>
               </div>
-            )}
-          </div>
-          {isAuthenticated && (
+            </div>
+
             <Image
               className="cursor-pointer"
               onClick={() => setShowCart(true)}
               src={Cart}
               alt="Cart icon"
             />
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="relative z-50 flex gap-3 items-center lg:hidden">
           {!isSearchOpen && (
@@ -392,7 +387,7 @@ const Header = () => {
                           {!isAuthenticated && (
                             <Link
                               href="/auth/login"
-                              className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
+                              className=" w-[90px] sm:w-[120px] py-[12px] text-center sm:mx-10 px-[16px] gap-2 bg-[#040404] hover:bg-[#242323] duration-700 rounded-[8px] text-[#f2f2f2] "
                             >
                               Sign In
                             </Link>
