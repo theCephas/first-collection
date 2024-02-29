@@ -1,25 +1,19 @@
 "use client";
-import React, {
-  LegacyRef,
-  MutableRefObject,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import { AuthWrapper } from "../(components)/AuthWrapper";
 import Image from "next/image";
 import { BackIcon } from "@/app/components/Icons";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
-import { Timer } from "lucide-react";
+import { LoaderIcon, Timer } from "lucide-react";
+import { OtpInputs } from "./components/OtpInputs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-let currentOTPIndex: number = 0;
 const OTP = () => {
   const [time, setTime] = useState(60);
   const numberOfInputs = 5;
   const [otpValues, setOtpValues] = useState(Array(numberOfInputs).fill(""));
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [activeOTPIndex, setActiveOTPIndex] = useState(0);
+  const [isVerifying, setIsVerifying] = useState(false);
 
   // Count Down
   useEffect(() => {
@@ -32,57 +26,6 @@ const OTP = () => {
     };
   }, [time]);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, [activeOTPIndex]);
-
-  // Input classes
-  const inputClasses = `w-full h-[40px] md:h-[60px] p-2 sm:p-3 border border-primary-200 text-primary-200 rounded-[9px] text-xl sm:text-2xl text-center focus:outline-orange-600`;
-
-  const handleInputChange = (index: number, val: string) => {
-    if (!/^[0-9]*$/.test(val)) return;
-    if (otpValues.join("").length >= 5 && val.length !== 0) return;
-
-    const newOtpValues: string[] = [...otpValues];
-    newOtpValues[currentOTPIndex] = val;
-
-    // Move focus to the next input
-    if (!val) setActiveOTPIndex(currentOTPIndex - 1);
-    else setActiveOTPIndex(currentOTPIndex + 1);
-
-    setOtpValues(newOtpValues);
-  };
-
-  const handlePaste = (val: string) => {
-    if (val.length > 5 || otpValues.join("").length >= 5) return;
-    if (val.length > 1) {
-      const digitArray = val.split("");
-
-      const paddedDigitArray = digitArray.concat(
-        Array(5 - digitArray.length).fill("")
-      );
-
-      setOtpValues([...paddedDigitArray]);
-
-      // Move focus to the next input
-      if (val.length <= 5) {
-        setActiveOTPIndex(digitArray?.length);
-      }
-    }
-  };
-
-  const handleBackspace = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const target = e.target as HTMLInputElement;
-    if (index === 0 && target.value === "") return;
-    currentOTPIndex = index;
-    if (target.value === "" && e.key === "Backspace") {
-      setActiveOTPIndex(currentOTPIndex - 1);
-    }
-  };
-
   // Format Timen
   const formatTime = (sec: number) => {
     const minutes = Math.floor(sec / 60);
@@ -93,10 +36,44 @@ const OTP = () => {
     return `${formattedMinutes}:${formattedSeconds}`;
   };
 
+  // Resend
+  const handleReset = async () => {
+    try {
+      setTimeout(() => {
+        toast.success("Check your  email for the verification code");
+        setTime(60);
+        setOtpValues(Array(numberOfInputs).fill(""));
+      }, 1000);
+    } catch (err: any) {
+      toast.error(err.message);
+    }
+  };
+
   // Submit
-  const handleSubmit = () => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
     if (otpValues.join("").length < 5) return;
-    window.alert(otpValues.join(""));
+
+    setIsVerifying(true);
+
+    try {
+      if (time === 0)
+        throw new Error(
+          "OTP expired. Please try again! Click 'Resend' to get a new OTP."
+        );
+
+      setTimeout(() => {
+        toast.success("OTP Verified Successfully");
+      }, 1000);
+    } catch (err: any) {
+      setTimeout(() => {
+        toast.error(err.message);
+      }, 1000);
+    } finally {
+      setTimeout(() => {
+        setIsVerifying(false);
+      }, 1500);
+    }
   };
 
   return (
@@ -128,33 +105,8 @@ const OTP = () => {
           </p>
           <form onSubmit={handleSubmit} className="flex flex-col gap-14">
             <div className="flex flex-col items-end">
-              <div className="flex justify-between md:grid grid-cols-5 gap-3 max-w-[500px]">
-                {otpValues.map((value, i) => (
-                  <input
-                    key={i + 1}
-                    type="text"
-                    name="quantity"
-                    pattern="[1-9]"
-                    id={`otpInput_${i}`}
-                    className={`${inputClasses} ${
-                      value !== "" && "border-2 border-orange-600"
-                    }`}
-                    value={value}
-                    ref={i === activeOTPIndex ? inputRef : null}
-                    onKeyDown={(e) => {
-                      handleBackspace(e, i);
-                    }}
-                    onChange={(e) => {
-                      handleInputChange(i, e.target.value);
-                    }}
-                    onPaste={(e) =>
-                      handlePaste(e.clipboardData.getData("text/plain"))
-                    }
-                    maxLength={1}
-                    required
-                  />
-                ))}
-              </div>
+              {/* Inputs */}
+              <OtpInputs otpValues={otpValues} setOtpValues={setOtpValues} />
               <p className="text-xs text-gray-500 flex items-center gap-1 mt-2">
                 {time > 0 ? (
                   formatTime(time)
@@ -173,13 +125,10 @@ const OTP = () => {
                   "opacity-40 cursor-not-allowed"
                 }`}
               >
-                Done
+                {isVerifying ? <LoaderIcon className="animate-spin" /> : "Done"}
               </ButtonPrimary>
               {time === 0 && (
-                <ButtonSecondary
-                  click={() => setTime(60)}
-                  classes="w-full mt-5"
-                >
+                <ButtonSecondary click={handleReset} classes="w-full mt-5">
                   Resend
                 </ButtonSecondary>
               )}
@@ -187,6 +136,7 @@ const OTP = () => {
           </form>
         </section>
       </main>
+      <ToastContainer />
     </AuthWrapper>
   );
 };
