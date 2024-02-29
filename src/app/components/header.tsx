@@ -107,12 +107,12 @@ const Header = () => {
           </Link>
         )}
 
-        {isDropDownVisible && (
+        {isAuthenticated && (
           <div className="hidden lg:flex items-center justify-center gap-6">
             <div
               className="relative z-50"
-              onMouseEnter={() => setIsDropDownVisible(true)}
-              onMouseLeave={() => setIsDropDownVisible(false)}
+              onClick={() => setIsDropDownVisible(true)}
+              // onMouseLeave={() => setIsDropDownVisible(false)}
             >
               <svg
                 width="20"
@@ -133,7 +133,13 @@ const Header = () => {
                 />
               </svg>
 
-              <div className="absolute p-4 -right-full z-50 bg-white rounded-[8px] top-5 w-[16rem] shadow">
+              {/* {isDropDownVisible && ( */}
+              <div
+                onMouseLeave={() => setIsDropDownVisible(false)}
+                className={`absolute p-4 -right-full z-50 bg-white rounded-[8px] top-5 w-[16rem] shadow flex-col items-end ${
+                  isDropDownVisible ? "flex" : "hidden"
+                }`}
+              >
                 <AnimatePresence>
                   <motion.div
                     variants={{
@@ -155,7 +161,7 @@ const Header = () => {
                     initial="closed"
                     animate="open"
                     exit="closed"
-                    className="flex flex-col gap-4 items-center  relative z-50 text-[#060606] text-[14px]  focus:text-[#ff5c00]"
+                    className="w-full flex flex-col gap-4 items-center  relative z-50 text-[#060606] text-[14px]  focus:text-[#ff5c00]"
                   >
                     <Link
                       className="focus:text-[#ff5c00] py-3 px-10 sm:px-20 "
@@ -183,6 +189,7 @@ const Header = () => {
                   </motion.div>
                 </AnimatePresence>
               </div>
+              {/* )} */}
             </div>
 
             <Image
