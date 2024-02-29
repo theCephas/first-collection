@@ -36,7 +36,7 @@ const OTP = () => {
     inputRef.current?.focus();
   }, [activeOTPIndex]);
 
-  // Input classes 65644
+  // Input classes
   const inputClasses = `w-full h-[40px] md:h-[60px] p-2 sm:p-3 border border-primary-200 text-primary-200 rounded-[9px] text-xl sm:text-2xl text-center focus:outline-orange-600`;
 
   const handleInputChange = (index: number, val: string) => {
@@ -54,7 +54,7 @@ const OTP = () => {
   };
 
   const handlePaste = (val: string) => {
-    if (val.length > 5 && otpValues.join("").length >= 5) return;
+    if (val.length > 5 || otpValues.join("").length >= 5) return;
     if (val.length > 1) {
       const digitArray = val.split("");
 
@@ -95,6 +95,7 @@ const OTP = () => {
 
   // Submit
   const handleSubmit = () => {
+    if (otpValues.join("").length < 5) return;
     window.alert(otpValues.join(""));
   };
 
@@ -165,12 +166,23 @@ const OTP = () => {
               </p>
             </div>
             <div className="w-full flex flex-col -mt-5">
-              <ButtonPrimary buttonType="submit" classes="w-full mt-5">
+              <ButtonPrimary
+                buttonType="submit"
+                classes={`w-full mt-5 ${
+                  otpValues.join("").length < 5 &&
+                  "opacity-40 cursor-not-allowed"
+                }`}
+              >
                 Done
               </ButtonPrimary>
-              <ButtonSecondary click={() => setTime(60)} classes="w-full mt-5">
-                Resend
-              </ButtonSecondary>
+              {time === 0 && (
+                <ButtonSecondary
+                  click={() => setTime(60)}
+                  classes="w-full mt-5"
+                >
+                  Resend
+                </ButtonSecondary>
+              )}
             </div>
           </form>
         </section>
