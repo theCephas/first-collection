@@ -13,16 +13,13 @@ import { BackIcon } from "@/app/components/Icons";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { Timer } from "lucide-react";
 
-// type InputRefsArray = MutableRefObject<HTMLInputElement | null | undefined>;
-type InputRefsArray = Array<React.RefObject<HTMLInputElement>>;
-
+let currentOTPIndex: number = 0;
 const OTP = () => {
   const [time, setTime] = useState(60);
   const numberOfInputs = 5;
   const [otpValues, setOtpValues] = useState(Array(numberOfInputs).fill(""));
-  // const inputRefs: InputRefsArray = Array.from({ length: numberOfInputs }, () =>
-  //   useRef<HTMLInputElement>(null)
-  // );
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [activeOTPIndex, setActiveOTPIndex] = useState(0);
 
   // Count Down
   useEffect(() => {
@@ -35,44 +32,41 @@ const OTP = () => {
     };
   }, [time]);
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [activeOTPIndex]);
+
   // Input classes 65644
-  const inputClasses = `w-full h-[40px] md:h-[60px] p-2 sm:p-3 border border-primary-200 text-primary-200 rounded-[9px] text-xl sm:text-2xl text-center focus:outline-none`;
+  const inputClasses = `w-full h-[40px] md:h-[60px] p-2 sm:p-3 border border-primary-200 text-primary-200 rounded-[9px] text-xl sm:text-2xl text-center focus:outline-orange-600`;
 
   const handleInputChange = (index: number, val: string) => {
     if (!/^[0-9]*$/.test(val)) return;
     if (otpValues.join("").length >= 5 && val.length !== 0) return;
 
-    const newOtpValues = [...otpValues];
-    newOtpValues[index] = val;
-    console.log(newOtpValues);
-    setOtpValues(newOtpValues);
+    const newOtpValues: string[] = [...otpValues];
+    newOtpValues[currentOTPIndex] = val;
 
     // Move focus to the next input
-    if (val !== "" && index < numberOfInputs - 1) {
-      const nextInput = document.getElementById(`otpInput_${index + 1}`);
-      nextInput && nextInput.focus();
-    }
+    if (!val) setActiveOTPIndex(currentOTPIndex - 1);
+    else setActiveOTPIndex(currentOTPIndex + 1);
+
+    setOtpValues(newOtpValues);
   };
 
   const handlePaste = (val: string) => {
     if (val.length > 5 && otpValues.join("").length >= 5) return;
     if (val.length > 1) {
-      // const digitArray = Array.from(String(val), Number);
       const digitArray = val.split("");
 
       const paddedDigitArray = digitArray.concat(
         Array(5 - digitArray.length).fill("")
       );
-      // console.log(digitArray);
 
       setOtpValues([...paddedDigitArray]);
 
       // Move focus to the next input
       if (val.length <= 5) {
-        const nextInput = document.getElementById(
-          `otpInput_${digitArray?.length - 1}`
-        );
-        nextInput && nextInput.focus();
+        setActiveOTPIndex(digitArray?.length);
       }
     }
   };
@@ -81,13 +75,11 @@ const OTP = () => {
     e: React.KeyboardEvent<HTMLInputElement>,
     index: number
   ) => {
-    if (e.key === "Backspace" && index === 0) return;
-
     const target = e.target as HTMLInputElement;
-
+    if (index === 0 && target.value === "") return;
+    currentOTPIndex = index;
     if (target.value === "" && e.key === "Backspace") {
-      const prevInput = document.getElementById(`otpInput_${index - 1}`);
-      prevInput && prevInput.focus();
+      setActiveOTPIndex(currentOTPIndex - 1);
     }
   };
 
@@ -143,8 +135,11 @@ const OTP = () => {
                     name="quantity"
                     pattern="[1-9]"
                     id={`otpInput_${i}`}
-                    className={`${inputClasses}`}
+                    className={`${inputClasses} ${
+                      value !== "" && "border-2 border-orange-600"
+                    }`}
                     value={value}
+                    ref={i === activeOTPIndex ? inputRef : null}
                     onKeyDown={(e) => {
                       handleBackspace(e, i);
                     }}
@@ -155,7 +150,6 @@ const OTP = () => {
                       handlePaste(e.clipboardData.getData("text/plain"))
                     }
                     maxLength={1}
-                    // ref={inputRefs[i]}
                     required
                   />
                 ))}
