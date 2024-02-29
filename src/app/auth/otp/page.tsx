@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { AuthWrapper } from "../(components)/AuthWrapper";
+import AuthWrapper from "../(components)/AuthWrapper";
 import Image from "next/image";
 import { BackIcon } from "@/app/components/Icons";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";

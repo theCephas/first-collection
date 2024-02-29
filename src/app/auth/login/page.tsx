@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { AuthWrapper } from "../(components)/AuthWrapper";
+import AuthWrapper from "../(components)/AuthWrapper";
 import Image from "next/image";
 import { BackIcon } from "@/app/components/Icons";
 import Link from "next/link";
@@ -12,7 +12,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { setCookie } from "@/app/Helpers/Helpers";
-import withAuth from "../(components)/withAuth";
 
 const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -193,4 +192,4 @@ const Login = () => {
   );
 };
 
-export default withAuth(Login);
+export default Login;

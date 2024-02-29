@@ -43,12 +43,11 @@ const withAuth = (WrappedComponent: any) => {
       autoLogin();
     }, [autoLogin]);
 
-    // const { token, refresh } = getToken();
     useEffect(() => {
-      if (token && window.location.pathname === "/auth/login") {
+      if (token && window.location.pathname.includes("auth")) {
         router.push("/products");
       }
-      if (!token) {
+      if (!token && !window.location.pathname.includes("auth")) {
         router.push("/auth/login");
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
