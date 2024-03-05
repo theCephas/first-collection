@@ -14,6 +14,7 @@ import { SearchResults } from "./SearchResults";
 import CartComponent from "./Cart";
 import { useRouter } from "next/navigation";
 import { clearCookie, getToken } from "../Helpers/Helpers";
+import { Confirm } from "notiflix/build/notiflix-confirm-aio";
 
 const Header = () => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
@@ -22,7 +23,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showCart, setShowCart] = useState(false);
   const router = useRouter();
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -32,11 +33,32 @@ const Header = () => {
     }
   }, []);
 
-  const handleClick = () => {
-    // Use router.push to navigate to the /products page
-    router.push("/products");
-    // Set isActive to true
-    setIsActive(true);
+  useEffect(() => {
+    if (window.location.pathname.includes("contact")) {
+      setIsActive("contact");
+    } else if (window.location.pathname.includes("product")) {
+      setIsActive("products");
+    }
+  }, []);
+
+  const handleLogout = () => {
+    Confirm.show(
+      "Confirm Logout",
+      "Are you sure you want want to logout?",
+      "Yes",
+      "No",
+      () => {
+        clearCookie();
+        router.push("/auth/login");
+      },
+      () => {
+        return;
+      },
+      {
+        titleColor: "#d42620",
+        okButtonBackground: "#d42620",
+      }
+    );
   };
 
   return (
@@ -83,8 +105,8 @@ const Header = () => {
         <div className="text-[14px] font-[600] hidden items-center justify-center text-[#b3b3b3] lg:flex gap-6">
           <Link
             href="/products"
-            className={`focus:text-[#ff5c00] text-${
-              isActive ? "#ff5c00" : "#b3b3b3"
+            className={`focus:text-[#ff5c00] ${
+              isActive === "products" ? "text-[#ff5c00]" : "text-[#b3b3b3]"
             } active:scale-75 transform`}
           >
             Products
@@ -92,7 +114,9 @@ const Header = () => {
 
           <Link
             href="/contact-us"
-            className="focus:text-[#ff5c00] active:scale-75 transform"
+            className={`focus:text-[#ff5c00] ${
+              isActive === "contact" ? "text-[#ff5c00]" : "text-[#b3b3b3]"
+            } active:scale-75 transform`}
           >
             Contact Us
           </Link>
@@ -179,8 +203,7 @@ const Header = () => {
 
                     <button
                       onClick={() => {
-                        clearCookie();
-                        router.push("/auth/login");
+                        handleLogout();
                       }}
                       className=" w-full py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
                     >
@@ -328,13 +351,21 @@ const Header = () => {
                 <div className="flex flex-col gap-8 mt-10 font-[600] text-[14px] leading-[20.3px] ">
                   <Link
                     href="/products"
-                    className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
+                    className={`focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700 ${
+                      isActive === "products"
+                        ? "text-[#ff5c00]"
+                        : "text-[#060606]"
+                    }`}
                   >
                     Products
                   </Link>
                   <Link
                     href="/contact-us"
-                    className="focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700"
+                    className={`focus:text-[#ff5c00] hover:text-[#ff5c00] duration-700 ${
+                      isActive === "contact"
+                        ? "text-[#ff5c00]"
+                        : "text-[#060606]"
+                    }`}
                   >
                     Contact Us
                   </Link>
@@ -402,8 +433,9 @@ const Header = () => {
                           {isAuthenticated && (
                             <button
                               onClick={() => {
-                                clearCookie();
-                                router.push("/auth/login");
+                                // clearCookie();
+                                // router.push("/auth/login");
+                                handleLogout();
                               }}
                               className=" w-[90px] sm:w-[120px] py-[12px] text-center mx-5 sm:mx-10 px-[16px] gap-2 rounded-[8px] hover:bg-[#d42620] hover:text-white duration-700 text-[#d42620] border border-[#d42620] "
                             >
