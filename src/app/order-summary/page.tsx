@@ -6,7 +6,6 @@ import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Balenciaga1 from "../../../public/balenciaga1.svg";
 import Balenciaga2 from "../../../public/balenciaga2.svg";
-import PageWrapper from "../components/PageWrapper";
 import OnGoing from "../(components)/OnGoing";
 
 const Page = () => {
@@ -21,7 +20,7 @@ const Page = () => {
     router.push(shippingDetailsPage);
   };
   return (
-    <PageWrapper>
+    <>
       <div className="max-w-[1080px] mx-auto px-8 lg:px-10 ">
         <div className="flex items-center mt-6 mb-20">
           <Link href="/">
@@ -144,7 +143,7 @@ const Page = () => {
           </button>
         </div>
       </div>
-    </PageWrapper>
+    </>
   );
 };
 

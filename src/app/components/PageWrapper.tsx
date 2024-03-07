@@ -2,19 +2,21 @@
 import React, { ReactNode } from "react";
 import Header from "./header";
 import Footer from "./Footer";
+import { useHideLayout } from "../Helpers/useHideLayout";
 
 interface PageProps {
   children: ReactNode;
 }
 
 export const PageWrapper = ({ children }: PageProps) => {
+  const { hide } = useHideLayout();
   return (
     <main>
       <div className="">
-        <Header />
+        {!hide && <Header />}
         {children}
       </div>
-      <Footer />
+      {!hide && <Footer />}
     </main>
   );
 };

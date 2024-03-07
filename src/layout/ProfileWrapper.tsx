@@ -10,7 +10,7 @@ export default function ProfileWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <PageWrapper>
+    <>
       <div className="relative z-[39] mb-36 max-w-[67.5rem] mx-auto px-6 lg:px-8 mt-6 ">
         <Link href="/" className="float-left">
           <ChevronLeft />
@@ -18,6 +18,6 @@ export default function ProfileWrapper({
         <ProfileHeader />
         {children}
       </div>
-    </PageWrapper>
+    </>
   );
 }

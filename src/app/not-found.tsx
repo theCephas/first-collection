@@ -1,5 +1,4 @@
 import React from "react";
-import PageWrapper from "./components/PageWrapper";
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonPrimary } from "./components/Buttons";
@@ -16,7 +15,7 @@ const icons: string[] = [
 
 const notFound = () => {
   return (
-    <PageWrapper>
+    <>
       <section className="max-w-[67.5rem] mx-auto px-6 xl:px-0 h-screen flex flex-col gap-6 items-center sm:place-content-center mt-10 sm:mt-0">
         <aside className="max-w-[19rem] h-auto relative">
           <Image
@@ -45,7 +44,7 @@ const notFound = () => {
           <ButtonPrimary classes="w-fit px-4">{"Go back home"}</ButtonPrimary>
         </Link>
       </section>
-    </PageWrapper>
+    </>
   );
 };
 

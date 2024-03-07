@@ -25,13 +25,15 @@ const Header = () => {
   const router = useRouter();
   const [isActive, setIsActive] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { token } = getToken();
 
   useEffect(() => {
-    const { token } = getToken();
     if (token) {
       setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     if (window.location.pathname.includes("contact")) {

@@ -2,16 +2,14 @@
 import React from "react";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import Image from "next/image";
 import Balenciaga1 from "../../../public/balenciaga1.svg";
 import Balenciaga2 from "../../../public/balenciaga2.svg";
-import PageWrapper from "../components/PageWrapper";
 import OnGoing from "../(components)/OnGoing";
 import withAuth from "../auth/(components)/withAuth";
 
 const page = () => {
   return (
-    <PageWrapper>
+    <>
       <div className="max-w-[1080px] mx-auto px-8 lg:px-10 ">
         <div className="flex items-center mt-6 mb-16">
           <Link href="/order-summary">
@@ -129,7 +127,7 @@ const page = () => {
           </Link>
         </div>
       </div>
-    </PageWrapper>
+    </>
   );
 };
 

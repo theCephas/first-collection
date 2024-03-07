@@ -1,9 +1,7 @@
 "use client";
-import React, { Suspense, useCallback, useEffect } from "react";
+import React from "react";
 import ProfileWrapper from "@/layout/ProfileWrapper";
 import withAuth from "@/app/auth/(components)/withAuth";
-import { Fetch } from "@/app/Helpers/Fetch";
-import { getToken } from "@/app/Helpers/Helpers";
 import { useUser } from "@/app/Helpers/useUser";
 
 const Profile = () => {

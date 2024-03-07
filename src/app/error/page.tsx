@@ -1,11 +1,8 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import PageWrapper from "../components/PageWrapper";
 import { ButtonPrimary } from "../components/Buttons";
 import Link from "next/link";
-
-// mt-20 md:mt-40
 
 const icons: string[] = [
   "top-1",
@@ -19,7 +16,7 @@ const icons: string[] = [
 
 const Error = () => {
   return (
-    <PageWrapper>
+    <>
       <section className="max-w-[67.5rem] mx-auto px-6 xl:px-0 h-screen flex flex-col gap-6 items-center sm:place-content-center mt-10 sm:mt-0">
         <aside className="max-w-[19rem] h-auto relative">
           <Image
@@ -48,7 +45,7 @@ const Error = () => {
           <ButtonPrimary classes="w-fit px-4">{"Go back home"}</ButtonPrimary>
         </Link>
       </section>
-    </PageWrapper>
+    </>
   );
 };
 export default Error;

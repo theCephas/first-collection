@@ -9,7 +9,8 @@ import Subscription from "./components/subscription";
 
 export default function Home() {
   return (
-    <PageWrapper>
+    // <PageWrapper>
+    <>
       <div className="bg-[#fffafa]">
         <Herosection />
       </div>
@@ -18,6 +19,7 @@ export default function Home() {
       <Newarrivals />
       <Testimonials />
       <Subscription />
-    </PageWrapper>
+    </>
+    // </PageWrapper>
   );
 }
