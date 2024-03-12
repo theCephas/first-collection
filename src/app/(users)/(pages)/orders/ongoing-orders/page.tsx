@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import HistoryWrapper from "@/app/profiles/history/(components)/HistoryWrapper";
-import Balenciaga1 from "../../../../public/balenciaga1.svg";
-import Balenciaga2 from "../../../../public/balenciaga2.svg";
+import Balenciaga1 from "../../../../../../public/balenciaga1.svg";
+import Balenciaga2 from "../../../../../../public/balenciaga2.svg";
 import OnGoing from "@/app/(components)/OnGoing";
-import withAuth from "@/app/auth/(components)/withAuth";
+import HistoryWrapper from "../../profiles/history/(components)/HistoryWrapper";
+import withAuth from "@/app/(users)/auth/(components)/withAuth";
 
 const Page = () => {
   return (

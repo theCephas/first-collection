@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import Balenciaga1 from "../../../../public/balenciaga1.svg";
+import Balenciaga1 from "../../../../../../public/balenciaga1.svg";
 import { Star } from "lucide-react";
-import HistoryWrapper from "@/app/profiles/history/(components)/HistoryWrapper";
 import Image from "next/image";
-import withAuth from "@/app/auth/(components)/withAuth";
+import HistoryWrapper from "../../profiles/history/(components)/HistoryWrapper";
+import withAuth from "@/app/(users)/auth/(components)/withAuth";
 
 const Page = () => {
   return (

@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 
 import React, { useCallback, useEffect } from "react";
-import { getToken } from "../../Helpers/Helpers";
 import { Fetch } from "@/app/Helpers/Fetch";
+import { getToken } from "@/app/Helpers/Helpers";
 
 const withAuth = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {

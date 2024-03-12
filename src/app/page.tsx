@@ -2,15 +2,14 @@
 import Herosection from "./components/herosection";
 import Handpicked from "./components/handpickedforu";
 import PageWrapper from "./components/PageWrapper";
-import ProductsHero from "./products/(components)/ProductsHero";
 import Newarrivals from "./components/newarrivals";
 import Testimonials from "./components/testimonials";
 import Subscription from "./components/subscription";
+import ProductsHero from "./(users)/(pages)/products/(components)/ProductsHero";
 
 export default function Home() {
   return (
-    // <PageWrapper>
-    <>
+    <PageWrapper>
       <div className="bg-[#fffafa]">
         <Herosection />
       </div>
@@ -19,7 +18,6 @@ export default function Home() {
       <Newarrivals />
       <Testimonials />
       <Subscription />
-    </>
-    // </PageWrapper>
+    </PageWrapper>
   );
 }

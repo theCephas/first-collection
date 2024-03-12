@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Balenciaga1 from "../../../public/balenciaga1.svg";
-import Balenciaga2 from "../../../public/balenciaga2.svg";
-import OnGoing from "../(components)/OnGoing";
+import Balenciaga1 from "../../../../../public/balenciaga1.svg";
+import Balenciaga2 from "../../../../../public/balenciaga2.svg";
+import OnGoing from "@/app/(components)/OnGoing";
 
 const Page = () => {
   const router = useRouter();

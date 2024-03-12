@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import ProfileWrapper from "@/layout/ProfileWrapper";
-import withAuth from "@/app/auth/(components)/withAuth";
 import { useUser } from "@/app/Helpers/useUser";
+import withAuth from "@/app/(users)/auth/(components)/withAuth";
 
 const Profile = () => {
   const user = useUser();

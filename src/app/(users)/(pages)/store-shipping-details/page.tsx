@@ -1,11 +1,15 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import Balenciaga1 from "../../../public/balenciaga1.svg";
-import Balenciaga2 from "../../../public/balenciaga2.svg";
-import OnGoing from "../(components)/OnGoing";
+import Balenciaga1 from "../../../../../public/balenciaga1.svg";
+import Balenciaga2 from "../../../../../public/balenciaga2.svg";
+import withAuth from "../../auth/(components)/withAuth";
+import OnGoing from "@/app/(components)/OnGoing";
+import { useUser } from "@/app/Helpers/useUser";
 
-const page = () => {
+const StoreShipping = () => {
+  const user = useUser();
   return (
     <>
       <div className="max-w-[1080px] mx-auto px-8 lg:px-10 ">
@@ -23,9 +27,9 @@ const page = () => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:justify-between gap-6 w-full">
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-6">
           <div className="my-6 w-full">
-            <form className="w-full px-4 py-6 rounded-xl border border-neutral-100 flex-col gap-6 flex">
+            <form className="w-full px-4 py-6 rounded-xl border border-neutral-100 flex-col gap-8 flex">
               <p className="font-judson text-[24px] text-[#040404] font-[400]">
                 Personal Details
               </p>
@@ -34,7 +38,7 @@ const page = () => {
               </label>
               <input
                 type="text"
-                placeholder="John"
+                placeholder={user?.firstName}
                 className="outline-none rounded-[6px] py-[8px] px-[12px] flex items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
                 readOnly
               />
@@ -44,7 +48,7 @@ const page = () => {
               </label>
               <input
                 type="text"
-                placeholder="Bull"
+                placeholder={user?.lastName}
                 className="outline-none rounded-[6px] py-[8px] px-[12px] flex items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
                 readOnly
               />
@@ -54,46 +58,15 @@ const page = () => {
               </label>
               <input
                 type="email"
-                placeholder="johnbull@gmail.com"
+                placeholder={user?.email}
                 className="outline-none rounded-[6px] py-[8px] px-[12px] flex items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
                 readOnly
-              />
-
-              <div className="flex gap-4 justify-between items-center">
-                <div className="flex flex-col gap-1">
-                  <label className="flex justify-between gilroy text-[14px] font-[600] leading-[20.3px] text-[#040404] ">
-                    City/Town
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="City"
-                    className="outline-none rounded-[6px] py-[8px] px-[12px] flex items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] w-full "
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <label className="gilroy text-[14px] font-[600] leading-[20.3px] text-[#040404] ">
-                    State
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="State"
-                    className="outline-none rounded-[6px] py-[8px] px-[12px] flex items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] w-full"
-                  />
-                </div>
-              </div>
-              <label className="gilroy text-[14px] font-[600] leading-[20.3px] text-[#040404] ">
-                Shipping Address
-              </label>
-              <input
-                type="address"
-                placeholder="Shipping Address"
-                className="outline-none rounded-[6px] py-[8px] px-[12px] flex items-center focus:border-[#ff5c00] border border-[#b3b3b3] text-[#040404] gilroy text-[14px] leading-[20.3px] font-[400] mt-[-22px] "
               />
             </form>
 
             <Link
-              href="/order-summary"
-              className="w-full h-11 px-4 my-8 py-3 bg-orange-600 rounded-lg flex-col justify-center items-center gap-2.5 hidden lg:inline-flex "
+              href="/shipping-details"
+              className="w-full h-11 px-4 mt-12 mb-8 py-3 bg-orange-600 rounded-lg flex-col justify-center items-center gap-2.5 hidden lg:inline-flex "
             >
               <div className="justify-center items-center gap-2 inline-flex">
                 <div className="text-zinc-100 text-sm font-semibold font-['Gilroy'] leading-tight">
@@ -160,4 +133,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(StoreShipping);

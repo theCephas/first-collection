@@ -1,16 +1,15 @@
 import React from "react";
-import PageWrapper from "../../components/PageWrapper";
-
 import ProductReview from "./(components)/ProductReview";
-import Carousel from "../../(components)/Carousel";
-import Item1 from "../../../../public/item1.svg";
-import Item2 from "../../../../public/item2.svg";
-import Item3 from "../../../../public/item3.svg";
-import Item4 from "../../../../public/item4.svg";
-import Item5 from "../../../../public/item5.svg";
-import Item6 from "../../../../public/item6.svg";
-import Item7 from "../../../../public/item7.svg";
+import Item1 from "../../../../../../public/item1.svg";
+import Item2 from "../../../../../../public/item2.svg";
+import Item3 from "../../../../../../public/item3.svg";
+import Item4 from "../../../../../../public/item4.svg";
+import Item5 from "../../../../../../public/item5.svg";
+import Item6 from "../../../../../../public/item6.svg";
+import Item7 from "../../../../../../public/item7.svg";
 import Product from "./(components)/Product";
+import PageWrapper from "@/app/components/PageWrapper";
+import Carousel from "@/app/(components)/Carousel";
 
 const Slides = [
   {

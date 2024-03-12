@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import ProductsHero from "./(components)/ProductsHero";
 import FilterSection from "./(components)/FilterSection";
-import ProductCard from "../(components)/ProductCard";
-import Item1 from "../../../public/item1.svg";
-import Item2 from "../../../public/item5.svg";
-import Item3 from "../../../public/item3.svg";
+import Item1 from "../../../../../public/item1.svg";
+import Item2 from "../../../../../public/item5.svg";
+import Item3 from "../../../../../public/item3.svg";
+import ProductCard from "@/app/(components)/ProductCard";
 
 const Five: number[] = [1, 2, 3, 4, 5];
 
