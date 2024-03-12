@@ -1,16 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import { AuthWrapper } from "../(components)/AuthWrapper";
+import AuthWrapper from "../(components)/AuthWrapper";
 import Image from "next/image";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
 import Link from "next/link";
 import { Fetch } from "@/app/Helpers/Fetch";
-import { LoaderIcon } from "lucide-react";
+import { Asterisk, LoaderIcon } from "lucide-react";
 import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { isEmpty, isValidEmail, validPassword } from "@/app/Helpers/Helpers";
 
 const SignUp = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -126,6 +127,7 @@ const SignUp = () => {
               val={userInput.firstName}
             >
               First Name
+              <Asterisk size={10} color="#ff5c00" />
             </AuthInput>
 
             {/* Last Name */}
@@ -136,7 +138,7 @@ const SignUp = () => {
               inputType="text"
               val={userInput.lastName}
             >
-              Last Name
+              Last Name <Asterisk size={10} color="#ff5c00" />
             </AuthInput>
 
             {/* Email */}
@@ -146,8 +148,18 @@ const SignUp = () => {
               changeHandler={changeHandler}
               inputType="email"
               val={userInput.email}
+              focus={
+                userInput.email.length > 0 && !isValidEmail(userInput.email)
+                  ? "border-orange-600"
+                  : ""
+              }
             >
-              Email Address
+              Email Address <Asterisk size={10} color="#ff5c00" />
+              {userInput.email.length > 0 && !isValidEmail(userInput.email) && (
+                <p className="text-[10px] ml-3 font-light text-orange-600">
+                  Kindly enter a valid email address
+                </p>
+              )}
             </AuthInput>
 
             {/* Password */}
@@ -162,14 +174,63 @@ const SignUp = () => {
               inputType="password"
               val={userInput.password}
             >
-              Password
+              Create a strong Password <Asterisk size={10} color="#ff5c00" />
             </AuthPasswordInput>
+
+            {/* Strong password */}
+            <ul
+              className="text-neutral-700 text-sm font-normal gilroy leading-tight flex flex-col sm:flex-row gap-1 sm:justify-between list-disc list-inside
+
+"
+            >
+              <li
+                className={`text-xs sm:text-center ${
+                  /[A-Z]/.test(userInput.password)
+                    ? "text-green-600"
+                    : "text-zinc-500"
+                }`}
+              >
+                Has uppercase letter
+              </li>
+              <li
+                className={`text-xs sm:text-center ${
+                  /\d/.test(userInput.password) ||
+                  /[!@#$%^&*]/.test(userInput.password)
+                    ? "text-green-600"
+                    : "text-zinc-500"
+                }`}
+              >
+                Has number or symbol
+              </li>
+              <li
+                className={`text-xs sm:text-center ${
+                  userInput.password.length >= 8
+                    ? "text-green-600"
+                    : "text-zinc-500"
+                }`}
+              >
+                Is at least 8 characters long
+              </li>
+            </ul>
 
             {/* ACTION BUTTONS */}
             <div className="w-full mt-8 flex flex-col gap-3  items-center">
-              <ButtonPrimary classes="w-full">
-                {loading ? <LoaderIcon className="animate-spin" /> : "Sign Up"}
-              </ButtonPrimary>
+              {validPassword(userInput.password) &&
+              !isEmpty(userInput.firstName) &&
+              !isEmpty(userInput.lastName) &&
+              isValidEmail(userInput.email) ? (
+                <ButtonPrimary buttonType="submit" classes={`w-full`}>
+                  {loading ? (
+                    <LoaderIcon className="animate-spin" />
+                  ) : (
+                    "Sign Up"
+                  )}
+                </ButtonPrimary>
+              ) : (
+                <ButtonPrimary classes={`w-full opacity-50 cursor-not-allowed`}>
+                  Sign Up
+                </ButtonPrimary>
+              )}
 
               <ButtonSecondary classes="w-full">
                 {"Sign Up"} with Google

@@ -1,14 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { AuthWrapper } from "../(components)/AuthWrapper";
+import AuthWrapper from "../(components)/AuthWrapper";
 import Image from "next/image";
 import { BackIcon } from "@/app/components/Icons";
-import { CheckIcon } from "../(components)/AuthIcons";
 import Link from "next/link";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { Fetch } from "@/app/Helpers/Fetch";
 import { AuthInput, AuthPasswordInput } from "../(components)/AuthInput";
-import { LoaderIcon } from "lucide-react";
+import { Check, LoaderIcon } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
@@ -60,7 +59,7 @@ const Login = () => {
         body: userData,
       });
 
-      setCookie(data);
+      setCookie(data, checked);
 
       router.push("/products");
 
@@ -143,9 +142,13 @@ const Login = () => {
             <div className="text-neutral-700 text-sm font-normal gilroy leading-tight flex items-center gap-1">
               <div
                 onClick={() => setChecked((prev) => !prev)}
-                className={`bg-transparent rounded border border-black w-4 h-4 cursor-pointer flex items-center justify-center`}
+                className={`rounded border  w-4 h-4 cursor-pointer flex items-center justify-center ${
+                  checked
+                    ? "bg-blue-500 border-transparent"
+                    : "bg-transparent border-black"
+                }`}
               >
-                {checked && <CheckIcon />}
+                {checked && <Check color="white" />}
               </div>
               <span>Keep me logged In.</span>
             </div>
@@ -162,10 +165,11 @@ const Login = () => {
                 </Link>
               </p>
 
-              <ButtonPrimary classes="w-full">
+              <ButtonPrimary buttonType="submit" classes="w-full">
                 {" "}
                 {loading ? <LoaderIcon className="animate-spin" /> : "Sign In"}
               </ButtonPrimary>
+
               <ButtonSecondary classes="w-full">
                 {"Sign In"} with Google
               </ButtonSecondary>

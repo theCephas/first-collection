@@ -2,14 +2,13 @@
 import React from "react";
 import Balenciaga1 from "../../../../public/balenciaga1.svg";
 import { Star } from "lucide-react";
-import ProfileWrapper from "@/layout/ProfileWrapper";
 import HistoryWrapper from "@/app/profiles/history/(components)/HistoryWrapper";
 import Image from "next/image";
 import withAuth from "@/app/auth/(components)/withAuth";
 
 const Page = () => {
   return (
-    <ProfileWrapper>
+    <>
       <HistoryWrapper>
         <div className="gilroy w-full mb-12">
           <p className="text-[12px] font-[400] text-[#040404] ">
@@ -63,7 +62,7 @@ const Page = () => {
           </form>
         </div>
       </HistoryWrapper>
-    </ProfileWrapper>
+    </>
   );
 };
 

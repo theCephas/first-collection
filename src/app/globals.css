@@ -56,6 +56,11 @@ input[type="radio"]:checked {
   background-color: #ff5c00;
 }
 
+/* Firefox specific focus styling */
+input:-moz-focusring {
+  outline: 2px solid #ff5c00; /* Adjust the color as needed */
+}
+
 @media screen and (max-width: 600px) {
   input[type="radio"] {
     width: 35px;

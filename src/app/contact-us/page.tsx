@@ -1,12 +1,11 @@
 "use client";
 import React from "react";
-import PageWrapper from "../components/PageWrapper";
 import { Instagram } from "lucide-react";
 import { WhatsappIcon, FacebookIcon } from "./(components)/ContactIcons";
 
 const ContactUs = () => {
   return (
-    <PageWrapper>
+    <>
       <section className="max-w-[67.5rem] mx-auto my-8 sm:my-0 h-screen px-6 xl:px-0 flex flex-col justify-center md:grid md:grid-cols-2 md:place-content-center gap-8 ">
         <aside className="flex flex-col gap-4">
           <h1 className=" text-black text-2xl md:text-3xl lg:text-4xl font-bold font-judson leading-7">
@@ -48,7 +47,7 @@ const ContactUs = () => {
           </div>
         </aside>
       </section>
-    </PageWrapper>
+    </>
   );
 };
 export default ContactUs;

@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import PageWrapper from "../components/PageWrapper";
 import ProductsHero from "./(components)/ProductsHero";
 import FilterSection from "./(components)/FilterSection";
 import ProductCard from "../(components)/ProductCard";
@@ -13,7 +12,7 @@ const Five: number[] = [1, 2, 3, 4, 5];
 const Products = () => {
   const [pageNum, setPageNum] = useState(1);
   return (
-    <PageWrapper>
+    <>
       <ProductsHero />
       <section className="mt-12 max-w-[67.5rem] mx-auto flex flex-col lg:grid lg:grid-cols-6 gap-6 px-6 xl:px-0">
         <FilterSection />
@@ -28,7 +27,13 @@ const Products = () => {
                   (pageNum === 2 && Item2) ||
                   (pageNum === 3 && Item3)
                 }
-                name={"Nike Air Sneakers"}
+                name={
+                  pageNum === 1
+                    ? "Nike Air Sneakers"
+                    : pageNum === 2
+                    ? "Nike Female Sneakers"
+                    : "High heals"
+                }
                 price={17000}
               />
             ))}
@@ -67,11 +72,7 @@ const Products = () => {
           </div>
         </aside>
       </section>
-    </PageWrapper>
+    </>
   );
 };
 export default Products;
-
-//  imageSrc: string;
-// name: string;
-// price: number;

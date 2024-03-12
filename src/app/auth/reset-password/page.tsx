@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { AuthWrapper } from "../(components)/AuthWrapper";
+import AuthWrapper from "../(components)/AuthWrapper";
 import Image from "next/image";
 import { HideIcon, ShowIcon } from "../(components)/AuthIcons";
 import { ButtonPrimary } from "@/app/components/Buttons";

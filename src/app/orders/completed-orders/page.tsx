@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import ProfileWrapper from "@/layout/ProfileWrapper";
 import HistoryWrapper from "@/app/profiles/history/(components)/HistoryWrapper";
 import Balenciaga1 from "../../../../public/balenciaga1.svg";
 import Balenciaga2 from "../../../../public/balenciaga2.svg";
@@ -10,7 +9,7 @@ import withAuth from "@/app/auth/(components)/withAuth";
 
 const Page = () => {
   return (
-    <ProfileWrapper>
+    <>
       <HistoryWrapper>
         <div className="w-full flex flex-col gap-8 mb-14">
           <div className="w-full">
@@ -78,7 +77,7 @@ const Page = () => {
           </div>
         </div>
       </HistoryWrapper>
-    </ProfileWrapper>
+    </>
   );
 };
 

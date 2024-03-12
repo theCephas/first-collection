@@ -1,5 +1,6 @@
 import React from "react";
 import HistorySide from "./HistorySide";
+import ProfileHeader from "@/layout/ProfileHeader";
 
 export default function HistoryWrapper({
   children,
@@ -8,7 +9,8 @@ export default function HistoryWrapper({
 }) {
   return (
     <div className="relative z-[39] max-w-[67.5rem] mx-auto px-6 lg:px-8 mt-6 ">
-      <div className="flex flex-col md:flex-row gap-6">
+      <ProfileHeader />
+      <div className="flex flex-col md:flex-row gap-6 mt-8">
         <HistorySide />
         {children}
       </div>

@@ -3,8 +3,11 @@ import { Quantity } from "@/app/(components)/Quantity";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { Minus, Plus, Star } from "lucide-react";
 import React, { useState } from "react";
+interface Props {
+  params: any;
+}
 
-export const ProductDescriptionAndRating = () => {
+export const ProductDescriptionAndRating = ({ params }: Props) => {
   const [quantity, setQuantity] = useState(1);
 
   return (
@@ -12,7 +15,7 @@ export const ProductDescriptionAndRating = () => {
       {/* DESCRIPTION AND RATING */}
       <div className="flex-col justify-start items-start gap-2 flex">
         <p className="text-black text-sm font-medium gilroy leading-tight">
-          Balenciaga 3xl Sneakers
+          {params.productSlug}
         </p>
         <p className="text-orange-600 text-lg font-medium font-['Inter'] leading-relaxed">
           ₦ 17,000

@@ -1,6 +1,7 @@
 "use client";
 import React, { ReactNode } from "react";
 import Image from "next/image";
+import withAuth from "./withAuth";
 
 interface ContainerProps {
   children: ReactNode;
@@ -11,7 +12,7 @@ interface ContainerProps {
   heroText: string;
 }
 
-export const AuthWrapper = ({
+const AuthWrapper = ({
   children,
   classes,
   url,
@@ -49,3 +50,4 @@ export const AuthWrapper = ({
     </div>
   );
 };
+export default withAuth(AuthWrapper);
