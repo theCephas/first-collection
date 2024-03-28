@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   imageSrc: string;
@@ -16,6 +16,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   classes,
 }) => {
+  const router = useRouter();
+
   return (
     <div
       className={`gilroy relative rounded-[12px] border border-[#f6f6f6] bg-[#fbfbfb] ${classes}`}
@@ -29,9 +31,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
           className="m-auto w-full"
         />
         <div className="text-[14px] font-[400] leading-[20.3px]">
-          <Link href={`/products/${name.replaceAll(" ", "-")}`}>
-            <h3 className="pt-2 hover:underline">{name}</h3>
-          </Link>
+          <h3
+            onClick={() =>
+              router.push(`/products/${name.replaceAll(" ", "-")}`)
+            }
+            className="pt-2 hover:underline cursor-pointer"
+          >
+            {name}
+          </h3>
+
           <p className="font-[600] py-2">₦ {price}</p>
         </div>
         <div className="text-[#FE833D] focus:text-[#eb8449] flex gap-2">
