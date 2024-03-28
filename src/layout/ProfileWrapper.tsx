@@ -1,5 +1,4 @@
 import React from "react";
-import PageWrapper from "@/app/components/PageWrapper";
 import ProfileHeader from "./ProfileHeader";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";

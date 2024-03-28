@@ -8,7 +8,6 @@ import Item5 from "../../../../../../public/item5.svg";
 import Item6 from "../../../../../../public/item6.svg";
 import Item7 from "../../../../../../public/item7.svg";
 import Product from "./(components)/Product";
-import PageWrapper from "@/app/components/PageWrapper";
 import Carousel from "@/app/(components)/Carousel";
 
 const Slides = [
@@ -62,13 +61,13 @@ interface Props {
 
 const ProductDetails = ({ params }: Props) => {
   return (
-    <PageWrapper>
+    <>
       <Product params={params} />
       {/*  */}
 
       <ProductReview params={params} />
       <Carousel name="You Might Also Like These" slides={Slides} />
-    </PageWrapper>
+    </>
   );
 };
 
