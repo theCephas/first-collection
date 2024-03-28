@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/products/:productSlug*",
+      "destination": "/[productSlug]"
     }
   ]
 }
