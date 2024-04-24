@@ -4,10 +4,10 @@ import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { Minus, Plus, Star } from "lucide-react";
 import React, { useState } from "react";
 interface Props {
-  params: any;
+  productDetails: any;
 }
 
-export const ProductDescriptionAndRating = ({ params }: Props) => {
+export const ProductDescriptionAndRating = ({ productDetails }: Props) => {
   const [quantity, setQuantity] = useState(1);
 
   return (
@@ -15,10 +15,10 @@ export const ProductDescriptionAndRating = ({ params }: Props) => {
       {/* DESCRIPTION AND RATING */}
       <div className="flex-col justify-start items-start gap-2 flex">
         <p className="text-black text-sm font-medium gilroy leading-tight">
-          {params.productSlug}
+          {productDetails?.name?.toUpperCase()}
         </p>
         <p className="text-orange-600 text-lg font-medium font-['Inter'] leading-relaxed">
-          ₦ 17,000
+          {"₦"} {productDetails?.price}
         </p>
         <div className="justify-start items-center gap-2 flex">
           <div className="justify-start items-start gap-0.5 flex">
@@ -54,8 +54,8 @@ export const ProductDescriptionAndRating = ({ params }: Props) => {
       </div>
 
       {/* AVAILABLE SIZES */}
-      <div className="flex-col justify-start items-start gap-2 inline-flex">
-        <div className="justify-start items-center gap-2 inline-flex">
+      <div className="flex-col justify-start items-start gap-2 flex">
+        <div className="justify-start items-center gap-2 flex">
           <p className="text-black text-sm font-medium gilroy leading-tight">
             Available sizes
           </p>
@@ -63,7 +63,7 @@ export const ProductDescriptionAndRating = ({ params }: Props) => {
             size guide
           </p>
         </div>
-        <div className="justify-start items-start gap-3 sm:gap-1 md:gap-3 inline-flex">
+        <div className="justify-start items-start gap-3 grid grid-cols-3">
           {[38, 40, 42].map((item) => (
             <div
               key={item}
@@ -80,14 +80,15 @@ export const ProductDescriptionAndRating = ({ params }: Props) => {
       </div>
 
       {/* QUANTITY */}
-      <div className="flex-col justify-start items-start gap-2 inline-flex">
+      <div className="flex-col justify-start items-start gap-2 flex">
         <div className="text-black text-sm font-medium gilroy leading-tight">
-          Quantity
+          Quantity ({productDetails?.quantity})
         </div>
         <Quantity
           classes="px-3 py-2"
           text={quantity}
           setQuantity={setQuantity}
+          max={productDetails?.quantity}
         />
       </div>
 

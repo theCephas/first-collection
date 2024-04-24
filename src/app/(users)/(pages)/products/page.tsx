@@ -1,16 +1,40 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ProductsHero from "./(components)/ProductsHero";
 import FilterSection from "./(components)/FilterSection";
 import Item1 from "../../../../../public/item1.svg";
 import Item2 from "../../../../../public/item5.svg";
 import Item3 from "../../../../../public/item3.svg";
 import ProductCard from "@/app/(components)/ProductCard";
-
-const Five: number[] = [1, 2, 3, 4, 5];
+import { Fetch } from "@/app/Helpers/Fetch";
 
 const Products = () => {
   const [pageNum, setPageNum] = useState(1);
+  const [products, setProducts] = useState([]);
+  const csrfToken =
+    "rMdfpVMYyxbaaaIpIqGGOSL69pWzRpdIViZOK2xFrXCEokHkUZ0CCMW2aXVnKhoE";
+
+  const fetchProducts = useCallback(async () => {
+    try {
+      const data = await Fetch("products/", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      });
+
+      // console.log(data);
+      setProducts(data);
+    } catch (err: any) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
   return (
     <>
       <ProductsHero />
@@ -18,26 +42,23 @@ const Products = () => {
         <FilterSection />
         <aside className="col-span-5 flex flex-col items-center mb-14">
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 h-fit gap-6">
-            {[...Five, ...Five, ...Five, ...Five, ...Five].map((item, i) => (
+            {products?.map((item: any, i) => (
               <ProductCard
                 key={i + 1}
                 classes={""}
+                // imageSrc={item.image}
                 imageSrc={
                   (pageNum === 1 && Item1) ||
                   (pageNum === 2 && Item2) ||
                   (pageNum === 3 && Item3)
                 }
-                name={
-                  pageNum === 1
-                    ? "Nike Air Sneakers"
-                    : pageNum === 2
-                    ? "Nike Female Sneakers"
-                    : "High heals"
-                }
-                price={17000}
+                name={item.name?.toUpperCase()}
+                price={item.price}
+                id={item.id}
               />
             ))}
           </div>
+
           {/* Pagination */}
           <div className="justify-start items-center gap-6 flex mt-14 ">
             <button

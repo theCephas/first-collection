@@ -26,7 +26,7 @@ const Login = () => {
   const router = useRouter();
 
   const csrfToken =
-    "FfZcTHEVY2KcYoWknhgtHPZH8rTTAfF7auI3kFNxMoFu1J9kHqi7rG0JTJjByzW8";
+    "rMdfpVMYyxbaaaIpIqGGOSL69pWzRpdIViZOK2xFrXCEokHkUZ0CCMW2aXVnKhoE";
 
   const changeHandler = (
     identifier: string,

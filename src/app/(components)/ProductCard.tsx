@@ -8,6 +8,7 @@ interface ProductCardProps {
   name: string;
   price: number;
   classes: string;
+  id: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -15,6 +16,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   name,
   price,
   classes,
+  id,
 }) => {
   const router = useRouter();
 
@@ -32,9 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         />
         <div className="text-[14px] font-[400] leading-[20.3px]">
           <h3
-            onClick={() =>
-              router.push(`/products/${name.replaceAll(" ", "-")}`)
-            }
+            onClick={() => router.push(`/products/${id}`)}
             className="pt-2 hover:underline cursor-pointer"
           >
             {name}

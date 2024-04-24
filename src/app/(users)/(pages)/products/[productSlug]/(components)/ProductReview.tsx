@@ -4,27 +4,23 @@ import React from "react";
 import { ProductDescriptionAndRating } from "./ProductDescriptionAndRating";
 
 interface Props {
-  params: any;
+  productDetails: any;
 }
-const ProductReview = ({ params }: Props) => {
+const ProductReview = ({ productDetails }: Props) => {
   return (
     <section className="mt-14 max-w-[67.5rem] mx-auto px-6 xl:px-0 flex flex-col sm:grid grid-cols-3 lg:grid-cols-2 gap-6">
       <div className=" lg:hidden">
-        <ProductDescriptionAndRating params={params} />
+        <ProductDescriptionAndRating productDetails={productDetails} />
       </div>
       <div className="px-4 py-6 bg-white rounded-xl border border-neutral-100 justify-start items-start gap-2.5 inline-flex">
         <div className="self-stretch text-black text-sm font-normal gilroy leading-tight flex flex-col gap-6">
           <p className="text-black text-base font-semibold gilroy leading-normal">
             Product Description
           </p>
-          {[
-            "Responsive Cushioning: The Air Zoom unit in the sole delivers exceptional cushioning and energy return with every step, ensuring a smooth and responsive ride.",
-            "Lightweight and Breathable: The engineered mesh upper keeps your feet cool and comfortable, while the lightweight design helps you stay fast and agile.",
-            "Secure Fit: Dynamic Flywire technology wraps your foot for a secure and personalized fit, providing the support you need during your runs.",
-            "Versatile Style: With its sleek design and signature Nike Swoosh, the Pegasus 38 seamlessly transitions from your daily run to casual wear.",
-          ].map((item, i) => (
-            <p key={i + 1}>{item}</p>
-          ))}
+          {productDetails &&
+            [...productDetails?.description?.split(".")].map((item, i) => (
+              <p key={i + 1}>{item}</p>
+            ))}
         </div>
       </div>
 

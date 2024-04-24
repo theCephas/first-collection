@@ -6,9 +6,9 @@ import React from "react";
 import { ProductDescriptionAndRating } from "./ProductDescriptionAndRating";
 
 interface Props {
-  params: any;
+  productDetails: any;
 }
-const Product = ({ params }: Props) => {
+const Product = ({ productDetails }: Props) => {
   return (
     <section className="mt-6 max-w-[67.5rem] mx-auto px-6 xl:px-0">
       <Link className="" href="/products">
@@ -37,7 +37,7 @@ const Product = ({ params }: Props) => {
           ))}
         </aside>
         <aside className="hidden lg:block">
-          <ProductDescriptionAndRating params={params} />
+          <ProductDescriptionAndRating productDetails={productDetails} />
         </aside>
       </div>
     </section>

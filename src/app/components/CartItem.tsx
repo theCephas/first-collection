@@ -37,6 +37,7 @@ export const CartItem = () => {
           classes="py-1 sm:px-3 sm:py-2"
           text={quantity}
           setQuantity={setQuantity}
+          max={10}
         />
       </div>
       <aside className="w-[24px] h-[24px]">

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useCallback, useEffect, useState } from "react";
 import ProductReview from "./(components)/ProductReview";
 import Item1 from "../../../../../../public/item1.svg";
 import Item2 from "../../../../../../public/item2.svg";
@@ -9,6 +10,7 @@ import Item6 from "../../../../../../public/item6.svg";
 import Item7 from "../../../../../../public/item7.svg";
 import Product from "./(components)/Product";
 import Carousel from "@/app/(components)/Carousel";
+import { Fetch } from "@/app/Helpers/Fetch";
 
 const Slides = [
   {
@@ -60,12 +62,37 @@ interface Props {
 }
 
 const ProductDetails = ({ params }: Props) => {
+  const [productDetails, setProductDetails] = useState<{} | null>(null);
+  const csrfToken =
+    "rMdfpVMYyxbaaaIpIqGGOSL69pWzRpdIViZOK2xFrXCEokHkUZ0CCMW2aXVnKhoE";
+
+  const fetchProductDetails = useCallback(async () => {
+    try {
+      const data = await Fetch(`products/${params.productSlug}/`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      });
+
+      console.log(data);
+      setProductDetails(data);
+    } catch (err: any) {
+      console.log(err);
+    }
+  }, [params]);
+
+  useEffect(() => {
+    fetchProductDetails();
+  }, [fetchProductDetails]);
+
   return (
     <>
-      <Product params={params} />
+      <Product productDetails={productDetails} />
       {/*  */}
 
-      <ProductReview params={params} />
+      <ProductReview productDetails={productDetails} />
       <Carousel name="You Might Also Like These" slides={Slides} />
     </>
   );

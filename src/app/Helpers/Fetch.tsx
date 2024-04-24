@@ -9,7 +9,7 @@ type method = {
 export const Fetch = async (url: url, method: method) => {
   try {
     const res: any = await fetch(
-      `https://first-collectionz-kappa.vercel.app/api/${url}`,
+      `https://first-collectionz.onrender.com/${url}`,
       {
         method: method.method,
         headers: method.headers,
