@@ -179,6 +179,7 @@ const Handpicked: React.FC = (props) => {
           {Slides.map((item, index) => (
             <div key={index} className="w-full m-auto py-10">
               <ProductCard
+                id={"1"}
                 classes={"w-[160px] m-auto"}
                 imageSrc={item.url}
                 name={item.name}
