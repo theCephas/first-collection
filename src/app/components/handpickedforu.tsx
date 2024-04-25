@@ -1,20 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Item1 from "../../../public/item1.svg";
-import Item2 from "../../../public/item2.svg";
-import Item3 from "../../../public/item3.svg";
-import Item4 from "../../../public/item4.svg";
-import Item5 from "../../../public/item5.svg";
-import Item6 from "../../../public/item6.svg";
-import Item7 from "../../../public/item7.svg";
 import ProductCard from "../(components)/ProductCard";
 import Slider from "react-slick";
-import Link from "next/link";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Fetch } from "../Helpers/Fetch";
 
 const Handpicked: React.FC = (props) => {
+  const [products, setProducts] = useState([]);
+  const csrfToken =
+    "rMdfpVMYyxbaaaIpIqGGOSL69pWzRpdIViZOK2xFrXCEokHkUZ0CCMW2aXVnKhoE";
+
+  const fetchProducts = useCallback(async () => {
+    try {
+      const data = await Fetch("products/", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      });
+
+      // console.log(data);
+      setProducts(data);
+    } catch (err: any) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  //
+
   function SampleNextArrow(props: {
     className: any;
     style: any;
@@ -123,50 +144,6 @@ const Handpicked: React.FC = (props) => {
     ],
   };
 
-  const Slides = [
-    {
-      id: 1,
-      url: Item1,
-      name: "Nike Air Sneakers",
-      price: 17000,
-    },
-    {
-      id: 2,
-      url: Item2,
-      name: "Gucci Leather Bag",
-      price: 17000,
-    },
-    {
-      id: 3,
-      url: Item3,
-      name: 'Dior 6" heels',
-      price: 17000,
-    },
-    {
-      id: 4,
-      url: Item4,
-      name: "Ophidia GG Mediu...",
-      price: 17000,
-    },
-    {
-      id: 5,
-      url: Item6,
-      name: "Ego Heels",
-      price: 17000,
-    },
-    {
-      id: 6,
-      url: Item7,
-      name: "Prada spiky shoe",
-      price: 17000,
-    },
-    {
-      id: 7,
-      url: Item5,
-      name: "Nike Sneakers",
-      price: 17000,
-    },
-  ];
   return (
     <div className="max-w-[1080px] mx-auto mb-[-80px] lg:mb-[-100px]">
       <div className="px-8 lg:px-0 ">
@@ -176,17 +153,18 @@ const Handpicked: React.FC = (props) => {
       </div>
       <div className="w-full m-auto ">
         <Slider {...settings} className="flex gap-20  ">
-          {Slides.map((item, index) => (
-            <div key={index} className="w-full m-auto py-10">
-              <ProductCard
-                id={"1"}
-                classes={"w-[160px] m-auto"}
-                imageSrc={item.url}
-                name={item.name}
-                price={item.price}
-              />
-            </div>
-          ))}
+          {products &&
+            products.map((item: any, index) => (
+              <div key={index} className="w-full m-auto py-10 h-full">
+                <ProductCard
+                  id={item.id}
+                  classes={"w-[160px] m-auto"}
+                  imageSrc={Item1}
+                  name={item.name?.toUpperCase()}
+                  price={item.price}
+                />
+              </div>
+            ))}
         </Slider>
       </div>
     </div>

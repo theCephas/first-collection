@@ -1,23 +1,43 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Link from "next/link";
+import Item1 from "../../../public/item1.svg";
+import { Fetch } from "../Helpers/Fetch";
 
 interface CarouselProps {
   name: string;
-  slides: Array<{
-    id: number;
-    url: string;
-    name: string;
-    price: number;
-  }>;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ name, slides }) => {
+const Carousel: React.FC<CarouselProps> = ({ name }) => {
+  const [products, setProducts] = useState([]);
+  const csrfToken =
+    "rMdfpVMYyxbaaaIpIqGGOSL69pWzRpdIViZOK2xFrXCEokHkUZ0CCMW2aXVnKhoE";
+
+  const fetchProducts = useCallback(async () => {
+    try {
+      const data = await Fetch("products/", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      });
+
+      // console.log(data);
+      setProducts(data);
+    } catch (err: any) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
   function SampleNextArrow(props: {
     className: any;
     style: any;
@@ -152,17 +172,18 @@ const Carousel: React.FC<CarouselProps> = ({ name, slides }) => {
       </div>
       <div className="w-full m-auto ">
         <Slider {...settings} className="flex gap-20  ">
-          {slides.map((item, index) => (
-            <div key={index} className="w-full m-auto py-10">
-              <ProductCard
-                id={"1"}
-                classes={"w-[160px] m-auto"}
-                imageSrc={item.url}
-                name={item.name}
-                price={item.price}
-              />
-            </div>
-          ))}
+          {products &&
+            products.map((item: any, index) => (
+              <div key={index} className="w-full m-auto py-10">
+                <ProductCard
+                  id={item.id}
+                  classes={"w-[160px] m-auto"}
+                  imageSrc={Item1}
+                  name={item.name?.toUpperCase()}
+                  price={item.price}
+                />
+              </div>
+            ))}
         </Slider>
       </div>
     </div>

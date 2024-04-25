@@ -35,12 +35,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <div className="text-[14px] font-[400] leading-[20.3px]">
           <h3
             onClick={() => router.push(`/products/${id}`)}
-            className="pt-2 hover:underline cursor-pointer"
+            className="text-xs pt-2 hover:underline cursor-pointer"
           >
             {name}
           </h3>
 
-          <p className="font-[600] py-2">₦ {price}</p>
+          <p className="text-xs font-[600] py-2">₦ {price}</p>
         </div>
         <div className="text-[#FE833D] focus:text-[#eb8449] flex gap-2">
           <Star className="w-[12px] h-[12px]" />
