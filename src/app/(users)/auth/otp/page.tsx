@@ -11,8 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const OTP = () => {
   const [time, setTime] = useState(60);
-  const numberOfInputs = 5;
-  const [otpValues, setOtpValues] = useState(Array(numberOfInputs).fill(""));
+  const [otpValues, setOtpValues] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
 
   // Count Down
@@ -26,7 +25,7 @@ const OTP = () => {
     };
   }, [time]);
 
-  // Format Timen
+  // Format Time
   const formatTime = (sec: number) => {
     const minutes = Math.floor(sec / 60);
     const remainingSeconds = sec % 60;
@@ -42,7 +41,7 @@ const OTP = () => {
       setTimeout(() => {
         toast.success("Check your  email for the verification code");
         setTime(60);
-        setOtpValues(Array(numberOfInputs).fill(""));
+        setOtpValues("");
       }, 1000);
     } catch (err: any) {
       toast.error(err.message);
@@ -52,9 +51,10 @@ const OTP = () => {
   // Submit
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    if (otpValues.join("").length < 5) return;
+    if (otpValues.length < 6) return;
 
     setIsVerifying(true);
+    console.log(otpValues);
 
     try {
       if (time === 0)
@@ -98,15 +98,29 @@ const OTP = () => {
         <a href="/" className="absolute top-8 md:top-4 left-0 sm:pl-10 md:pl-0">
           <BackIcon />
         </a>
-        <section className="my-auto mx-auto flex flex-col items-center gap-16 gilroy">
+        <section className="w-full my-auto mx-auto flex flex-col items-center gap-16 gilroy">
           <p className="items-center  text-xl flex flex-col">
             <span className="text-black">Enter OTP sent to</span>
             <span className="text-orange-600 font-bold">cephas@gmail.com</span>
           </p>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-14">
+          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-14">
             <div className="flex flex-col items-end">
               {/* Inputs */}
-              <OtpInputs otpValues={otpValues} setOtpValues={setOtpValues} />
+              <input
+                type="text"
+                // name="quantity"
+                // pattern="[1-9]"
+                placeholder="Enter OTP"
+                className={`w-full h-[50px] md:h-[60px] p-2 sm:p-3 border border-orange-600 text-orange-600 rounded-[9px] text-xl sm:text-2xl text-center focus:outline-orange-600 placeholder:text-base`}
+                maxLength={6}
+                value={otpValues}
+                onChange={(e) => {
+                  if (!/^[0-9]*$/.test(e.target.value)) return;
+                  setOtpValues(e.target.value);
+                }}
+                required
+              />
+              {/* Timer */}
               <p className="text-xs text-gray-500 flex items-center gap-1 mt-2">
                 {time > 0 ? (
                   formatTime(time)
@@ -117,12 +131,12 @@ const OTP = () => {
                 <Timer size="16" color={time > 0 ? "#FF8F05" : "#353535"} />
               </p>
             </div>
+            {/* Action Buttons */}
             <div className="w-full flex flex-col -mt-5">
               <ButtonPrimary
                 buttonType="submit"
                 classes={`w-full mt-5 ${
-                  otpValues.join("").length < 5 &&
-                  "opacity-40 cursor-not-allowed"
+                  otpValues.length < 6 && "opacity-40 cursor-not-allowed"
                 }`}
               >
                 {isVerifying ? <LoaderIcon className="animate-spin" /> : "Done"}
