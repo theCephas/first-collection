@@ -26,12 +26,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
     >
       <div className="p-[14px] w-full">
         <Image
-          width={0}
-          height={0}
-          src={imageSrc}
+          width={999}
+          height={999}
+          src={imageSrc || ""}
           alt={name}
-          className="m-auto w-full"
+          className="m-auto w-full object-cover max-h-[130px] rounded-[12px]"
         />
+
         <div className="text-[14px] font-[400] leading-[20.3px]">
           <h3
             onClick={() => router.push(`/products/${id}`)}

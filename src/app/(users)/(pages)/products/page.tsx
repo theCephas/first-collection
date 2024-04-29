@@ -46,12 +46,9 @@ const Products = () => {
               <ProductCard
                 key={i + 1}
                 classes={""}
-                // imageSrc={item.image}
-                imageSrc={
-                  (pageNum === 1 && Item1) ||
-                  (pageNum === 2 && Item2) ||
-                  (pageNum === 3 && Item3)
-                }
+                imageSrc={`https://first-collectionz.onrender.com${
+                  item.image || ""
+                }`}
                 name={item.name?.toUpperCase()}
                 price={item.price}
                 id={item.id}

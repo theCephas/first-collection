@@ -159,7 +159,10 @@ const Handpicked: React.FC = (props) => {
                 <ProductCard
                   id={item.id}
                   classes={"w-[160px] m-auto"}
-                  imageSrc={Item1}
+                  imageSrc={`https://first-collectionz.onrender.com${
+                    item.image || ""
+                  }`}
+                  // imageSrc={Item1}
                   name={item.name?.toUpperCase()}
                   price={item.price}
                 />
