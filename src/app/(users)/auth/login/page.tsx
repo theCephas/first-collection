@@ -49,7 +49,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const data = await Fetch("accounts/token/", {
+      const data = await Fetch("api/accounts/token/", {
         method: "POST",
         headers: {
           Accept: "application/json",

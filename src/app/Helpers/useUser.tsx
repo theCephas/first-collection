@@ -19,7 +19,7 @@ export const useUser = () => {
     const { token } = getToken();
 
     try {
-      const data = await Fetch("accounts/", {
+      const data = await Fetch("api/accounts/", {
         method: "GET",
         headers: {
           Accept: "application/json",

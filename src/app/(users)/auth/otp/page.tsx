@@ -5,14 +5,18 @@ import Image from "next/image";
 import { BackIcon } from "@/app/components/Icons";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { LoaderIcon, Timer } from "lucide-react";
-import { OtpInputs } from "./components/OtpInputs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Fetch } from "@/app/Helpers/Fetch";
+import { useRouter } from "next/navigation";
 
 const OTP = () => {
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState(120);
   const [otpValues, setOtpValues] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
+  const router = useRouter();
+  const csrfToken =
+    "9MkWka1x9000M41exL55lSq5HdrMjJsoDi6vFhMe2qru0e09Jkp19MB1ILqAcBDk";
 
   // Count Down
   useEffect(() => {
@@ -37,12 +41,21 @@ const OTP = () => {
 
   // Resend
   const handleReset = async () => {
+    setTime(120);
+    setOtpValues("");
     try {
-      setTimeout(() => {
-        toast.success("Check your  email for the verification code");
-        setTime(60);
-        setOtpValues("");
-      }, 1000);
+      const data = await Fetch("api/accounts/resend-otp/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      });
+      toast.success("Check your email for the verification code", {
+        position: "top-right",
+        autoClose: 5000,
+      });
     } catch (err: any) {
       toast.error(err.message);
     }
@@ -54,25 +67,28 @@ const OTP = () => {
     if (otpValues.length < 6) return;
 
     setIsVerifying(true);
-    console.log(otpValues);
 
     try {
-      if (time === 0)
-        throw new Error(
-          "OTP expired. Please try again! Click 'Resend' to get a new OTP."
-        );
+      const data = await Fetch("api/accounts/validate-otp/", {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        body: otpValues,
+      });
 
-      setTimeout(() => {
-        toast.success("OTP Verified Successfully");
-      }, 1000);
+      toast.success("Account verified successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+      });
+
+      router.push("/auth/login");
     } catch (err: any) {
-      setTimeout(() => {
-        toast.error(err.message);
-      }, 1000);
+      toast.error(err.message);
     } finally {
-      setTimeout(() => {
-        setIsVerifying(false);
-      }, 1500);
+      setIsVerifying(false);
     }
   };
 

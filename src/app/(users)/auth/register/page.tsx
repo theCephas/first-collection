@@ -51,7 +51,7 @@ const SignUp = () => {
     setLoading(true);
 
     try {
-      const data = await Fetch("accounts/create/", {
+      const data = await Fetch("api/accounts/create/", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -61,9 +61,9 @@ const SignUp = () => {
         body: userData,
       });
 
-      console.log(await data);
+      // console.log(await data);
 
-      router.push("/auth/login");
+      router.push("/auth/otp");
 
       toast.success("Account created successfully!", {
         position: "top-right",
