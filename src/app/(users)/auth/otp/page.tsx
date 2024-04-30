@@ -41,21 +41,26 @@ const OTP = () => {
 
   // Resend
   const handleReset = async () => {
-    setTime(120);
     setOtpValues("");
     try {
       const data = await Fetch("api/accounts/resend-otp/", {
-        method: "POST",
+        method: "PATCH",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
           "X-CSRFToken": csrfToken,
         },
       });
+
+      if ((await data.response_status) === "error") {
+        throw new Error(data.message);
+      }
+
       toast.success("Check your email for the verification code", {
         position: "top-right",
         autoClose: 5000,
       });
+      setTime(120);
     } catch (err: any) {
       toast.error(err.message);
     }
@@ -70,14 +75,18 @@ const OTP = () => {
 
     try {
       const data = await Fetch("api/accounts/validate-otp/", {
-        method: "PATCH",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
           "X-CSRFToken": csrfToken,
         },
-        body: otpValues,
+        body: "",
       });
+
+      if ((await data.response_status) === "error") {
+        throw new Error(data.message);
+      }
 
       toast.success("Account verified successfully!", {
         position: "top-right",

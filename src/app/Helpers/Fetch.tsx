@@ -16,16 +16,8 @@ export const Fetch = async (url: url, method: method) => {
         body: JSON.stringify(method.body),
       }
     );
-    const data = await res.json();
 
-    if (!res.ok) {
-      if (data.error) {
-        throw new Error(data.error);
-      }
-      if (data.detail) {
-        throw new Error(data.detail);
-      }
-    }
+    const data = await res.json();
 
     return data;
   } catch (err: any) {
