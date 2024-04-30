@@ -42,52 +42,60 @@ const Products = () => {
         <FilterSection />
         <aside className="col-span-5 flex flex-col items-center mb-14">
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 h-fit gap-6">
-            {products?.map((item: any, i) => (
-              <ProductCard
-                key={i + 1}
-                classes={""}
-                imageSrc={`https://first-collectionz.onrender.com${
-                  item.image || ""
-                }`}
-                name={item.name?.toUpperCase()}
-                price={item.price}
-                id={item.id}
-              />
-            ))}
+            {products.length > 0
+              ? products.map((item: any, i) => (
+                  <ProductCard
+                    key={i + 1}
+                    classes={""}
+                    imageSrc={`https://first-collectionz.onrender.com${
+                      item.image || ""
+                    }`}
+                    name={item.name?.toUpperCase()}
+                    price={item.price}
+                    id={item.id}
+                  />
+                ))
+              : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                  <div key={num} className="px-[0.5rem] max-w-[300px] w-[100%]">
+                    <div className="w-[100%] h-[150px] md:h-[170px] lg:h-[220px] animate-pulse bg-gray-300 rounded-[1rem]"></div>
+                  </div>
+                ))}
           </div>
 
           {/* Pagination */}
-          <div className="justify-start items-center gap-6 flex mt-14 ">
-            <button
-              onClick={() =>
-                pageNum > 1 ? setPageNum((prev) => prev - 1) : ""
-              }
-              className="text-neutral-400 text-sm font-normal gilroy leading-tight cursor-pointer"
-            >
-              Prev
-            </button>
-            <div className="justify-start items-start gap-2 flex">
-              {[1, 2, 3].map((item, i) => (
-                <button
-                  onClick={() => setPageNum(item)}
-                  key={i + 1}
-                  className={`${
-                    pageNum === item ? "text-black" : "text-neutral-400"
-                  } text-sm font-semibold gilroy leading-tight cursor-pointer`}
-                >
-                  {item}
-                </button>
-              ))}
+          {products.length > 0 && (
+            <div className="justify-start items-center gap-6 flex mt-14 ">
+              <button
+                onClick={() =>
+                  pageNum > 1 ? setPageNum((prev) => prev - 1) : ""
+                }
+                className="text-neutral-400 text-sm font-normal gilroy leading-tight cursor-pointer"
+              >
+                Prev
+              </button>
+              <div className="justify-start items-start gap-2 flex">
+                {[1, 2, 3].map((item, i) => (
+                  <button
+                    onClick={() => setPageNum(item)}
+                    key={i + 1}
+                    className={`${
+                      pageNum === item ? "text-black" : "text-neutral-400"
+                    } text-sm font-semibold gilroy leading-tight cursor-pointer`}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+              <button
+                onClick={() =>
+                  pageNum < 3 ? setPageNum((prev) => prev + 1) : ""
+                }
+                className="text-black text-sm font-normal gilroy leading-tight cursor-pointer"
+              >
+                Next
+              </button>
             </div>
-            <button
-              onClick={() =>
-                pageNum < 3 ? setPageNum((prev) => prev + 1) : ""
-              }
-              className="text-black text-sm font-normal gilroy leading-tight cursor-pointer"
-            >
-              Next
-            </button>
-          </div>
+          )}
         </aside>
       </section>
     </>
