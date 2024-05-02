@@ -21,7 +21,7 @@ const Products = () => {
 
   useEffect(() => {
     setProductsPerPage(products.slice(startindex, pageNum * 25));
-  }, [products, pageNum]);
+  }, [products, pageNum, startindex]);
 
   const fetchProducts = useCallback(async () => {
     try {
