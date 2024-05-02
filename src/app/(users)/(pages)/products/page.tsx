@@ -2,17 +2,26 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ProductsHero from "./(components)/ProductsHero";
 import FilterSection from "./(components)/FilterSection";
-import Item1 from "../../../../../public/item1.svg";
-import Item2 from "../../../../../public/item5.svg";
-import Item3 from "../../../../../public/item3.svg";
 import ProductCard from "@/app/(components)/ProductCard";
 import { Fetch } from "@/app/Helpers/Fetch";
+import Pagination from "./(components)/Pagination";
 
 const Products = () => {
   const [pageNum, setPageNum] = useState(1);
   const [products, setProducts] = useState([]);
+  const [productsPerPage, setProductsPerPage] = useState([]);
   const csrfToken =
     "rMdfpVMYyxbaaaIpIqGGOSL69pWzRpdIViZOK2xFrXCEokHkUZ0CCMW2aXVnKhoE";
+  const numPages = Math.ceil(products.length / 25);
+  const paginationNums: number[] = Array.from(
+    { length: numPages },
+    (_, index) => index + 1
+  );
+  const startindex = (pageNum - 1) * 25;
+
+  useEffect(() => {
+    setProductsPerPage(products.slice(startindex, pageNum * 25));
+  }, [products, pageNum]);
 
   const fetchProducts = useCallback(async () => {
     try {
@@ -24,7 +33,6 @@ const Products = () => {
         },
       });
 
-      // console.log(data);
       setProducts(data);
     } catch (err: any) {
       console.log(err);
@@ -42,8 +50,8 @@ const Products = () => {
         <FilterSection />
         <aside className="col-span-5 flex flex-col items-center mb-14">
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 h-fit gap-6">
-            {products.length > 0
-              ? products.map((item: any, i) => (
+            {productsPerPage.length > 0
+              ? productsPerPage.map((item: any, i) => (
                   <ProductCard
                     key={i + 1}
                     classes={""}
@@ -64,37 +72,11 @@ const Products = () => {
 
           {/* Pagination */}
           {products.length > 0 && (
-            <div className="justify-start items-center gap-6 flex mt-14 ">
-              <button
-                onClick={() =>
-                  pageNum > 1 ? setPageNum((prev) => prev - 1) : ""
-                }
-                className="text-neutral-400 text-sm font-normal gilroy leading-tight cursor-pointer"
-              >
-                Prev
-              </button>
-              <div className="justify-start items-start gap-2 flex">
-                {[1, 2, 3].map((item, i) => (
-                  <button
-                    onClick={() => setPageNum(item)}
-                    key={i + 1}
-                    className={`${
-                      pageNum === item ? "text-black" : "text-neutral-400"
-                    } text-sm font-semibold gilroy leading-tight cursor-pointer`}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() =>
-                  pageNum < 3 ? setPageNum((prev) => prev + 1) : ""
-                }
-                className="text-black text-sm font-normal gilroy leading-tight cursor-pointer"
-              >
-                Next
-              </button>
-            </div>
+            <Pagination
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+              paginationNums={paginationNums}
+            />
           )}
         </aside>
       </section>
