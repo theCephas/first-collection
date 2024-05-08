@@ -14,27 +14,45 @@ const Product = ({ productDetails }: Props) => {
       <Link className="" href="/products">
         <BackIcon />
       </Link>
-      <div className="mt-6 sm:mt-14 md:mt-24 flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-1 gap-6">
-        <aside className="h-full w-full col-span-3 col-start-2  overflow-hidden">
-          <Image
-            className="w-full h-72 lg:h-full rounded-xl border border-neutral-100 object-cover"
-            width={1000000}
-            height={1000000}
-            alt=""
-            src="/shoe3.png"
-          />
-        </aside>
-        <aside className="col-start-1 row-start-1 grid grid-cols-3 lg:flex lg:flex-col gap-4">
-          {["/shoe1.png", "/shoe2.png", "/shoe3.png"].map((item, i) => (
+      <div className="mt-6 sm:mt-14 md:mt-24 flex flex-col lg:grid lg:grid-cols-5 lg:grid-rows-1 gap-6 lg:max-h-[510px]">
+        {productDetails ? (
+          <aside className="h-full w-full col-span-3 col-start-2  overflow-hidden">
             <Image
-              key={i}
-              className="w-full h-full object-cover rounded-xl border border-neutral-100"
-              width={10000}
-              height={10000}
+              className="w-full h-72 lg:h-full rounded-xl border border-neutral-100 object-cover"
+              width={1000000}
+              height={1000000}
               alt=""
-              src={item}
+              src={
+                `https://first-collectionz.onrender.com${
+                  productDetails?.image || ""
+                }` || ""
+              }
             />
-          ))}
+          </aside>
+        ) : (
+          <div className="w-full col-span-3 col-start-2">
+            <div className="w-full h-72 lg:h-[510px] animate-pulse bg-gray-300 rounded-[1rem]"></div>
+          </div>
+        )}
+        <aside className="col-start-1 row-start-1 grid grid-cols-3 lg:flex lg:flex-col gap-4 lg:max-h-[160px]">
+          {[1, 2, 3].map((item) =>
+            productDetails ? (
+              <Image
+                key={item}
+                className="w-full h-full object-cover rounded-xl border border-neutral-100"
+                width={10000}
+                height={10000}
+                alt=""
+                src={`https://first-collectionz.onrender.com${
+                  productDetails?.image || ""
+                }`}
+              />
+            ) : (
+              <div className="w-full">
+                <div className="w-full h-[160px] animate-pulse bg-gray-300 rounded-[1rem]"></div>
+              </div>
+            )
+          )}
         </aside>
         <aside className="hidden lg:block">
           <ProductDescriptionAndRating productDetails={productDetails} />
