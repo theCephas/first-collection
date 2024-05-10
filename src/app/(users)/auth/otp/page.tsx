@@ -16,7 +16,7 @@ const OTP = () => {
   const [isVerifying, setIsVerifying] = useState(false);
   const router = useRouter();
   const csrfToken =
-    "9MkWka1x9000M41exL55lSq5HdrMjJsoDi6vFhMe2qru0e09Jkp19MB1ILqAcBDk";
+    "NMYwESqiRRhMvZi2v0ew9ZlZGOKDXl3thiK5ZZbZKhIgJ9hXHzysXTwVHmJrQdep";
 
   // Count Down
   useEffect(() => {
@@ -81,7 +81,7 @@ const OTP = () => {
           "Content-Type": "application/json",
           "X-CSRFToken": csrfToken,
         },
-        body: "",
+        body: { otp: otpValues },
       });
 
       if ((await data.response_status) === "error") {
@@ -120,7 +120,10 @@ const OTP = () => {
           src="/logo.svg"
         />
 
-        <a href="/" className="absolute top-8 md:top-4 left-0 sm:pl-10 md:pl-0">
+        <a
+          href="/auth/register"
+          className="absolute top-8 md:top-4 left-0 sm:pl-10 md:pl-0"
+        >
           <BackIcon />
         </a>
         <section className="w-full my-auto mx-auto flex flex-col items-center gap-16 gilroy">

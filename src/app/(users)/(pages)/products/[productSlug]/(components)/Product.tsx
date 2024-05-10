@@ -48,7 +48,7 @@ const Product = ({ productDetails }: Props) => {
                 }`}
               />
             ) : (
-              <div className="w-full">
+              <div key={item} className="w-full">
                 <div className="w-full h-[160px] animate-pulse bg-gray-300 rounded-[1rem]"></div>
               </div>
             )

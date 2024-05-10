@@ -61,14 +61,21 @@ const SignUp = () => {
         body: userData,
       });
 
+      if ((await data.response_status) === "error") {
+        throw new Error(data.message);
+      }
+
       // console.log(await data);
 
       router.push("/auth/otp");
 
-      toast.success("Account created successfully!", {
-        position: "top-right",
-        autoClose: 5000,
-      });
+      toast.success(
+        `Account created! OTP verification email was sent to ${userData.email}`,
+        {
+          position: "top-right",
+          autoClose: 5000,
+        }
+      );
     } catch (err: any) {
       toast.error(err.message, {
         position: "top-right",

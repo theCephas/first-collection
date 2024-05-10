@@ -35,14 +35,6 @@ const Header = () => {
     }
   }, [token]);
 
-  useEffect(() => {
-    if (window.location.pathname.includes("contact")) {
-      setIsActive("contact");
-    } else if (window.location.pathname.includes("product")) {
-      setIsActive("products");
-    }
-  }, []);
-
   const handleLogout = () => {
     Confirm.show(
       "Confirm Logout",

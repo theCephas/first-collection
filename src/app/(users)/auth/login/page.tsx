@@ -59,14 +59,20 @@ const Login = () => {
         body: userData,
       });
 
-      setCookie(data, checked);
+      // console.log(data);
 
-      router.push("/products");
+      if ((await data.detail) && data.detail.includes("No active")) {
+        throw new Error(data.detail);
+      }
+
+      setCookie(data, checked);
 
       toast.success("Login successful!", {
         position: "top-right",
         autoClose: 5000,
       });
+
+      router.push("/products");
     } catch (err: any) {
       toast.error(err.message, {
         position: "top-right",
