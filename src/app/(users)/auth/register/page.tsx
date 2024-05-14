@@ -61,11 +61,12 @@ const SignUp = () => {
         body: userData,
       });
 
-      if ((await data.response_status) === "error") {
-        throw new Error(data.message);
+      if (await data.error) {
+        throw new Error(data.error);
       }
 
       // console.log(await data);
+      localStorage.setItem("email", userData.email);
 
       router.push("/auth/otp");
 

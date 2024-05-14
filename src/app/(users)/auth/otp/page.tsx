@@ -42,6 +42,12 @@ const OTP = () => {
   // Resend
   const handleReset = async () => {
     setOtpValues("");
+
+    const email = localStorage.getItem("email");
+    if (!email) {
+      throw new Error("Invalid email address");
+    }
+
     try {
       const data = await Fetch("api/accounts/resend-otp/", {
         method: "PATCH",
@@ -50,6 +56,7 @@ const OTP = () => {
           "Content-Type": "application/json",
           "X-CSRFToken": csrfToken,
         },
+        body: { email: email },
       });
 
       if ((await data.response_status) === "error") {
