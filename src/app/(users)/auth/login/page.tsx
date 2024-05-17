@@ -61,11 +61,11 @@ const Login = () => {
 
       // console.log(data);
 
-      if ((await data.detail) && data.detail.includes("No active")) {
-        throw new Error(data.detail);
+      if (await data.error) {
+        throw new Error(data.error);
       }
 
-      setCookie(data, checked);
+      setCookie(data.tokens, checked);
 
       toast.success("Login successful!", {
         position: "top-right",

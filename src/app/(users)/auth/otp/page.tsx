@@ -80,6 +80,8 @@ const OTP = () => {
 
     setIsVerifying(true);
 
+    const email = localStorage.getItem("email");
+
     try {
       const data = await Fetch("api/accounts/validate-otp/", {
         method: "POST",
@@ -88,7 +90,7 @@ const OTP = () => {
           "Content-Type": "application/json",
           "X-CSRFToken": csrfToken,
         },
-        body: { otp: otpValues },
+        body: { email: email, otp: otpValues },
       });
 
       if ((await data.response_status) === "error") {
