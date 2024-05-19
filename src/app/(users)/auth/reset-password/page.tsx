@@ -5,16 +5,58 @@ import Image from "next/image";
 import { HideIcon, ShowIcon } from "../(components)/AuthIcons";
 import { ButtonPrimary } from "@/app/components/Buttons";
 import { BackIcon } from "@/app/components/Icons";
+import { Fetch } from "@/app/Helpers/Fetch";
+import { LoaderIcon } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ResetPassword = () => {
   const [emailConfirmed, setEmailConfirmed] = useState(false);
   const [seePassword, setSeePassword] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [confirmPasswordFocus, setConfirmPasswordFocus] = useState(false);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const csrfToken =
+    "rMdfpVMYyxbaaaIpIqGGOSL69pWzRpdIViZOK2xFrXCEokHkUZ0CCMW2aXVnKhoE";
 
-  const handleSendLink: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+  const handleSendLink: React.MouseEventHandler<HTMLAnchorElement> = async (
+    e
+  ) => {
     e.preventDefault();
-    setEmailConfirmed((prev) => !prev);
+    setLoading(true);
+
+    try {
+      const data = await Fetch("api/accounts/forgot-password/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        body: { email: email },
+      });
+
+      console.log(await data);
+
+      // if ((await data.error) || data.email) {
+      //   throw new Error(data.error || data.email[0]);
+      // }
+
+      // toast.success("Login successful!", {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      // });
+    } catch (err: any) {
+      toast.error(err.message, {
+        position: "top-right",
+        autoClose: 5000,
+      });
+    } finally {
+      setLoading(false);
+    }
+
+    // setEmailConfirmed((prev) => !prev);
   };
 
   return (
@@ -66,6 +108,9 @@ const ResetPassword = () => {
                   className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 text-sm font-normal gilroy leading-tight focus:outline-orange-600"
                   type="email"
                   placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </label>
             )}
@@ -131,7 +176,11 @@ const ResetPassword = () => {
             <div className="w-full flex flex-col gap-3  ">
               <aside onClick={handleSendLink}>
                 <ButtonPrimary classes="w-full">
-                  {emailConfirmed ? "Reset password" : "Send the link"}
+                  {loading ? (
+                    <LoaderIcon className="animate-spin" />
+                  ) : (
+                    "Send the link"
+                  )}
                 </ButtonPrimary>
               </aside>
             </div>
