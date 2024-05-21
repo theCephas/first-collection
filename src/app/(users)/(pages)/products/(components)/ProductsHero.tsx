@@ -2,9 +2,12 @@
 import { ButtonPrimary } from "@/app/components/Buttons";
 import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import { useFetchProducts } from "@/app/Helpers/useFetchProducts";
 
 const ProductsHero = () => {
   const [count, setCount] = useState(1);
+  const { products, isLoading }: { products: any; isLoading: boolean } =
+    useFetchProducts();
 
   const handleHeroChange = useCallback(() => {
     setCount((prev) => (prev < 3 ? prev + 1 : 1));
@@ -21,13 +24,29 @@ const ProductsHero = () => {
   return (
     <section className="flex flex-col gap-4 md:grid md:grid-rows-1 md:grid-cols-2 mt-16 md:mt-32 items-center px-6 lg:px-12 max-w-[67.5rem] mx-auto relative">
       <aside className=" justify-start items-center flex flex-col gap-5 md:col-start-2">
-        <Image
-          className="w-full h-72 lg:h-[30rem] object-cover"
-          alt=""
-          width={10000000}
-          height={10000000}
-          src={`/shoe${count}.png`}
-        />
+        {products.length > 0 ? (
+          <Image
+            className="w-full h-72 lg:h-[30rem] object-cover rounded-lg"
+            alt={products[count]?.name}
+            width={10000000}
+            height={10000000}
+            src={`https://first-collectionz.onrender.com${
+              products[count]?.image || ""
+            }`}
+          />
+        ) : isLoading ? (
+          <div className="w-full col-span-3 col-start-2">
+            <div className="w-full h-72 lg:h-[30rem] animate-pulse bg-gray-300 rounded-[1rem]"></div>
+          </div>
+        ) : (
+          <Image
+            className="w-full h-72 lg:h-[30rem] object-cover rounded-lg"
+            alt={products[count]?.name}
+            width={10000000}
+            height={10000000}
+            src={`/shoe${count}.png`}
+          />
+        )}
       </aside>
       <aside className="flex flex-col sm:items-center md:items-start gap-8 md:col-start-1 md:row-start-1">
         <p className="text-black text-4xl font-bold font-['Judson'] leading-10 sm:max-w-lg sm:text-center md:text-start">

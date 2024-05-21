@@ -64,7 +64,7 @@ export const SearchResults = ({ searchResult, query, close }: Props) => {
       ) : (
         <div className="text-orange-600 text-xl font-bold flex flex-col gap-3 items-center">
           <AlertCircle color="#ff5c00" size={50} />
-          <span>{'No Product available for "{query}"'}</span>
+          <span>{`No Product available for "${query}"`}</span>
         </div>
       )}
     </section>
