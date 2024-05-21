@@ -59,10 +59,18 @@ const Login = () => {
         body: userData,
       });
 
-      console.log(data);
+      // console.log(data);
 
-      if ((await data.error) || data.email) {
-        throw new Error(data.error || data.email[0]);
+      if (data.detail || data.email || data.password) {
+        throw new Error(
+          data.detail
+            ? data.detail
+            : data.email
+            ? data.email[0]
+            : data.password
+            ? data.password[0]
+            : ""
+        );
       }
 
       setCookie(data.tokens, checked);
