@@ -2,30 +2,33 @@
 
 import React, { useState, useEffect } from "react";
 import Logo from "../../../public/logo.svg";
-import User from "../../../public/user.svg";
 import Cart from "../../../public/cart.svg";
 import Search from "../../../public/search.svg";
 import Image from "next/image";
 import Link from "next/link";
 import "../../../src/fonts.css";
-import { ChevronDown, ChevronUp, AlignJustify, X } from "lucide-react";
+import { ChevronDown, ChevronUp, X, SearchIcon, XIcon } from "lucide-react";
 import { motion, useCycle, AnimatePresence, MotionConfig } from "framer-motion";
 import { SearchResults } from "./SearchResults";
 import CartComponent from "./Cart";
 import { useRouter } from "next/navigation";
 import { clearCookie, getToken } from "../Helpers/Helpers";
 import { Confirm } from "notiflix/build/notiflix-confirm-aio";
+import { useFetchProducts } from "../Helpers/useFetchProducts";
 
 const Header = () => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState({});
   const [showCart, setShowCart] = useState(false);
   const router = useRouter();
   const [isActive, setIsActive] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { token } = getToken();
+  const { products, isLoading }: { products: any; isLoading: boolean } =
+    useFetchProducts();
 
   useEffect(() => {
     if (token) {
@@ -34,6 +37,16 @@ const Header = () => {
       setIsAuthenticated(false);
     }
   }, [token]);
+
+  const handleSearch = async (query: string) => {
+    const res = products.filter((prod: any) =>
+      prod?.name?.toLowerCase().includes(query.toLowerCase())
+    );
+
+    // console.log(res);
+
+    setSearchResult(res);
+  };
 
   const handleLogout = () => {
     Confirm.show(
@@ -64,38 +77,29 @@ const Header = () => {
         >
           <Image src={Logo} alt="Logo" width={0} />
         </Link>
-        <form className="relative hidden md:flex">
-          <label className="hidden">Search</label>
+        <div className="relative hidden md:flex">
+          <aside className="absolute left-3 top-1/2 -translate-y-1/2">
+            <SearchIcon color="#B5B5B5" size={20} />
+          </aside>
           <input
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              handleSearch(e.target.value);
+            }}
             value={searchQuery}
             type="text"
             placeholder="Search for products"
             className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[10px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 focus:border-orange-600"
           />
-          <button
-            type="submit"
-            aria-label="Submit-search"
-            className="absolute left-3 top-[29%]"
-          >
-            <svg
-              fill="none"
-              viewBox="0 0 13 14"
-              width="20"
-              height={20}
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Search-Icon"
+          {searchQuery.length > 0 && (
+            <div
+              onClick={() => setSearchQuery("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
             >
-              <path
-                clipRule="evenodd"
-                d="m8.82264 10.3833c-.92307.7008-2.07429 1.1167-3.32264 1.1167-3.03757 0-5.5-2.46243-5.5-5.5s2.46243-5.5 5.5-5.5 5.5 2.46243 5.5 5.5c0 1.24835-.4159 2.39957-1.1167 3.32264l2.897 2.89706c.2929.2929.2929.7677 0 1.0606s-.7677.2929-1.0606 0zm.67736-4.3833c0 2.20914-1.79086 4-4 4s-4-1.79086-4-4 1.79086-4 4-4 4 1.79086 4 4z"
-                fill="#B5B5B5"
-                fillRule="evenodd"
-              />
-            </svg>
-          </button>
-        </form>
+              <XIcon color="#ff5c00" size={20} />
+            </div>
+          )}
+        </div>
         <div className="text-[14px] font-[600] hidden items-center justify-center text-[#b3b3b3] lg:flex gap-6">
           <Link
             href="/products"
@@ -231,43 +235,25 @@ const Header = () => {
             <div className="flex gap-4 items-center">
               <form className="relative z-40">
                 <input
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    handleSearch(e.target.value);
+                  }}
                   value={searchQuery}
                   type="text"
                   placeholder="Search for products"
-                  className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[8px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] pl-10 focus:border-orange-600"
+                  className="rounded-[6px] outline-none border border-[#b3b3b3] md:w-[358px] text-[#b3b3b3] bg-[#000] flex pt-[8px] pb-[8px] px-[12px] items-center justify-center gap-[12px] text-[14px] leading-[20.3px] focus:border-orange-600"
                   autoFocus
                 />
-                <button
-                  type="submit"
-                  aria-label="Submit-search"
-                  className="absolute left-3 top-[30%]"
-                >
-                  <svg
-                    fill="none"
-                    viewBox="0 0 13 14"
-                    width="16"
-                    height={16}
-                    xmlns="http://www.w3.org/2000/svg"
-                    role="img"
-                    aria-label="Search-Icon"
-                  >
-                    <path
-                      clipRule="evenodd"
-                      d="m8.82264 10.3833c-.92307.7008-2.07429 1.1167-3.32264 1.1167-3.03757 0-5.5-2.46243-5.5-5.5s2.46243-5.5 5.5-5.5 5.5 2.46243 5.5 5.5c0 1.24835-.4159 2.39957-1.1167 3.32264l2.897 2.89706c.2929.2929.2929.7677 0 1.0606s-.7677.2929-1.0606 0zm.67736-4.3833c0 2.20914-1.79086 4-4 4s-4-1.79086-4-4 1.79086-4 4-4 4 1.79086 4 4z"
-                      fill="#B5B5B5"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                </button>
+
                 <div
-                  className="absolute right-2 top-[25%] cursor-pointer "
+                  className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer "
                   onClick={() => {
                     setSearchQuery("");
                     setSearchOpen(false);
                   }}
                 >
-                  <X className="w-[20px] h-[20px] text-[#b3b3b3] z-40 bg-[#040404] " />
+                  <X color="#b3b3b3" size={18} className="z-40" />
                 </div>
               </form>
             </div>
@@ -457,7 +443,13 @@ const Header = () => {
           </MotionConfig>
         )}
       </AnimatePresence>
-      {searchQuery.length > 0 && <SearchResults />}
+      {searchQuery.length > 0 && (
+        <SearchResults
+          searchResult={searchResult}
+          query={searchQuery}
+          close={() => setSearchQuery("")}
+        />
+      )}
       {showCart && <CartComponent close={() => setShowCart(false)} />}
     </div>
   );
