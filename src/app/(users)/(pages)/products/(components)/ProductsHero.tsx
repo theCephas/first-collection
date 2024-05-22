@@ -41,7 +41,7 @@ const ProductsHero = () => {
         ) : (
           <Image
             className="w-full h-72 lg:h-[30rem] object-cover rounded-lg"
-            alt={products[count]?.name}
+            alt="product-image"
             width={10000000}
             height={10000000}
             src={`/shoe${count}.png`}

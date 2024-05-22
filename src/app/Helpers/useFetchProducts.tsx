@@ -5,7 +5,7 @@ const csrfToken =
 
 export const useFetchProducts = () => {
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchProducts = useCallback(async () => {
     setIsLoading(true);
