@@ -11,42 +11,52 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ResetPassword = () => {
-  const [emailConfirmed, setEmailConfirmed] = useState(false);
   const [seePassword, setSeePassword] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [confirmPasswordFocus, setConfirmPasswordFocus] = useState(false);
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [otpValues, setOtpValues] = useState("");
   const csrfToken =
-    "rMdfpVMYyxbaaaIpIqGGOSL69pWzRpdIViZOK2xFrXCEokHkUZ0CCMW2aXVnKhoE";
+    "eR4Ea8PrLmUxWL3uiOi76KruaV7fcGthInQdvfA8EMl1aV2punC3UECqbt635yEd";
 
-  const handleSendLink: React.MouseEventHandler<HTMLAnchorElement> = async (
-    e
-  ) => {
-    e.preventDefault();
+  const handleChangePassword = async () => {
     setLoading(true);
+    const email = localStorage.getItem("email");
 
     try {
-      const data = await Fetch("api/accounts/forgot-password/", {
+      if (!email) throw new Error("Invalid Email address");
+
+      if (password !== confirmPassword)
+        throw new Error(
+          "The passwords you entered do not match, please try again."
+        );
+
+      const data = await Fetch("api/accounts/validate-reset-password/", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-type": "application/json",
           "X-CSRFToken": csrfToken,
         },
-        body: { email: email },
+        body: {
+          email: email,
+          otp: otpValues,
+          new_password: password,
+        },
       });
 
       console.log(await data);
 
-      // if ((await data.error) || data.email) {
-      //   throw new Error(data.error || data.email[0]);
-      // }
+      if (await data.error) {
+        throw new Error(data.error);
+      }
 
-      // toast.success("Login successful!", {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      // });
+      toast.success(data.message, {
+        position: "top-right",
+        autoClose: 5000,
+      });
     } catch (err: any) {
       toast.error(err.message, {
         position: "top-right",
@@ -55,8 +65,6 @@ const ResetPassword = () => {
     } finally {
       setLoading(false);
     }
-
-    // setEmailConfirmed((prev) => !prev);
   };
 
   return (
@@ -86,100 +94,99 @@ const ResetPassword = () => {
         <section className="my-auto flex flex-col gap-6 w-full">
           <div className="flex-col justify-start items-start gap-0.5 inline-flex">
             <h3 className="text-black text-2xl font-semibold gilroy leading-9">
-              {emailConfirmed ? "Reset Password" : "Forgot Password?"}
+              {"Reset Password"}
             </h3>
             <p className="text-black text-sm font-normal gilroy leading-tight">
-              {emailConfirmed
-                ? "Enter your new Password"
-                : "Enter your email address"}
+              {"Enter your new Password"}
             </p>
           </div>
 
           {/* FORM SIDE */}
-          <form className="flex flex-col gap-6" action="">
-            {/* Email */}
-            {!emailConfirmed && (
-              <label
-                className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-                htmlFor="email"
+          <form className="flex flex-col gap-6">
+            <label
+              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
+              htmlFor="otp"
+            >
+              <input
+                type="text"
+                placeholder="Enter OTP"
+                className={`w-full h-[50px] md:h-[60px] p-2 sm:p-3 border border-orange-600 text-orange-600 rounded-[9px] text-xl sm:text-2xl text-center focus:outline-orange-600 placeholder:text-base`}
+                maxLength={6}
+                value={otpValues}
+                onChange={(e) => {
+                  if (!/^[0-9]*$/.test(e.target.value)) return;
+                  setOtpValues(e.target.value);
+                }}
+                required
+              />
+            </label>
+
+            <label
+              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
+              htmlFor="password"
+            >
+              Password
+              <div
+                className={`flex h-11 px-3 py-2 rounded-md border border-zinc-400 ${
+                  passwordFocus && "border-2 border-orange-600"
+                }`}
               >
-                {" Email Address"}
                 <input
-                  className="w-full h-11 px-3 py-2 rounded-md border border-zinc-400 placeholder:text-zinc-400 text-sm font-normal gilroy leading-tight focus:outline-orange-600"
-                  type="email"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
+                  onFocus={() => setPasswordFocus(true)}
+                  onBlur={() => setPasswordFocus(false)}
+                  className="w-full  placeholder:text-zinc-400 text-sm font-normal gilroy focus:outline-none leading-tight"
+                  type={seePassword ? "text" : "password"}
+                  placeholder="Pasword"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-              </label>
-            )}
-            {/* Password */}
-            {emailConfirmed && (
-              <label
-                className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-                htmlFor="password"
-              >
-                Password
-                <div
-                  className={`flex h-11 px-3 py-2 rounded-md border border-zinc-400 ${
-                    passwordFocus && "border-2 border-orange-600"
-                  }`}
+                <aside
+                  onClick={() => setSeePassword((prev) => !prev)}
+                  className="cursor-pointer"
                 >
-                  <input
-                    onFocus={() => setPasswordFocus(true)}
-                    onBlur={() => setPasswordFocus(false)}
-                    className="w-full  placeholder:text-zinc-400 text-sm font-normal gilroy focus:outline-none leading-tight"
-                    type={seePassword ? "text" : "password"}
-                    placeholder="Pasword"
-                  />
-                  <aside
-                    onClick={() => setSeePassword((prev) => !prev)}
-                    className="cursor-pointer"
-                  >
-                    {!seePassword && <ShowIcon />}
-                    {seePassword && <HideIcon />}
-                  </aside>
-                </div>
-              </label>
-            )}
-            {emailConfirmed && (
-              <label
-                className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
-                htmlFor="password"
+                  {!seePassword && <ShowIcon />}
+                  {seePassword && <HideIcon />}
+                </aside>
+              </div>
+            </label>
+
+            <label
+              className="flex flex-col text-black text-sm font-semibold gilroy leading-tight gap-1"
+              htmlFor="password"
+            >
+              Confirm Password
+              <div
+                className={`flex h-11 px-3 py-2 rounded-md border border-zinc-400 ${
+                  confirmPasswordFocus && "border-2 border-orange-600"
+                }`}
               >
-                Confirm Password
-                <div
-                  className={`flex h-11 px-3 py-2 rounded-md border border-zinc-400 ${
-                    confirmPasswordFocus && "border-2 border-orange-600"
-                  }`}
+                <input
+                  onFocus={() => setConfirmPasswordFocus(true)}
+                  onBlur={() => setConfirmPasswordFocus(false)}
+                  className="w-full  placeholder:text-zinc-400 text-sm font-normal gilroy leading-tight focus:outline-none"
+                  type={seePassword ? "text" : "password"}
+                  placeholder="Confirm Pasword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <aside
+                  onClick={() => setSeePassword((prev) => !prev)}
+                  className="cursor-pointer"
                 >
-                  <input
-                    onFocus={() => setConfirmPasswordFocus(true)}
-                    onBlur={() => setConfirmPasswordFocus(false)}
-                    className="w-full  placeholder:text-zinc-400 text-sm font-normal gilroy leading-tight focus:outline-none"
-                    type={seePassword ? "text" : "password"}
-                    placeholder="Confirm Pasword"
-                  />
-                  <aside
-                    onClick={() => setSeePassword((prev) => !prev)}
-                    className="cursor-pointer"
-                  >
-                    {!seePassword && <ShowIcon />}
-                    {seePassword && <HideIcon />}
-                  </aside>
-                </div>
-              </label>
-            )}
+                  {!seePassword && <ShowIcon />}
+                  {seePassword && <HideIcon />}
+                </aside>
+              </div>
+            </label>
 
             {/* ACTION BUTTONS */}
             <div className="w-full flex flex-col gap-3  ">
-              <aside onClick={handleSendLink}>
+              <aside onClick={handleChangePassword}>
                 <ButtonPrimary classes="w-full">
                   {loading ? (
                     <LoaderIcon className="animate-spin" />
                   ) : (
-                    "Send the link"
+                    "Change Password"
                   )}
                 </ButtonPrimary>
               </aside>
@@ -187,6 +194,7 @@ const ResetPassword = () => {
           </form>
         </section>
       </main>
+      <ToastContainer />
     </AuthWrapper>
   );
 };

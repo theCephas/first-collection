@@ -172,7 +172,7 @@ const Login = () => {
               <p className="text-sm gilroy flex gap-2">
                 Forgot Password?
                 <Link
-                  href="/auth/reset-password"
+                  href="/auth/forgot-password"
                   className="text-orange-600 font-medium"
                 >
                   Reset
