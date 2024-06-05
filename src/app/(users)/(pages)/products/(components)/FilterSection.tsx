@@ -1,7 +1,5 @@
 "use client";
-import { FilterIcon } from "./ProductsIcons";
 import React from "react";
-// import styles from '/Fiter.modules.css'
 
 type filter = {
   title: string;
@@ -22,21 +20,6 @@ const Filter: filters = [
       "Purses",
     ],
   },
-  {
-    title: "Brands",
-    categories: [
-      "Nike",
-      "Naked Wolfe",
-      "Adiddas",
-      "Fila",
-      "Reebok",
-      "View more",
-    ],
-  },
-  {
-    title: "Colors",
-    categories: ["Beige", "Black", "Blue", "Brown", "Cyan", "View more"],
-  },
 ];
 
 const FilterSection = () => {
@@ -56,12 +39,12 @@ const FilterSection = () => {
               {item.title}
             </h4>
             <ul
-              className={`w-full lg:flex-col justify-start items-start gap-4 flex overflow-scroll hide-scroll`}
+              className={`w-full lg:flex-col justify-start items-start gap-4 flex overflow-scroll hide-scroll pr-2`}
             >
               {item.categories.map((cat, i) => (
                 <li
                   key={i + 1}
-                  className="text-zinc-600 whitespace-nowrap text-base font-normal gilroy leading-normal"
+                  className="text-zinc-600 whitespace-nowrap text-base font-normal gilroy leading-normal cursor-pointer"
                 >
                   {cat}
                 </li>
@@ -82,13 +65,6 @@ const FilterSection = () => {
             </li>
           </ul>
         </div>
-      </div>
-
-      <div className="justify-end mt-4 items-center gap-0.5 flex cursor-pointer lg:hidden">
-        <FilterIcon />
-        <p className="text-zinc-600 text-base font-normal gilroy leading-normal">
-          Filters
-        </p>
       </div>
     </aside>
   );

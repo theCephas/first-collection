@@ -4,7 +4,11 @@ import React, { useState } from "react";
 import { Quantity } from "../(components)/Quantity";
 import Image from "next/image";
 
-export const CartItem = () => {
+interface Props {
+  item: any;
+}
+
+export const CartItem = ({ item }: Props) => {
   const [quantity, setQuantity] = useState(1);
   return (
     <div className="w-full justify-between items-start inline-flex gap-2">
@@ -19,10 +23,10 @@ export const CartItem = () => {
       <div className="flex-col justify-start items-start gap-3 inline-flex">
         <div className="flex-col justify-start items-start gap-1 flex">
           <p className="text-black text-base font-normal gilroy leading-normal">
-            Baleciaga 3xl Sneakers
+            {item.name}
           </p>
           <p className="text-orange-600 text-sm font-medium gilroy leading-tight">
-            ₦ 17,000
+            ₦ {item.price}
           </p>
         </div>
         <div className="flex-col justify-start items-start gap-1 flex">

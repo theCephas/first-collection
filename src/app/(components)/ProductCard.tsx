@@ -2,6 +2,11 @@ import React from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Confirm } from "notiflix";
+import { Fetch } from "../Helpers/Fetch";
+import { getToken } from "../Helpers/Helpers";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface ProductCardProps {
   imageSrc: string;
@@ -18,7 +23,73 @@ const ProductCard: React.FC<ProductCardProps> = ({
   classes,
   id,
 }) => {
+  const { token } = getToken();
   const router = useRouter();
+  const csrfToken =
+    "tYIzXNvekXPM9WZYAzVN9CELrnyobauxXuu8iUgVdnggn6YTM8fJXwPHsVxc42Ft";
+
+  const handleAddToCart = (id: string) => {
+    if (!token) {
+      return Confirm.show(
+        "Unlock Cart Feature",
+        "You have to Login or Register before you can add products to Cart",
+        "Login",
+        "Cancel",
+        () => {
+          return router.push("/auth/login");
+        },
+        () => {
+          return;
+        },
+        {
+          titleColor: "#FE833D",
+          okButtonBackground: "#FE833D",
+        }
+      );
+    }
+    Confirm.show(
+      "Confirm Add to Cart",
+      "Are you sure you want want to Add this item to your Cart?",
+      "Add to Cart",
+      "Cancel",
+      async () => {
+        try {
+          const data = await Fetch("cart/create/", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-type": "application/json",
+              "X-CSRFToken": csrfToken,
+              Authorization: `Bearer ${token}`,
+            },
+            body: { id: id },
+          });
+
+          // console.log(data);
+          if (data.id) throw new Error(data.id[0]);
+          if (data.detail) throw new Error(data.detail);
+          if (data.error) throw new Error(data.error);
+
+          toast.success(data.message, {
+            position: "top-right",
+            autoClose: 5000,
+          });
+        } catch (err: any) {
+          toast.error(err.message, {
+            position: "top-right",
+            autoClose: 5000,
+          });
+        }
+      },
+      () => {
+        return;
+      },
+      {
+        titleColor: "#FE833D",
+        okButtonBackground: "#FE833D",
+      }
+    );
+  };
 
   return (
     <div
@@ -51,7 +122,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <Star className="w-[12px] h-[12px]" />
         </div>
       </div>
-      <button className="bg-[#fe833d] absolute bottom-0 right-0 p-2 rounded-br-[8px] rounded-tl-[8px] ">
+      <button
+        onClick={() => handleAddToCart(id)}
+        className="bg-[#fe833d] absolute bottom-0 right-0 p-2 rounded-br-[8px] rounded-tl-[8px]"
+        type="button"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

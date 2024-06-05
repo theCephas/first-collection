@@ -75,7 +75,7 @@ const Header = () => {
           href="/"
           // className={`${isSearchOpen ? "hidden sm:flex" : "flex"}`}
         >
-          <Image src={Logo} alt="Logo" width={0} />
+          <Image src="/logo.svg" alt="Logo" width={36} height={36} />
         </Link>
         <div className="relative hidden md:flex">
           <aside className="absolute left-3 top-1/2 -translate-y-1/2">
