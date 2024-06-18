@@ -18,9 +18,21 @@ export const useFetchProducts = () => {
         },
       });
 
+      if (data.detail || data.email || data.password) {
+        throw new Error(
+          data.detail
+            ? data.detail
+            : data.email
+            ? data.email[0]
+            : data.password
+            ? data.password[0]
+            : ""
+        );
+      }
+
       setProducts(data);
     } catch (err: any) {
-      console.log(err);
+      console.log(err.message);
     } finally {
       setIsLoading(false);
     }

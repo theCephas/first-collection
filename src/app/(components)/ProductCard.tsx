@@ -26,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const { token } = getToken();
   const router = useRouter();
   const csrfToken =
-    "tYIzXNvekXPM9WZYAzVN9CELrnyobauxXuu8iUgVdnggn6YTM8fJXwPHsVxc42Ft";
+    "JxQvgGXo8yteepXgJ7HUp5gUNwOHEs3cHdy8S1UgjM5QLFqcXEWuOF2aGd3836fM";
 
   const handleAddToCart = (id: string) => {
     if (!token) {
@@ -62,10 +62,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
               "X-CSRFToken": csrfToken,
               Authorization: `Bearer ${token}`,
             },
-            body: { id: id },
+            body: {
+              id: "550e8400-e29b-41d4-a716-446755440001",
+              product_id: id,
+            },
           });
 
-          // console.log(data);
+          console.log(data);
           if (data.id) throw new Error(data.id[0]);
           if (data.detail) throw new Error(data.detail);
           if (data.error) throw new Error(data.error);

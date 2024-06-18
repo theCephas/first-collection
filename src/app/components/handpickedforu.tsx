@@ -10,10 +10,12 @@ import { Fetch } from "../Helpers/Fetch";
 
 const Handpicked: React.FC = (props) => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const csrfToken =
     "rMdfpVMYyxbaaaIpIqGGOSL69pWzRpdIViZOK2xFrXCEokHkUZ0CCMW2aXVnKhoE";
 
   const fetchProducts = useCallback(async () => {
+    setIsLoading(true);
     try {
       const data = await Fetch("products/", {
         method: "GET",
@@ -23,10 +25,24 @@ const Handpicked: React.FC = (props) => {
         },
       });
 
+      if (data.detail || data.email || data.password) {
+        throw new Error(
+          data.detail
+            ? data.detail
+            : data.email
+            ? data.email[0]
+            : data.password
+            ? data.password[0]
+            : ""
+        );
+      }
+
       // console.log(data);
       setProducts(data);
     } catch (err: any) {
-      console.log(err);
+      console.log(err.message);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -153,21 +169,28 @@ const Handpicked: React.FC = (props) => {
       </div>
       <div className="w-full m-auto ">
         <Slider {...settings} className="flex gap-20  ">
-          {products &&
-            products.map((item: any, index) => (
-              <div key={index} className="w-full m-auto py-10 h-full">
-                <ProductCard
-                  id={item.id}
-                  classes={"w-[160px] m-auto"}
-                  imageSrc={`https://first-collectionz.onrender.com${
-                    item.image || ""
-                  }`}
-                  // imageSrc={Item1}
-                  name={item.name?.toUpperCase()}
-                  price={item.price}
-                />
-              </div>
-            ))}
+          {products
+            ? products?.map((item: any, index) => (
+                <div key={index} className="w-full m-auto py-10 h-full">
+                  <ProductCard
+                    id={item.id}
+                    classes={"w-[160px] m-auto"}
+                    imageSrc={`https://first-collectionz.onrender.com${
+                      item.image || ""
+                    }`}
+                    // imageSrc={Item1}
+                    name={item.name?.toUpperCase()}
+                    price={item.price}
+                  />
+                </div>
+              ))
+            : isLoading
+            ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                <div key={num} className="px-[0.5rem] max-w-[300px] w-[100%]">
+                  <div className="w-[100%] h-[150px] md:h-[170px] lg:h-[220px] animate-pulse bg-gray-300 rounded-[1rem]"></div>
+                </div>
+              ))
+            : ""}
         </Slider>
       </div>
     </div>

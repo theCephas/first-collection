@@ -27,7 +27,7 @@ export const Quantity = ({
         className="cursor-pointer"
         style={{ color: text === 1 ? "#B3B3B3" : "" }}
       />
-      <p className="text-black text-sm font-semibold gilroy leading-tight">
+      <p className="text-black text-sm font-semibold gilroy leading-tight select-none ">
         {text}
       </p>
       <Plus

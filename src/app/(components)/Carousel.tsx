@@ -27,10 +27,22 @@ const Carousel: React.FC<CarouselProps> = ({ name }) => {
         },
       });
 
+      if (data.detail || data.email || data.password) {
+        throw new Error(
+          data.detail
+            ? data.detail
+            : data.email
+            ? data.email[0]
+            : data.password
+            ? data.password[0]
+            : ""
+        );
+      }
+
       // console.log(data);
       setProducts(data);
     } catch (err: any) {
-      console.log(err);
+      console.log(err.message);
     }
   }, []);
 

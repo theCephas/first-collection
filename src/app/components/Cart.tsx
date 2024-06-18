@@ -55,10 +55,8 @@ const Cart = ({ close }: CartProps) => {
   }, [getCartItems]);
 
   const sumTotalAmount = (items: any) => {
-    console.log(items);
-    // const total = items.reduce((item: any) => (item.price += item.price));
-    // console.log(total);
-    return "total";
+    const total = items.reduce((sum: number, item: any) => sum + item.price, 0);
+    return total;
   };
 
   return (
@@ -73,7 +71,9 @@ const Cart = ({ close }: CartProps) => {
         {/*  */}
         <div className="flex flex-col items-start gap-6">
           {cartItems.length > 0 ? (
-            cartItems.map((item, i) => <CartItem key={i + 1} item={item} />)
+            cartItems.map((item, i) => (
+              <CartItem key={i + 1} item={item} close={close} />
+            ))
           ) : isLoading ? (
             <div className="flex justify-center items-center mx-auto">
               <div className="flex flex-row gap-2">
@@ -96,8 +96,7 @@ const Cart = ({ close }: CartProps) => {
               Total Amount:
             </p>
             <p className="text-orange-600 text-lg font-semibold gilroy leading-relaxed">
-              ₦ 51,000
-              {/* {sumTotalAmount(cartItems)} */}
+              ₦ {sumTotalAmount(cartItems)}
             </p>
           </div>
           <ButtonPrimary classes="w-full">{"Checkout"}</ButtonPrimary>
