@@ -89,9 +89,9 @@ const SignUp = () => {
 
   return (
     <AuthWrapper
-      classes={"hue-rotate-[-10deg] saturate-[150%]"}
-      url={"/auth-female.png"}
-      alt={"lady"}
+      classes={"opacity-50"}
+      url={"/slide2.svg"}
+      alt={"shoe"}
       heroHeader={"Get started with First Collection"}
       heroText={
         "Be in the loop for exclusive deals. Your unique fashion story begins with a simple sign-up"

@@ -90,12 +90,12 @@ const Login = () => {
       setLoading(false);
     }
   };
-
+  // import Slide1 from "../../../public/slide1.svg";
   return (
     <AuthWrapper
-      classes={"hue-rotate-[-10deg] saturate-[150%]"}
-      url={"/auth-female.png"}
-      alt={"lady"}
+      classes={"opacity-50"}
+      url={"/slide2.svg"}
+      alt={"shoe"}
       heroHeader={"Welcome back to First Collection"}
       heroText={"Be in the loop for exclusive deals."}
     >

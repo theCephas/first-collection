@@ -57,9 +57,9 @@ const ForgotPassword = () => {
 
   return (
     <AuthWrapper
-      classes={""}
-      url={"/auth-male.png"}
-      alt={"man"}
+      classes={"opacity-50"}
+      url={"/slide1.svg"}
+      alt={"bag"}
       heroHeader={"No worries!!"}
       heroText={"We will help you reset it"}
     >

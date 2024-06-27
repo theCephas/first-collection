@@ -112,9 +112,9 @@ const OTP = () => {
 
   return (
     <AuthWrapper
-      classes={"hue-rotate-[-10deg] saturate-[150%]"}
-      url={"/auth-female.png"}
-      alt={"lady"}
+      classes={"opacity-50"}
+      url={"/slide1.svg"}
+      alt={"bag"}
       heroHeader={"Confirm your Email address"}
       heroText={
         "A six digit code has been sent to the email address you provided."

@@ -38,13 +38,16 @@ const AuthWrapper = ({
             {heroText}
           </p>
         </div>
-        <Image
-          alt={alt}
-          width={1000}
-          height={1000}
-          className={`h-full w-[60%] ${classes} object-cover rounded-tl-2xl rounded-bl-2xl`}
-          src={url}
-        />
+        <aside className="h-full w-[60%] relative">
+          <div className="w-full h-full absolute top-0 left-0 right-0 bottom-0 bg-orange-600/25 opacity-50 rounded-tl-2xl rounded-bl-2xl z-50"></div>
+          <Image
+            alt={alt}
+            width={1000}
+            height={1000}
+            className={`h-full w-full ${classes} object-cover rounded-tl-2xl rounded-bl-2xl`}
+            src={url}
+          />
+        </aside>
       </div>
       {children}
     </div>

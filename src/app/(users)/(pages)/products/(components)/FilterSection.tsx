@@ -6,6 +6,10 @@ type filter = {
   categories: string[];
 };
 
+interface Props {
+  filter: (text: string) => void;
+}
+
 type filters = filter[];
 
 const Filter: filters = [
@@ -22,7 +26,7 @@ const Filter: filters = [
   },
 ];
 
-const FilterSection = () => {
+const FilterSection = ({ filter }: Props) => {
   return (
     <aside className="">
       <div className="lg:flex-col gap-6 justify-start items-start flex ">
@@ -57,10 +61,16 @@ const FilterSection = () => {
             Price
           </h4>
           <ul className="flex-col justify-start items-start gap-4 flex">
-            <li className="text-zinc-600 text-sm font-normal gilroy leading-normal px-3 pr-5 py-3 rounded-md border border-zinc-400">
+            <li
+              onClick={() => filter("lowest")}
+              className="text-zinc-600 text-sm font-normal gilroy leading-normal px-3 pr-5 py-3 rounded-md border border-zinc-400 cursor-pointer"
+            >
               Lowest Price
             </li>
-            <li className="text-zinc-600 text-sm font-normal gilroy leading-normal px-3 pr-5 py-3 rounded-md border border-zinc-400">
+            <li
+              onClick={() => filter("highest")}
+              className="text-zinc-600 text-sm font-normal gilroy leading-normal px-3 pr-5 py-3 rounded-md border border-zinc-400 cursor-pointer"
+            >
               Highest Price
             </li>
           </ul>

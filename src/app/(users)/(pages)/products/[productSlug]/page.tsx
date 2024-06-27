@@ -24,7 +24,7 @@ const ProductDetails = ({ params }: Props) => {
         },
       });
 
-      console.log(data);
+      // console.log(data);
       setProductDetails(data);
     } catch (err: any) {
       console.log(err);

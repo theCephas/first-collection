@@ -34,7 +34,7 @@ const Cart = ({ close }: CartProps) => {
         },
       });
 
-      console.log(data);
+      // console.log(data);
       if (data.id) throw new Error(data.id[0]);
       if (data.detail) throw new Error(data.detail);
       if (data.error) throw new Error(data.error);
@@ -72,7 +72,12 @@ const Cart = ({ close }: CartProps) => {
         <div className="flex flex-col items-start gap-6">
           {cartItems.length > 0 ? (
             cartItems.map((item, i) => (
-              <CartItem key={i + 1} item={item} close={close} />
+              <CartItem
+                key={i + 1}
+                item={item}
+                close={close}
+                getCartItems={getCartItems}
+              />
             ))
           ) : isLoading ? (
             <div className="flex justify-center items-center mx-auto">

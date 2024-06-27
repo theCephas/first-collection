@@ -20,14 +20,33 @@ const Products = () => {
   const startindex = (pageNum - 1) * 25;
 
   useEffect(() => {
+    // console.log(products);
     setProductsPerPage(products.slice(startindex, pageNum * 25));
   }, [products, pageNum, startindex]);
+
+  const filterByPrice = (text: string) => {
+    const avg = Math.ceil(products.length * 0.3);
+
+    const prices = products;
+
+    prices.sort((a: any, b: any) => a.price - b.price);
+
+    if (text === "lowest") {
+      const lowestPrices = prices.slice(0, avg);
+      setProductsPerPage(lowestPrices.slice(startindex, pageNum * 25));
+    }
+
+    if (text === "highest") {
+      const topPrices = prices.slice(-avg).reverse();
+      setProductsPerPage(topPrices.slice(startindex, pageNum * 25));
+    }
+  };
 
   return (
     <>
       <ProductsHero />
       <section className="mt-12 max-w-[67.5rem] mx-auto flex flex-col lg:grid lg:grid-cols-6 gap-6 px-6 xl:px-0">
-        <FilterSection />
+        <FilterSection filter={filterByPrice} />
         <aside className="col-span-5 flex flex-col items-center mb-14">
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 h-fit gap-6">
             {productsPerPage.length > 0 ? (

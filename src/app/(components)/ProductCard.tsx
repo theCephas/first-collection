@@ -63,12 +63,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
               Authorization: `Bearer ${token}`,
             },
             body: {
-              id: "550e8400-e29b-41d4-a716-446755440001",
               product_id: id,
             },
           });
 
-          console.log(data);
+          // console.log(data);
           if (data.id) throw new Error(data.id[0]);
           if (data.detail) throw new Error(data.detail);
           if (data.error) throw new Error(data.error);
@@ -104,7 +103,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           height={999}
           src={imageSrc || ""}
           alt={name}
-          className="m-auto w-full object-cover max-h-[130px] rounded-[12px]"
+          className="m-auto w-full object-cover h-[130px] rounded-[12px]"
         />
 
         <div className="text-[14px] font-[400] leading-[20.3px]">

@@ -8,41 +8,64 @@ import { getToken } from "../Helpers/Helpers";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { Confirm } from "notiflix";
 
 interface Props {
   item: any;
   close: () => void;
+  getCartItems: () => void;
 }
 
-export const CartItem = ({ item, close }: Props) => {
+export const CartItem = ({ item, close, getCartItems }: Props) => {
   const [quantity, setQuantity] = useState(1);
   const { token } = getToken();
   const router = useRouter();
   const csrfToken =
-    "JxQvgGXo8yteepXgJ7HUp5gUNwOHEs3cHdy8S1UgjM5QLFqcXEWuOF2aGd3836fM";
+    "jEu90PtuEIJ21jlX3YmInaVOrUPgLyAWhkcMCaqmPWlEyzOThvBiMKH4kB4HacMw";
 
   const deleteCartItems = async () => {
-    // console.log(item.id);
-    try {
-      const data = await Fetch(`cart/${item.id}/delete/`, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "X-CSRFToken": csrfToken,
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    return Confirm.show(
+      "Delete Cart Item",
+      "Are you sure you want to delete this item from your cart",
+      "Yes",
+      "Cancel",
+      async () => {
+        try {
+          const data = await Fetch(`cart/${item.cart_id}/delete/`, {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+              "X-CSRFToken": csrfToken,
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-      // console.log(data);
-      if (data.id) throw new Error(data.id[0]);
-      if (data.detail) throw new Error(data.detail);
-      if (data.error) throw new Error(data.error);
-    } catch (err: any) {
-      toast.error(err.message, {
-        position: "top-right",
-        autoClose: 5000,
-      });
-    }
+          // console.log(data);
+          if (data.id) throw new Error(data.id[0] + "id");
+          if (data.detail) throw new Error(data.detail + "detail");
+          if (data.error) throw new Error(data.error + "error");
+
+          toast.success(data.message, {
+            position: "top-right",
+            autoClose: 5000,
+          });
+
+          getCartItems();
+        } catch (err: any) {
+          toast.error(err.message, {
+            position: "top-right",
+            autoClose: 5000,
+          });
+        }
+      },
+      () => {
+        return;
+      },
+      {
+        titleColor: "#FE833D",
+        okButtonBackground: "#FE833D",
+      }
+    );
   };
 
   return (
@@ -85,7 +108,10 @@ export const CartItem = ({ item, close }: Props) => {
           max={item.quantity}
         />
       </div>
-      <aside onClick={deleteCartItems} className="w-[24px] h-[24px]">
+      <aside
+        onClick={deleteCartItems}
+        className="w-[24px] h-[24px] cursor-pointer"
+      >
         <Delete />
       </aside>
     </div>
