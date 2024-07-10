@@ -1,14 +1,40 @@
 "use client";
 import { Quantity } from "@/app/(components)/Quantity";
+import { Fetch } from "@/app/Helpers/Fetch";
+import { getToken } from "@/app/Helpers/Helpers";
 import { ButtonPrimary, ButtonSecondary } from "@/app/components/Buttons";
 import { Minus, Plus, Star } from "lucide-react";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 interface Props {
   productDetails: any;
 }
 
 export const ProductDescriptionAndRating = ({ productDetails }: Props) => {
   const [quantity, setQuantity] = useState(1);
+  const [isInCart, setIsInCart] = useState(false);
+  const { token } = getToken();
+
+  useEffect(() => {
+    const checkIfInCart = async () => {
+      try {
+        const data = await Fetch(`cart/product-in-cart/${productDetails.id}/`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "X-CSRFToken":
+              "fhR10PfdX9jQnxThKSwzfd4pr4esRQp3dXzECac58nVsUNmdYpL9ENQFkLtTguBD",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setIsInCart(data);
+      } catch (err: any) {
+        console.log(err.message);
+      }
+    };
+
+    checkIfInCart();
+  }, [productDetails, token]);
 
   return (
     <section className="w-full h-full mt-14 sm:m-0 sm:px-4 sm:py-6 sm:border border-neutral-100 rounded-xl lg:rounded-none lg:p-0 lg:border-none flex flex-col gap-8">
@@ -94,7 +120,9 @@ export const ProductDescriptionAndRating = ({ productDetails }: Props) => {
 
       {/* ACTIONS */}
       <div className="w-full flex sm:flex-col gap-6">
-        <ButtonSecondary classes=" sm:px-1">{"Add to cart"}</ButtonSecondary>
+        {!isInCart && (
+          <ButtonSecondary classes=" sm:px-1">{"Add to cart"}</ButtonSecondary>
+        )}
         <ButtonPrimary classes="w-full sm:px-1">{"Checkout"}</ButtonPrimary>
       </div>
     </section>
